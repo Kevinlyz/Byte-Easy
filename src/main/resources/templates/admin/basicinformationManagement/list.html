@@ -1,0 +1,272 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head th:include="_meta :: header">
+<title>基础信息管理</title>
+</head>
+<body>
+	<div class="page-container">
+		<form action="#" th:action="@{/admin/basicInformationManagement/search}"
+			method="post">
+			<div class="layui-body">
+				<!-- 内容主体区域 -->
+				<fieldset class="layui-elem-field">
+					<legend>基础信息列表</legend>
+					<div class="layui-field-box">
+
+						<div class="search_condition">
+							<div class="layui-form-item ">
+								<div class="col-xs-12 col-sm-3">
+									<input type="text" class="input-text" style="width: 250px;float:left;margin-left:10px;"
+										placeholder="请输入标题名称进行搜索" id="titlename"
+										name="titlename" th:value="${titlename}" />
+								</div>	
+								<div class="col-xs-12 col-sm-2">
+									<button class="layui-btn layui-btn-success radius" id="subbtn"
+										type="submit" value="&nbsp;&nbsp;提交&nbsp;&nbsp;">
+										<i class="Hui-iconfont">&#xe665;</i> 查找
+									</button>
+								</div>	
+							</div>
+						</div>
+						<hr style="margin: 0">
+						<div class="cl pd-5 bg-1 bk-gray mt-20">
+							<span class="l"> 
+								<a href="javascript:;"
+									th:onclick="'javascript:deleteAll(\''+@{/admin/basicInformationManagement/deleteall}+'\')'"
+									class="layui-btn layui-btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i>
+										批量删除 
+								</a> 
+								<a  href="javascript:;" 
+									th:onclick="'javascript:admin_add(\'添加标题\',\' '+@{/admin/basicInformationManagement/addpage}+'\',800,600)'"
+									class="layui-btn layui-btn-normal radius"><i class="Hui-iconfont">&#xe600;</i> 
+									添加基础信息
+								</a>
+							</span> <span class="r wei-height">共有数据：<strong th:text="${pageInfo.total}"></strong>
+								条
+							</span>
+						</div>
+						<table class="layui-table text-c">
+							<thead>
+								<tr class="text-c">
+									<th width="25"><input type="checkbox" name="" value="" /></th>
+									<th width="25">id</th>
+									<th width="80">标题</th>
+									<th width="80">网址</th>
+									<th width="80">标题图片</th>
+									<th width="80">联系电话</th>
+									<th width="80">ICP信息</th>
+									<th width="80">微信二维码图片</th>
+									<th width="80">邮箱地址</th>
+									<th width="80">页脚logo</th>
+									<th width="100">操作</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr class="text-c" th:if="${pageInfo.getSize() == 0}">
+									<td colspan="15"><strong>暂无数据</strong></td>
+								</tr>
+								<tr class="text-c" th:each="i:${pageInfo.list}">
+									<td>
+										<input type="checkbox" value="1" th:value="${i.id}"name="id" />
+									</td>
+									<td th:text="${i.id}"></td>
+									<td>
+										<span th:text="${i.title}">暂无标题</span>
+										<span th:if="${i.isSelected eq 1}" style="color:red">[应用中]</span>
+									</td>
+									<td th:text="${i.webUrl}"></td>
+									<td ><img th:src="${i.titleImg}"/></td>
+									<td th:text="${i.phone}"></td>
+									<td th:text="${i.icpInformation}"></td>
+									<td ><img th:src="${i.wechatImg}"/></td>
+									<td th:text="${i.emailAddress}"></td>
+									<td ><img th:src="${i.footImg}"/></td>
+									<td class="td-manage">
+
+										<a title="应用该设置"
+										   href="javascript:;"
+										   th:onclick="'javascript:admin_set(\' '+@{/admin/basicInformationManagement/set}+'?id='+${i.id}+'\')'"
+										   class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe632;</i></a>
+										
+										<a title="编辑 " href="javascript:;"
+										th:onclick="'javascript:admin_edit(\'修改设标题信息\',\' '+@{/admin/basicInformationManagement/editpage}+'?id='+${i.id}+'&isUpdate=1\',800,600)'"
+										 class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6df;</i></a>
+										
+										<a title="删除"
+										href="javascript:;"
+										th:onclick="'javascript:admin_del(\' '+@{/admin/basicInformationManagement/deleteone}+'?id='+${i.id}+'\')'"
+										class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6e2;</i></a>
+
+										<!--<a title="详情" href="javascript:;"-->
+								   			<!--th:onclick="'javascript:admin_edit(\'设计师详情\',\' '+@{/admin/basicInformationManagement/editpage}+'?id='+${i.id}+'&isUpdate=0\',800,600)'"-->
+								  			 <!--class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe695;</i></a>-->
+
+								</tr>
+							</tbody>
+						</table>
+
+					</div>
+				</fieldset>
+			</div>
+			<div th:include="_pagination :: page"></div>
+		</form>
+	</div>
+	<!--_footer 作为公共模版分离出去-->
+	<div th:replace="_footer :: footerjs"></div>
+	<!--/_footer 作为公共模版分离出去-->
+
+	<!--请在下方写此页面业务相关的脚本-->
+	<script type="text/javascript"
+		th:src="@{/lib/My97DatePicker/4.8/WdatePicker.js}"
+		src="lib/My97DatePicker/4.8/WdatePicker.js"></script>
+	<script type="text/javascript"
+		th:src="@{/lib/datatables/1.10.0/jquery.dataTables.min.js}"
+		src="lib/datatables/1.10.0/jquery.dataTables.min.js"></script>
+	<script type="text/javascript" th:src="@{/lib/laypage/1.2/laypage.js}"
+		src="lib/laypage/1.2/laypage.js"></script>
+	<script type="text/javascript">
+		/*
+		 参数解释：
+		 title	标题
+		 url		请求的url
+		 id		需要操作的数据id
+		 w		弹出层宽度（缺省调默认值）
+		 h		弹出层高度（缺省调默认值）
+		 */
+		/*设计师增加*/
+		function admin_add(title, url, w, h) {
+			layer_show(title, url, w, h);
+		}
+
+		/*设计师编辑*/
+		function admin_edit(title, url, w, h) {
+			layer_show(title, url, w, h);
+		}
+
+		/*应用设置*/
+		function admin_set(url) {
+
+			layer.confirm('确定要应用设置吗？', {
+				btn : [ '确定', '取消' ]
+				// 按钮
+			}, function() {
+				$.ajax({
+					url : url,// 跳转到 action
+					data : String,
+					type : 'post',
+					cache : false,
+					dataType : 'json',
+					contentType : "application/json", //发送信息至服务器时内容编码类型。
+					success : function(data) {
+						if (data == "1") {
+							layer.msg('设置成功!', {
+								icon : 1,
+								time : 1000
+							});
+							setTimeout(function() { //使用  setTimeout（）方法设定定时2000毫秒
+								window.location.reload();//页面刷新
+							}, 500);
+						} else {
+							layer.msg('设置失败!', {
+								icon : 5,
+								time : 1000
+							});
+						}
+					},
+					error : function() {
+						layer.msg("异常！");
+					}
+				});
+			}, function() {
+
+			});
+		}
+
+		/*设计师删除*/
+		function admin_del(url) {
+
+			layer.confirm('确定要删除吗？', {
+				btn : [ '确定', '取消' ]
+			// 按钮
+			}, function() {
+				$.ajax({
+					url : url,// 跳转到 action  
+					data : String,
+					type : 'post',
+					cache : false,
+					dataType : 'json',
+					contentType : "application/json", //发送信息至服务器时内容编码类型。    
+					success : function(data) {
+						if (data == "1") {
+							layer.msg('删除成功!', {
+								icon : 1,
+								time : 1000
+							});
+							setTimeout(function() { //使用  setTimeout（）方法设定定时2000毫秒
+								window.location.reload();//页面刷新
+							}, 500);
+						} else {
+							layer.msg('删除失败!', {
+								icon : 5,
+								time : 1000
+							});
+						}
+					},
+					error : function() {
+						layer.msg("异常！");
+					}
+				});
+			}, function() {
+
+			});
+		}
+
+		//批量删除
+		function deleteAll(url) {
+			var _list = new Array();
+			$('input[name="id"]:checked').each(function(i) {
+				_list[i] = $(this).val();
+			});
+			if (_list.length == 0) {
+				layer.msg("请选择删除设置项");
+				return false;
+			}
+			layer.confirm('确定要删除选中的全部设置项吗？', {
+				btn : [ '确定', '取消' ]
+			// 按钮
+			}, function() {
+				$.ajax({
+					url : url,// 跳转到 action  
+					data : JSON.stringify(_list),
+					type : 'post',
+					cache : false,
+					dataType : 'json',
+					contentType : "application/json", //发送信息至服务器时内容编码类型。    
+					success : function(data) {
+						if (data == "1") {
+							layer.msg('删除成功!', {
+								icon : 1,
+								time : 1000
+							});
+							setTimeout(function() { //使用  setTimeout（）方法设定定时2000毫秒
+								window.location.reload();//页面刷新
+							}, 500);
+						} else {
+							layer.msg('删除失败!', {
+								icon : 5,
+								time : 1000
+							});
+						}
+					},
+					error : function() {
+						layer.msg("异常！");
+					}
+				});
+			}, function() {
+
+			});
+		}
+	</script>
+</body>
+</html>

@@ -1,0 +1,513 @@
+#projectDetailPage .topNavAndNews {
+	background-color: #f2f2f2;
+	padding-bottom: 112px
+}
+
+#projectDetailPage .headerNav {
+	padding: 24px 0
+}
+
+#projectDetailPage .el-breadcrumb__inner {
+	font-size: 16px;
+	color: #191919;
+	font-weight: 400
+}
+
+#projectDetailPage .is-link {
+	color: gray
+}
+
+#projectDetailPage .el-pagination.is-background .el-pager li:not(.disabled).active {
+	background-color: #bd4d43
+}
+
+#projectDetailPage .projectDetail {
+	background-color: #fff;
+	padding: 24px;
+	position: relative
+}
+
+#projectDetailPage .projectDetail .beforePro {
+	position: absolute;
+	top: 50%;
+	left: -76px;
+	-webkit-transform: translateY(-50%);
+	transform: translateY(-50%);
+	width: 36px;
+	height: 63px;
+	background: url(../images/btn_next_left_nor.946fdb7.png)/*tpa=http://www.zhongtunet.com/_nuxt/img/btn_next_left_nor.946fdb7.png*/ 0 0 no-repeat;
+	cursor: pointer
+}
+
+#projectDetailPage .projectDetail .beforePro:hover {
+	background: url(../images/btn_next_left_pressed.b5b9e0b.png)/*tpa=http://www.zhongtunet.com/_nuxt/img/btn_next_left_pressed.b5b9e0b.png*/ 0 0 no-repeat
+}
+
+#projectDetailPage .projectDetail .afterPro {
+	position: absolute;
+	top: 50%;
+	right: -76px;
+	-webkit-transform: translateY(-50%);
+	transform: translateY(-50%);
+	width: 36px;
+	height: 63px;
+	background: url(../images/btn_next_right_nor.d118360.png)/*tpa=http://www.zhongtunet.com/_nuxt/img/btn_next_right_nor.d118360.png*/ 0 0 no-repeat;
+	cursor: pointer
+}
+
+#projectDetailPage .projectDetail .afterPro:hover {
+	background: url(../images/btn_next_right_pressed.9354d1a.png)/*tpa=http://www.zhongtunet.com/_nuxt/img/btn_next_right_pressed.9354d1a.png*/ 0 0 no-repeat
+}
+
+#projectDetailPage .projectDetail .BigPic {
+	float: left;
+	width: 480px;
+	height: 360px;
+	background-color: #f2f2f2
+}
+
+#projectDetailPage .projectDetail .proNews {
+	float: left;
+	padding-left: 24px;
+	width: 648px
+}
+
+#projectDetailPage .projectDetail .proNews .title {
+	position: relative
+}
+
+#projectDetailPage .projectDetail .proNews .title h1 {
+	padding-right: 100px;
+	font-size: 24px;
+	line-height: 24px;
+	color: #333947;
+	margin: 0;
+	height: 48px
+}
+
+#projectDetailPage .projectDetail .proNews .title a {
+	position: absolute;
+	top: 0;
+	right: 0;
+	font-size: 16px;
+	color: #999
+}
+
+#projectDetailPage .projectDetail .proNews .title a:after {
+	content: ">"
+}
+
+#projectDetailPage .projectDetail .proNews .title a:hover {
+	color: #bd4d43
+}
+
+#projectDetailPage .projectDetail .proNews .steps {
+	margin-top: 24px
+}
+
+#projectDetailPage .projectDetail .proNews .steps .steps0 {
+	position: relative
+}
+
+#projectDetailPage .projectDetail .proNews .steps .steps0 .linkBar0 {
+	position: absolute;
+	top: 26px
+}
+
+#projectDetailPage .projectDetail .proNews .steps .steps0 .linkBar1 {
+	left: 75px
+}
+
+#projectDetailPage .projectDetail .proNews .steps .steps0 .linkBar2 {
+	left: 178px
+}
+
+#projectDetailPage .projectDetail .proNews .steps .steps0 .linkBar3 {
+	left: 275px
+}
+
+#projectDetailPage .projectDetail .proNews .steps .steps0 .linkBar4 {
+	left: 381px
+}
+
+#projectDetailPage .projectDetail .proNews .steps .steps0 .linkBar5 {
+	left: 482px
+}
+
+#projectDetailPage .projectDetail .proNews .moneyAndTime {
+	padding-top: 34px
+}
+
+#projectDetailPage .projectDetail .proNews .moneyAndTime span {
+	padding-left: 16px
+}
+
+#projectDetailPage .projectDetail .proNews .moneyAndTime p {
+	margin: 0;
+	font-size: 16px;
+	color: #838794
+}
+
+#projectDetailPage .projectDetail .proNews .moneyAndTime p span {
+	color: #332f47
+}
+
+#projectDetailPage .projectDetail .proNews .moneyAndTime .money {
+	float: left;
+	width: 298px
+}
+
+#projectDetailPage .projectDetail .proNews .moneyAndTime .time {
+	float: left;
+	width: 350px;
+	padding-top: 21px
+}
+
+#projectDetailPage .projectDetail .proNews .moneyAndTime .time .detailTime {
+	background-color: #be4f44;
+	color: #fff;
+	padding: 2px 4px;
+	margin: 0 2px
+}
+
+#projectDetailPage .projectDetail .proNews .BtnAndShare {
+	position: relative;
+	height: 56px;
+	padding-top: 24px
+}
+
+#projectDetailPage .projectDetail .proNews .BtnAndShare .allBtn .btn {
+	width: 240px;
+	height: 56px;
+	color: #fff;
+	background-color: #be4f44;
+	border-radius: 8px;
+	line-height: 56px;
+	text-align: center;
+	font-size: 16px;
+	cursor: pointer;
+	border: none
+}
+
+#projectDetailPage .projectDetail .proNews .BtnAndShare .allBtn .btnNot {
+	cursor: not-allowed
+}
+
+#projectDetailPage .projectDetail .proNews .BtnAndShare .allBtn .btn_end {
+	width: 240px;
+	height: 56px;
+	color: #fff;
+	background-color: #bcbeb7;
+	border-radius: 8px;
+	line-height: 56px;
+	text-align: center;
+	font-size: 16px;
+	cursor: not-allowed
+}
+
+#projectDetailPage .projectDetail .proNews .BtnAndShare .allBtn .btn_house {
+	width: 240px;
+	height: 56px;
+	color: #fff;
+	border-radius: 8px;
+	line-height: 56px;
+	text-align: center;
+	font-size: 16px;
+	cursor: pointer
+}
+
+#projectDetailPage .projectDetail .proNews .BtnAndShare .share {
+	float: left;
+	line-height: 40px;
+	position: absolute;
+	bottom: 0;
+	right: 0
+}
+
+#projectDetailPage .projectDetail .proNews .BtnAndShare .share h4 {
+	font-size: 16px;
+	text-align: center;
+	float: left;
+	color: #999
+}
+
+#projectDetailPage .projectDetail .proNews .BtnAndShare .share div {
+	display: inline-block;
+	overflow: hidden;
+	float: right
+}
+
+#projectDetailPage .projectDetail .proNews .BtnAndShare .share div a {
+	float: left;
+	text-align: center;
+	height: 40px
+}
+
+#projectDetailPage .fourOther {
+	margin-top: -56px
+}
+
+#projectDetailPage .fourOther .el-tabs--card>.el-tabs__header {
+	border-bottom: none;
+	margin: 0
+}
+
+#projectDetailPage .fourOther .el-tabs--card>.el-tabs__header .el-tabs__nav {
+	border: none
+}
+
+#projectDetailPage .fourOther .el-tabs--card>.el-tabs__header .el-tabs__item {
+	padding: 16px 48px;
+	font-size: 20px;
+	color: #838794;
+	border-top: 2px solid transparent;
+	background-color: transparent;
+	line-height: 16px;
+	height: 56px;
+	border-left: none
+}
+
+#projectDetailPage .fourOther .el-tabs--card>.el-tabs__header .el-tabs__item.is-active {
+	border-bottom-color: #fff;
+	font-weight: 700;
+	color: #be4f44;
+	border-top: 2px solid #be4f44;
+	background-color: #fff
+}
+
+#projectDetailPage .fourOther h2 {
+	font-size: 24px;
+	line-height: 24px;
+	color: #333947;
+	padding: 56px 0 16px;
+	border-bottom: 1px solid #eaeaea
+}
+
+#projectDetailPage .fourOther .basicInfo table {
+	padding: 32px 32px 0
+}
+
+#projectDetailPage .fourOther .basicInfo table tr td:first-child {
+	font-size: 16px;
+	line-height: 16px;
+	color: #838794;
+	width: 180px;
+	padding-bottom: 26px
+}
+
+#projectDetailPage .fourOther .basicInfo table tr td:last-child {
+	font-size: 16px;
+	line-height: 16px;
+	color: #333947;
+	padding-bottom: 26px
+}
+
+#projectDetailPage .fourOther .basicInfo table:last-child tr {
+	/*float: left;*/
+	width: 370px
+}
+
+#projectDetailPage .fourOther .proAsk .content {
+	padding: 32px 32px 64px
+}
+
+#projectDetailPage .fourOther .proAsk .content .like-item {
+	width: 200px;
+	height: 200px;
+	margin-right: 16px;
+	background-color: snow;
+	display: inline-block;
+	position: relative;
+	cursor: pointer
+}
+
+#projectDetailPage .fourOther .proAsk .content .like-item:hover {
+	-webkit-box-shadow: 0 5px 8px #ccc;
+	box-shadow: 0 5px 8px #ccc
+}
+
+#projectDetailPage .fourOther .fileData ul {
+	padding-top: 40px
+}
+
+#projectDetailPage .fourOther .fileData ul li {
+	height: 70px;
+	border: 1px solid #f2f2f2;
+	border-radius: 2px;
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-pack: start;
+	-ms-flex-pack: start;
+	justify-content: flex-start;
+	margin-bottom: 16px;
+	padding-left: 40px;
+	padding-top: 10px
+}
+
+#projectDetailPage .fourOther .fileData ul li h4 {
+	font-size: 16px;
+	color: #333947;
+	padding-left: 32px;
+	width: 1000px;
+	line-height: 60px
+}
+
+#projectDetailPage .fourOther .fileData ul li .download_item {
+	display: block;
+	width: 32px;
+	height: 32px;
+	background: url(../images/icon_download_nor.2705520.png)/*tpa=http://www.zhongtunet.com/_nuxt/img/icon_download_nor.2705520.png*/ 0 0 no-repeat;
+	margin-top: 14px
+}
+
+#projectDetailPage .fourOther .fileData ul li:hover {
+	border: 1px solid #be4f44;
+	-webkit-box-shadow: 0 2px 5px #bbb;
+	box-shadow: 0 2px 5px #bbb
+}
+
+#projectDetailPage .fourOther .fileData ul li:hover .download_item {
+	background: url(../images/icon_download_pressed.efee2ea.png)/*tpa=http://www.zhongtunet.com/_nuxt/img/icon_download_pressed.efee2ea.png*/ 0 0 no-repeat
+}
+
+#projectDetailPage .fourOther .fileData .download_all {
+	margin: 40px 0 64px
+}
+
+#projectDetailPage .fourOther .fileData .download_all a {
+	width: 240px;
+	height: 56px;
+	margin: 0 auto;
+	display: block;
+	text-align: center;
+	line-height: 56px;
+	color: #fff;
+	background-color: #be4f44;
+	border-radius: 8px;
+	font-size: 16px
+}
+
+#projectDetailPage .fourOther .fileData .download_all a img {
+	vertical-align: middle;
+	margin-right: 16px
+}
+
+#projectDetailPage .fourOther .allComment .el-textarea .el-textarea__inner {
+	background-color: #f8f8f8;
+	font-size: 16px;
+	border: 1px solid #eaeaea;
+	height: 128px;
+	border-radius: 2px
+}
+
+#projectDetailPage .fourOther .allComment .commentBtn {
+	width: 128px;
+	height: 40px;
+	background-color: #be4f44;
+	font-size: 14px;
+	border-radius: 2px;
+	text-align: center;
+	color: #fff
+}
+
+#projectDetailPage .fourOther .allComment .commentBtn:hover {
+	color: #fff
+}
+
+#projectDetailPage .fourOther .allComment .goToLogin {
+	position: absolute;
+	left: 0;
+	top: 50%;
+	-webkit-transform: translateY(-50%);
+	transform: translateY(-50%);
+	font-size: 16px;
+	color: #838794
+}
+
+#projectDetailPage .fourOther .allComment .goToLogin a {
+	color: #be4f44
+}
+
+#projectDetailPage .fourOther .allComment .toTopComment .notice {
+	background: url(../images/icon_label.e5d30d7.png)/*tpa=http://www.zhongtunet.com/_nuxt/img/icon_label.e5d30d7.png*/ 0 0 no-repeat;
+	width: 70px;
+	height: 32px;
+	color: #fff;
+	line-height: 32px;
+	padding-left: 10px
+}
+
+#projectDetailPage .fourOther .allComment .toTopComment .content {
+	padding-left: 15px;
+	color: #333947;
+	font-size: 16px;
+	line-height: 24px
+}
+
+#projectDetailPage .fourOther .allComment .toTopComment .content div {
+	width: 1000px;
+	word-break: break-all
+}
+
+#projectDetailPage .fourOther .allComment .toTopComment .Time {
+	padding: 16px 0 16px 95px;
+	color: #999;
+	font-size: 16px
+}
+
+#projectDetailPage .fourOther .allComment .peopleComment {
+	margin: 24px 0 0 40px;
+	border-bottom: 1px solid #eaeaea;
+	padding-bottom: 16px
+}
+
+#projectDetailPage .fourOther .allComment .peopleComment .NameAndComment {
+	font-size: 16px
+}
+
+#projectDetailPage .fourOther .allComment .peopleComment .NameAndComment img {
+	vertical-align: middle
+}
+
+#projectDetailPage .fourOther .allComment .peopleComment .NameAndComment .Name {
+	color: #999;
+	padding-left: 16px;
+	float: left;
+	padding-top: 10px
+}
+
+#projectDetailPage .fourOther .allComment .peopleComment .NameAndComment .content {
+	color: #333947;
+	float: left;
+	max-width: 1000px;
+	word-break: break-all;
+	padding-top: 10px
+}
+
+#projectDetailPage .fourOther .allComment .peopleComment .Time {
+	color: #999;
+	font-size: 16px;
+	padding-left: 56px;
+	padding-top: 16px
+}
+
+#projectDetailPage .fourOther .allComment .peopleComment .service {
+	margin-left: 40px;
+	padding: 24px 0 16px;
+	border-bottom: 1px dashed #eaeaea;
+	margin-right: 16px
+}
+
+#projectDetailPage .fourOther .allComment .peopleComment .service:last-child {
+	border-bottom: none
+}
+
+.clearfix:after {
+	content: "";
+	display: block;
+	height: 0;
+	overflow: hidden;
+	clear: both;
+	zoom: 1
+}

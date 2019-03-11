@@ -1,0 +1,159 @@
+.wei-ul li{
+	width: 95%;
+	margin: 0 auto;
+	border-bottom: 1px dashed #848791;
+}
+.wei-ul li:last-child{
+	width: 95%;
+	margin: 0 auto;
+	border-bottom: 0;
+}
+.consult_content {
+	padding-top: 40px;
+	background: #f8f8f8
+}
+
+.consult_content_s,.consult_list {
+	background: #fff
+}
+
+.consult_list {
+	overflow: hidden;
+}
+
+.consult_list_right {
+	width: 100%;
+	position: relative;
+	height: 52px;
+    margin: 8px 0px;
+}
+
+.consult_list_right h3 {
+	font-size: 20px;
+	font-weight: 700;
+	color: #333;
+	margin-bottom: 6px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	margin-top: 0
+}
+
+.consult_list_right.active h4 {
+	color:#be4f44;
+}
+
+.consult_list_right.active>.consult_list_time span {
+	color:#be4f44;
+}
+
+.consult_list_right h4 {
+	display: -webkit-box;
+	color: #818181;
+	-webkit-line-clamp: 2;
+	-webkit-box-orient: vertical;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: normal;
+	word-break: break-all;
+	font-size: 16px;
+	margin-top: 10px;
+	line-height: 23px
+}
+
+.consult_list_time {
+	font-size: 14px;
+	color: #999;
+	float: right;
+	line-height: 40px;
+}
+
+.consult_list_time span {
+	border-left: 1px solid #ccc;
+	display: inline-block;
+	line-height: 14px
+}
+
+.consult_list_time span img {
+	vertical-align: bottom
+}
+
+.consult_list_time span:first-child {
+	padding-left: 0;
+	border-left: 0
+}
+
+.consult_right {
+	padding: 20px 20px 40px;
+	margin-bottom: 20px
+}
+
+.consult_right h3 {
+	font-size: 20px;
+	font-weight: 700;
+	color: #333;
+	border-bottom: 1px solid #ccc;
+	padding: 20px 0
+}
+
+.consult_right_list {
+	margin-top: 20px
+}
+
+.consult_right_list img {
+	display: block
+}
+
+.consult_right_list h6 {
+	font-size: 12px;
+	color: #999;
+	padding: 7px 10px
+}
+
+.consult_right_list h6 img {
+	display: inline-block;
+	vertical-align: inherit;
+	margin-right: 5px
+}
+
+.consult_border {
+	border: 1px solid #eaeaea
+}
+
+.consult_right_list h4 {
+	font-size: 14px;
+	color: #353947;
+	margin-top: 15px;
+	padding-left: 10px
+}
+
+.consult_right_list h5 {
+	font-size: 14px;
+	color: #be4e44;
+	margin-top: 10px;
+	padding-left: 10px;
+	margin-bottom: 15px
+}
+
+.consult_right_list p {
+	padding: 14px 10px;
+	color: #353947;
+	margin: 0
+}
+
+.consult_details_content {
+	padding: 20px;
+	background: #fff
+}
+
+.consult_details_content_head {
+	position: relative;
+	border-bottom: 1px solid #ccc;
+	margin-bottom: 20px
+}
+
+.consult_details_content_head .consult_list_time {
+	position: inherit;
+	margin-top: 30px;
+	padding-bottom: 30px
+}

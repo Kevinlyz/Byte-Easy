@@ -1,0 +1,105 @@
+.case_banner img {
+	width: 100%
+}
+
+.case_content {
+	background: #f8f8f8;
+	padding-top: 40px
+}
+
+.case_bg_color {
+	background: #fff;
+	padding: 20px
+}
+
+.case_ul {
+	overflow: hidden
+}
+
+.case_ul li {
+	float: left;
+	margin-right: 20px;
+	margin-bottom: 20px;
+	width: 275px
+}
+
+.case_ul li .main4_ul_margin {
+	margin-bottom: 30px
+}
+
+.case_ul li:nth-child(4n) {
+	margin-right: 0
+}
+
+.case_ul_img {
+	display: block
+}
+
+.case_ul_img img {
+	display: block;
+	width: 275px;
+	height: 180px
+}
+
+.case_ul li h4 {
+	font-size: 16px;
+	color: #353947;
+	text-align: center;
+	line-height: 16px;
+	padding: 15px 10px 18px;
+	height: 30px
+}
+
+.case_ul h5 {
+	font-size: 14px;
+	color: #838794;
+	text-align: center;
+	margin-top: 14px
+}
+
+.case_ul li:hover {
+	-webkit-box-shadow: 0 3px 10px #ccc;
+	box-shadow: 0 3px 10px #ccc;
+	cursor: pointer
+}
+
+.main4_li_list {
+	border: 1px solid #ebebeb;
+	overflow: hidden;
+	border-top: 0
+}
+
+.main4_li_list div {
+	float: left;
+	height: 38px;
+	width: 90px;
+	text-align: center;
+	line-height: 42px;
+	color: #999
+}
+
+.main4_li_list div span {
+	font-size: 14px
+}
+
+.main4_li_list div img {
+	vertical-align: text-bottom
+}
+
+.main4_li_list_mes,.main4_li_list_show {
+	border-top: 1px solid #ebebeb;
+	border-right: 1px solid #ebebeb
+}
+
+.main4_li_list_re {
+	border-top: 1px solid #ebebeb
+}
+
+.block {
+	margin: 50px 0;
+	text-align: center
+}
+
+#typicalsPage .el-pagination.is-background .el-pager li:not(.disabled).active {
+	background-color: #bd4d43
+}

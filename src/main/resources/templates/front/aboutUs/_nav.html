@@ -1,0 +1,5 @@
+<header class="navbar-wrapper" th:fragment="nav">
+    <ul id="left-ul" data-v-4a249bd8>
+		<li th:each="l : ${list}" th:class="${l.description} == ${column.description} ? 'active' : ''"  data-v-4a249bd8><a th:href="${l.url}" th:text="${l.description}" data-v-4a249bd8>关于我们</a></li>
+    </ul>
+</header>

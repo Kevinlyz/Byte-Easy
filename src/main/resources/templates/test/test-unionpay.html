@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:include="_meta :: header">
+	<title>电脑网站银联支付测试</title>
+</head>
+<body>
+	<article class="page-container">
+        <form class="form form-horizontal" action="#" th:action="@{/unionPay/payPC}" method="post">
+            <div class="row cl">
+
+                <label class="form-label col-xs-4 col-sm-3">【银联支付测试】</label>
+            </div>
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3">唯一订单号(8-40位)：</label>
+                <div class="formControls col-xs-7 col-sm-8">
+                    <input class="input-text upload-url" type="text"  th:value="${orderId}" name="outTradeNo" style="width:400px">
+                </div>
+            </div>
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3">订单发送时间（当前时间）：</label>
+                <div class="formControls col-xs-7 col-sm-8">
+                    <input class="input-text upload-url" type="text"  name="txnTime" th:value="${txnTime}" style="width:400px">
+                </div>
+            </div>
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3">总金额：</label>
+                <div class="formControls col-xs-7 col-sm-8">
+                    <input class="input-text upload-url" type="text"  name="totalFee" style="width:400px">
+                </div>
+            </div>
+            <div class="row cl">
+                <div class="col-xs-8 col-sm-9 col-xs-offset-7 col-sm-offset-5">
+                    <input class="btn btn-primary radius" type="submit" value="&nbsp;&nbsp;支付&nbsp;&nbsp;"/>
+                </div>
+            </div>
+        </form>
+        </form>
+	</article>
+<!--_footer 作为公共模版分离出去-->
+<div th:replace="_footer :: footerjs"/>
+<script>
+</script>
+</body>
+</html>

@@ -1,0 +1,151 @@
+﻿<!DOCTYPE HTML>
+<html  xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:include="_meta :: header">
+<meta charset="utf-8"/>
+<title>权限管理</title>
+</head>
+<body>
+<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 权限配置 <span class="c-gray en">&gt;</span> 权限管理 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
+<div class="page-container">
+<form action="#" th:action="@{/resource}"  method="post">
+	<div class="text-c">
+			<input type="text" class="input-text" style="width:250px" placeholder="权限名称" id="" th:value="${name}" value="" name="name"/>
+			<button type="submit" class="btn btn-success" id=""><i class="Hui-iconfont">&#xe665;</i> 权限名称</button>
+		
+	</div>
+	<div class="cl pd-5 bg-1 bk-gray mt-20"> 
+		<span class="l">
+			<a  sec:authorize="hasAuthority('/resource/delete')"  href="javascript:;" th:onclick="'javascript:deleteAll(\''+@{/resource/delete}+'\')'"  class="btn btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i> 批量删除</a> 
+			<a  sec:authorize="hasAuthority('/resource/add-permission')" href="javascript:;" onclick="admin_permission_add('添加权限节点','/resource/add-permission','','310')" class="btn btn-primary radius"><i class="Hui-iconfont">&#xe600;</i> 添加权限节点</a>
+		</span> 
+		<span class="r">共有数据：<strong th:text="${pageInfo.total}"></strong> 条</span> </div>
+	<table class="table table-border table-bordered table-bg">
+		<thead>
+			<tr>
+				<th scope="col" colspan="8">权限节点</th>
+			</tr>
+			<tr class="text-c">
+				<th width="25"><input type="checkbox" name="" value=""/></th>
+				<th width="40">ID</th>
+				<th width="200">权限名称</th>
+				<th width="200">父级栏目</th>
+				<th>路由</th>
+				<th>权限字符串</th>
+				<th>权限类型</th>
+				<th width="100">操作</th>
+			</tr>
+		</thead>
+		<tbody>
+		<tr class="text-c" th:if="${pageInfo.list.size() == 0}"><td colspan="15"><strong>暂无数据</strong></td></tr>
+		<tr  class="text-c" th:each="resource:${pageInfo.list}">  
+				<td><input type="checkbox" th:value="${resource.id}" value="" name="id"/></td>
+				<td th:text="${resource.id}" ></td>
+				<td th:text="${resource.name}"></td>
+				<td th:text="${resource.parentResource != null} ? ${resource.parentResource.name}"></td>
+				<td th:text="${resource.url}"></td>
+				<td th:text="${resource.permission}"></td>
+				<td th:text="${resource.type eq 0 } ? '菜单' : '按钮'"></td>
+				<td>
+				<a title="编辑" sec:authorize="hasAuthority('/resource/editor-permission')"  href="javascript:;" th:onclick="'javascript:admin_permission_edit(\'角色编辑\',\''+@{/resource/editor-permission/}+${resource.id}+'\',\'1\',\'\',\'310\')'" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6df;</i></a> 
+				<a title="删除" th:if="${resource.id != 1}" sec:authorize="hasAuthority('/resource/delete')"  href="javascript:;"  th:onclick="'javascript:admin_permission_del(\''+${resource.id}+'\',\''+@{/resource/delete}+'\')'" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6e2;</i></a></td>
+			</tr>
+		</tbody>
+	</table>
+	<div th:include="_pagination :: page"></div>
+	</form>
+</div>
+<!--_footer 作为公共模版分离出去-->
+<div th:replace="_footer :: footerjs">
+</div>
+ 
+<script type="text/javascript">
+/*
+	参数解释：
+	title	标题
+	url		请求的url
+	id		需要操作的数据id
+	w		弹出层宽度（缺省调默认值）
+	h		弹出层高度（缺省调默认值）
+*/
+/*管理员-权限-添加*/
+function admin_permission_add(title,url,w,h){
+	layer_show(title,url,w,h);
+}
+/*管理员-权限-编辑*/
+function admin_permission_edit(title,url,id,w,h){
+	layer_show(title,url,w,h);
+}
+
+/*管理员-权限-删除*/
+function admin_permission_del(id,url){
+	layer.confirm('确认要删除吗？',function(index){
+		var _list = new Array();
+		_list[0] = id;
+		$.ajax({
+			type: 'POST',
+			url: url,
+			data:JSON.stringify(_list),  
+   	        type:'post',  
+   	        cache:false,  
+   	        dataType:'json', 
+   	        contentType:"application/json",  //发送信息至服务器时内容编码类型。
+			success: function(data){
+				//$(obj).parents("tr").remove();
+				if(data){
+					layer.msg('已删除!',{icon:1,time:1000});
+					window.location.reload();
+				}else{
+					layer.msg('顶级栏目不允许删除!',{icon:1,time:1000});
+					//window.location.reload();
+				}
+				
+			},
+			error:function(data) {
+				console.log("资源访问失败");
+			},
+		});		
+	});
+}
+/*<![CDATA[*/
+/*批量删除*/
+function deleteAll(url){
+	var _list = new Array();
+	$('input[name="id"]:checked').each(
+            function (i) {
+                _list[i] = $(this).val();
+            });
+	
+	if(_list.length <=0){
+		layer.msg("请选择删除的资源");
+		return false;
+	}
+    layer.confirm('确定要删除选中的全部数据吗？', {
+		btn : [ '确定', '取消' ]
+	// 按钮
+	}, function() {
+		 $.ajax({  
+	   	     url:url,// 跳转到 action  
+	   	     data:JSON.stringify(_list),  
+	   	     type:'post',  
+	   	     cache:false,  
+	   	     dataType:'json', 
+	   	     contentType:"application/json",  //发送信息至服务器时内容编码类型。    
+	   	     success:function(data) {  
+	   	         if(data == 1){  
+	   	            window.location.reload();  
+	   	         }else{  
+	   	        	layer.msg("请先删除关联子项");  
+	   	         }  
+	   	      },  
+	   	      error : function() {  
+	   	    	  layer.msg("异常！");  
+	   	      }  
+	        });
+	}, function() {
+
+	});
+}
+/*]]>*/
+</script>
+</body>
+</html>

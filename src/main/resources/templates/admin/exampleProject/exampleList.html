@@ -1,0 +1,219 @@
+<!DOCTYPE HTML>
+<html  xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:include="_meta :: header">
+    <meta charset="utf-8"/>
+    <title>案例项目列表</title>
+</head>
+<body>
+
+<!--<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 案例管理 <span class="c-gray en">&gt;</span> 案例项目列表 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:window.location.href='/admin/example/showExample';" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>-->
+<div class="page-container">
+    <form action="#" th:action="@{/admin/example/showExample}"  method="post" onsubmit="return judge()">
+        <div class="layui-body">
+            <fieldset class="layui-elem-field">
+                <legend>项目列表</legend>
+                <div class="layui-field-box">
+                    <div class="search_condition">
+                        <div class="layui-form-item ">
+
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-3">
+                                    <input type="text" class="input-text" style="width:250px" placeholder="输入项目名" id="" th:value="${exampleName}" value="" name="exampleName"/>
+                                </div>
+                                <div class="col-xs-12 col-sm-3">
+                                    <input type="text" class="input-text" autocomplete="off" readonly="readonly"
+                                           placeholder="输入项目案例发布日期开始范围"
+                                           onfocus="WdatePicker({el:$dp.$('purchaseTime'),dateFmt:'yyyy-MM-dd'})"
+                                           id="start" th:value="${startDate}" name="startDate"/>
+                                    <!--<input type="date" class="input-text" style="width:250px" placeholder="输入项目案例发布日期开始范围" id="start" th:value="${startDate}" name="startDate"/>-->
+                                </div>
+                                <div class="col-xs-12 col-sm-3">
+                                    <input type="text" class="input-text" autocomplete="off" readonly="readonly"
+                                           placeholder="输入项目案例发布日期结束范围"
+                                           onfocus="WdatePicker({el:$dp.$('purchaseTime'),dateFmt:'yyyy-MM-dd'})"
+                                           id="end" th:value="${endDate}" name="endDate"/>
+                                    <!--<input type="date" class="input-text" style="width:250px" placeholder="输入项目案例发布日期结束范围" id="end" th:value="${endDate}" name="endDate"/>-->
+                                </div>
+                                <div class="col-xs-12 col-sm-3">
+                                    <button type="submit" class="layui-btn  layui-btn-success radius ml-10" style="text-align: center;"><i class="Hui-iconfont">&#xe665;</i> 查询项目案例</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <hr style="margin: 0">
+                    <div class="cl pd-5 bg-1 bk-gray">
+						<span class="l">
+                            <a href="javascript:;" onclick="example_add('添加项目案例','/admin/example/addExample',1400,600)" class="layui-btn  layui-btn-normal radius"><i class="Hui-iconfont">&#xe600;</i>添加项目案例</a>
+                            <a href="javascript:;" th:onclick="'javascript:deleteAll(\''+@{/student/delete}+'\')'"  class="layui-btn  layui-btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i>批量删除</a>
+                        </span>
+                        <span class="r wei-height">共有数据：<strong th:text="${pageInfo.total}"></strong> 条</span>
+                    </div>
+                    <hr>
+        <table class="table table-border table-bordered table-bg">
+            <thead>
+                <tr class="text-c">
+                    <th width="25"><input type="checkbox" name="" id="checkBox_selectAll" value=""/></th>
+                    <th width="40">序号</th>
+                    <th width="150">项目名</th>
+                    <th width="60">设计师姓名</th>
+                    <th width="150">项目方姓名</th>
+                    <th width="130">案例发布时间</th>
+                    <th width="180">案例发布人</th>
+                    <th width="100">操作</th>
+                </tr>
+            </thead>
+            <tbody>
+            <tr class="text-c" th:if="${pageInfo.list.size() == 0}"><td colspan="15"><strong>暂无案例项目</strong></td></tr>
+                <tr class="text-c" th:each="example,exampleCount:${pageInfo.list}" >
+                    <td><input type="checkbox" th:value="${example.getId()}" name="id" class="checkBox_id"/></td>
+                    <td th:text="${exampleCount.count}"></td>
+                    <td th:text="${example.getProjectName()}"></td>
+                    <td th:text="${example.getDesignerName()}"></td>
+                    <td th:text="${example.getProjecterName()}"></td>
+                    <td th:text="${#dates.format(example.getCreateTime(), 'yyyy-MM-dd HH:mm:ss')}"></td>
+                    <td th:text="${example.getUsername()}"></td>
+                    <td>
+                        <a th:href="@{/admin/example/detail}+'?exampleid='+${example.getId()}"><i class="Hui-iconfont" style="cursor: pointer;" title="查看详情">&#xe667;</i></a>&nbsp;&nbsp;&nbsp;&nbsp;
+                        <i th:onclick="'javascript:example_edit('+${example.getId()}+')'" class="Hui-iconfont" style="cursor: pointer;" title="编辑">&#xe6df;</i>&nbsp;&nbsp;&nbsp;&nbsp;
+                        <i class="Hui-iconfont" th:onclick="'javascript:deleteExample('+${example.getId()}+');'" style="cursor: pointer;" title="删除">&#xe6e2;</i>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        </div>
+    </fieldset>
+</div>
+<div th:include="_pagination :: page"></div>
+</form>
+
+</div>
+<!--_footer 作为公共模版分离出去-->
+<div th:replace="_footer :: footerjs">
+</div>
+<script type="text/javascript" th:src="@{/lib/My97DatePicker/4.8/WdatePicker.js}" src="lib/My97DatePicker/4.8/WdatePicker.js"></script>
+
+<script>
+    function example_add(title,url,w,h){
+        layer_show(title,url,w,h);
+    }
+    function example_edit(a){
+        /*<![CDATA[*/
+        layer_show('编辑项目案例','/admin/example/editExample?exampleid='+a,1400,600);
+        /*]]>*/
+    }
+</script>
+
+<script type="text/javascript">
+    /*
+        参数解释：
+        title	标题
+        url		请求的url
+        id		需要操作的数据id
+        w		弹出层宽度（缺省调默认值）
+        h		弹出层高度（缺省调默认值）
+    */
+    //全选
+    var selectAll = false;
+    $("#checkBox_selectAll").click(function () {
+        if(!selectAll)
+        {
+            $(".checkBox_id").prop("checked", true);
+            selectAll = true;
+        }
+        else
+        {
+            $(".checkBox_id").prop("checked", false);
+            selectAll = false;
+        }
+    });
+
+    /*批量删除*/
+    function deleteAll(url){
+        var _list = new Array();
+        $('input[name="id"]:checked').each(
+            function (i) {
+                _list[i] = $(this).val();
+            });
+
+        if(_list.length <=0){
+            layer.msg("请选择要批量删除的案例");
+            return false;
+        }
+        layer.confirm('确定删除所选的所有案例吗？', {
+            btn : [ '确认', '取消' ]
+            // 按钮
+        }, function() {
+            $.ajax({
+                url:'/admin/example/deleteAll',// 跳转到 action
+                data:JSON.stringify(_list),
+                type:'post',
+                cache:false,
+                dataType:'json',
+                contentType:"application/json",  //发送信息至服务器时内容编码类型。
+                success:function(data) {
+                    if(data == 1){
+                        window.location.href="/admin/example/showExample";
+                    }else{
+                        layer.msg("Please delete the associated child first");
+                    }
+                },
+                error : function() {
+                    layer.msg("删除异常！");
+                }
+            });
+        }, function() {
+
+        });
+    }
+    /*]]>*/
+
+    $(".changeIcon").click(function(){
+        $(this).parent().siblings().children(".input_changeStu").toggle("fast");
+        $(this).parent().siblings().children(".span_stu").toggle("fast");
+        $(this).siblings().show();
+        $(this).hide();
+    });
+    $(".button_changeCancel").click(function () {
+        $(this).siblings().hide();
+        $(this).siblings(".changeIcon").show();
+        $(this).parent().siblings().children(".input_changeStu").toggle("fast");
+        $(this).parent().siblings().children(".span_stu").toggle("fast");
+        $(this).hide();
+    });
+    function judge()
+    {
+        if($("#start").val()>$("#end").val() && $("#start").val() != "" && $("#end").val() != "")
+        {
+            layer.msg("开始日期必须小于等于结束日期！");
+            return false
+        }
+        return true;
+    }
+    function deleteExample(id)
+    {
+        layer.confirm('确定删除这个案例吗？', {
+                btn : [ '确定', '取消' ]
+                // 按钮
+            },function(){
+            $.ajax({
+                type: 'get',
+                url: "/admin/example/delete?id="+id,
+                success: function(data){
+                    if(data.code == "000000"){
+                        layer.msg('删除成功!',{icon:1,time:1000});
+                        window.location.reload();
+                    }else{
+                        layer.msg('删除失败!',{icon:1,time:1000});
+                    }
+                },
+                error: function(XmlHttpRequest, textStatus, errorThrown){
+                    layer.msg('删除失败!请检查网络连接！',{icon:1,time:1000});
+                }
+            });
+        });
+    }
+
+</script>
+
+</body>
+</html>

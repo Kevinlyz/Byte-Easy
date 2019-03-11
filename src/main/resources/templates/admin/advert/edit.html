@@ -1,0 +1,189 @@
+<!DOCTYPE HTML>
+<html  xmlns:th="http://www.thymeleaf.org">
+<head th:include="_meta :: header">
+<title>编辑广告 </title>
+</head>
+<body>
+<style>
+	#remarks{
+		height:5em;
+	}
+	select{
+		height:2.6em;
+		width:24.3em;
+		border: solid 1px #ddd;
+	}
+	#reset{
+		margin-left:10px;
+	}
+</style>
+<article class="page-container">
+	<form class="form form-horizontal" id="form-purchase-updateOrder" action="#" th:action="@{/admin/advert/updateAdvert}">
+	<input id= "id" name = "id" type = "hidden" th:value = "${advert.id}">
+	<div class="row cl">
+		<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>广告位置：</label>
+		<div class="formControls col-xs-5 col-sm-5">
+			<select id= "locationCode" name="locationCode" class="input-text mySelect">
+			<option th:selected="${advert.locationCode} eq ${location.code}" th:each="location:${locationInfo}"  th:text="${location.description}" th:value="${location.code}">空</option> 
+			</select>
+		</div>
+	</div>
+	<div class="row cl">
+		<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>广告图片：</label>
+		<div class="formControls col-xs-7 col-sm-8" style="float:left;">
+	         	<img  style="width:30px;height:30px;" th:src="${advert.pictureUrl}"/>
+				<input class="input-text upload-url" type="text"  readonly="" th:value="${advert.pictureUrl}" style="width:255px;height:33px;">
+				<a href="javascript:void();" class="btn btn-primary upload-btn" onclick="document.getElementById('coverImage').click()"><i class="Hui-iconfont"style="width:70px;height:30px;"></i> 浏览文件</a>
+				<input type="file"  multiple="" name="coverImage" id="coverImage" class="input-file valid" style="z-index:-1;"/>
+		</div>
+	</div>
+	<div class="row cl" >
+		<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>广告链接：</label>
+		<div class="formControls col-xs-5 col-sm-5">
+			<input type="text" class="input-text" th:value="${advert.advertUrl}"  name="advertUrl" id="advertUrl"   />
+		</div>
+	</div>
+	<div class="row cl">
+		<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>广告费用 ：</label>
+		<div class="formControls col-xs-5 col-sm-5">
+			<input type="text" class="input-text"  th:value="${advert.advertFee}" name="advertFee" id="advertFee"/>
+		</div>
+	</div>
+	<div class="row cl">
+		<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>广告发布时间：</label>
+		<div class="formControls col-xs-5 col-sm-5">
+		<input  type="input-text" placeholder="广告发布时间" th:value="${#calendars.format(advert.creatTime,'yyyy-MM-dd HH:mm:ss')}" 
+                           autocomplete="off" id="creatTimeString"  onfocus="WdatePicker({el:$dp.$('beginTime'),dateFmt:'yyyy-MM-dd'})"
+                           name="creatTimeString" class="input-text Wdate" />
+		</div>
+	</div>
+	<div class="row cl">
+		<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>广告截至时间：</label>
+		<div class="formControls col-xs-5 col-sm-5">
+		<input type="input-text"  placeholder="广告截至时间" th:value="${#calendars.format(advert.term,'yyyy-MM-dd HH:mm:ss')}" 
+                           autocomplete="off" id="endTimeString"  onfocus="WdatePicker({el:$dp.$('beginTime'),dateFmt:'yyyy-MM-dd'})"
+                           name="endTimeString" class="input-text Wdate" />
+		</div>
+	</div>
+	<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-3">广告备注：</label><br>
+			<div class="formControls col-xs-7 col-sm-7"> 
+				<textarea id="remark" name="remark"  th:text="${advert.remark}" class="input-text"  type="text" style="height:300px;"></textarea>
+			</div>
+		</div>
+		<div class="row cl">
+		<div class="col-xs-3 col-sm-3 col-xs-offset-4 col-sm-offset-3">
+			<input class="btn btn-primary radius" id="subbtn" type="submit" value="&nbsp;&nbsp;提交&nbsp;&nbsp;"/>
+			<input class="btn radius" id="reset" type="button" value="&nbsp;&nbsp;重置&nbsp;&nbsp;"/>
+		</div> 
+	</div>
+	</form>
+</article>
+
+<!--_footer 作为公共模版分离出去--> 
+<div th:replace="_footer :: footerjs"></div>
+ <!--/_footer 作为公共模版分离出去-->
+
+<!--请在下方写此页面业务相关的脚本-->
+<script type="text/javascript" th:src="@{/lib/jquery.validation/1.14.0/jquery.validate.js}" src="lib/jquery.validation/1.14.0/jquery.validate.js"></script> 
+<script type="text/javascript" th:src="@{/lib/jquery.validation/1.14.0/validate-methods.js}" src="lib/jquery.validation/1.14.0/validate-methods.js"></script> 
+<script type="text/javascript" th:src="@{/lib/jquery.validation/1.14.0/messages_zh.js}"  src="lib/jquery.validation/1.14.0/messages_zh.js"></script> 
+<script type="text/javascript" th:src="@{/lib/My97DatePicker/4.8/WdatePicker.js}"  src="lib/My97DatePicker/4.8/WdatePicker.js"></script>
+<script type="text/javascript">
+
+
+
+ $(function(){
+	 
+	$("#form-purchase-updateOrder").validate({
+		rules:{
+			locationCode:{
+				required:true,
+			},
+			advertUrl:{
+				required:true,
+			},
+			advertFee:{
+				required:true,
+				minNumber:0.01,
+				number:true,
+			},
+			creatTimeString:{
+				required:true,
+			},
+			endTimeString:{
+				required:true,
+			}
+		},
+		onkeyup:false,
+		debug: true,
+		success:"valid",
+		submitHandler:function(form){
+				$(form).ajaxSubmit({
+				type: 'POST',
+				url: "/admin/advert/updateAdvert" ,
+				success: function(data){
+					if(data.code == "000000"){
+						//禁止重复提交
+						$('#subbtn').attr("type","button");
+						layer.msg('发布成功!',{icon:1,time:1000},function(){
+							var index = parent.layer.getFrameIndex(window.name);
+							parent.location.reload();
+							parent.layer.close(index); 
+						});
+					}else{
+						layer.msg('发布失败!请重试',{icon:5,time:1000});
+					}
+				},
+                error: function(XmlHttpRequest, textStatus, errorThrown){
+					layer.msg('error!',{icon:5,time:1000});
+				}
+			});
+		}
+	});
+}); 
+
+
+
+ 
+//自定义validate验证输入的数字小数点位数不能大于两位
+jQuery.validator.addMethod("minNumber",function(value, element){
+    var returnVal = true;
+    inputZ=value;
+    var ArrMen= inputZ.split(".");    //截取字符串
+    if(ArrMen.length==2){
+        if(ArrMen[1].length>2){    //判断小数点后面的字符串长度
+            returnVal = false;
+            return false;
+        }
+    }
+    return returnVal;
+},"小数点后最多为两位");         //验证错误信息
+
+//重置按钮
+$('#reset').on('click',function(){
+	$('.input-text').val("");
+	$('.text-input').prop('selectedIndex', 0);
+	$("#send").css('display','none');
+
+	$("#isallTrue").prop('checked',true);
+	$("#isallTrue").prop('checked',true);
+	var editorBox = UE.getEditor('editor');
+	editorBox.setContent('');
+});
+
+$(document).ready(function() {
+    $('input[type=radio][name=isall]').change(function() {
+        if (this.value == 1) {
+        	$("#send").css('display','none');
+        }
+        else if (this.value == 2) {
+        	$("#send").css('display','block');
+        }
+    });
+});
+
+</script> 
+<!--/请在上方写此页面业务相关的脚本-->
+</body>
+</html>

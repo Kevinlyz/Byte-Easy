@@ -1,0 +1,88 @@
+<!DOCTYPE HTML>
+<html  xmlns:th="http://www.thymeleaf.org">
+<head th:include="_meta :: header">
+<title>友情链接 </title>
+</head>
+<body>
+<article class="page-container">
+	<form class="form form-horizontal" id="form-admin-add" action="#" th:action="@{admin/insertlink}">
+	 <input type="hidden" name="save" value="true"/>
+	<div class="row cl">
+		<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>链接名称</label>
+		<div class="formControls col-xs-7 col-sm-8 skin-minimal">
+		<input type="text" class="input-text" name="name" value="" placeholder="" id="name"/>
+		</div>
+	</div>
+	<div class="row cl">
+		<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>链接地址</label>
+		<div class="formControls col-xs-7 col-sm-8">
+			<input type="text" class="input-text" name="link" value="" placeholder="" id="link"/>
+		</div>
+	</div>
+	<div class="row cl">
+		<div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-3">
+			<input class="btn btn-primary radius" type="submit" style="margin-left:130px;margin-right:30px;" value="&nbsp;&nbsp;提交&nbsp;&nbsp;"/>
+			<input class="btn btn-primary radius" type="button" id="cancel" value="&nbsp;&nbsp;重置&nbsp;&nbsp;"/>
+		</div>
+	</div>
+	</form>
+</article>
+
+<!--_footer 作为公共模版分离出去--> 
+<div th:replace="_footer :: footerjs">
+</div>
+ <!--/_footer 作为公共模版分离出去-->
+
+<!--请在下方写此页面业务相关的脚本-->
+<script type="text/javascript" th:src="@{/lib/jquery.validation/1.14.0/jquery.validate.js}" src="lib/jquery.validation/1.14.0/jquery.validate.js"></script> 
+<script type="text/javascript" th:src="@{/lib/jquery.validation/1.14.0/validate-methods.js}" src="lib/jquery.validation/1.14.0/validate-methods.js"></script> 
+<script type="text/javascript" th:src="@{/lib/jquery.validation/1.14.0/messages_zh.js}"  src="lib/jquery.validation/1.14.0/messages_zh.js"></script> 
+<script type="text/javascript">
+$(function(){
+	$('.skin-minimal input').iCheck({
+		checkboxClass: 'icheckbox-blue',
+		radioClass: 'iradio-blue',
+		increaseArea: '20%'
+	});
+	
+	$("#form-admin-add").validate({
+		rules:{
+			link:{
+				required:true,
+			},
+			name:{
+				required:true,
+			},
+		},
+		onkeyup:false,
+		success:"valid",
+		submitHandler:function(form){
+			$(form).ajaxSubmit({
+				type: 'post',
+				url: "/admin/insertlink" ,
+				success: function(data){
+					if(data == "1"){
+						layer.msg('插入成功!',{icon:1,time:1000},function(){
+							var index = parent.layer.getFrameIndex(window.name);
+							parent.location.reload();
+							parent.layer.close(index); 
+						});
+					}else{
+						layer.msg('插入失败,友情链接已存在1!',{icon:1,time:1000});
+					}
+				},
+                error: function(XmlHttpRequest, textStatus, errorThrown){
+					layer.msg('插入失败,友情链接已存在2!',{icon:1,time:1000});
+				}
+			});
+		
+		}
+	});
+});
+$("#cancel").on('click',function(){
+	$(".input-text").val("");
+})
+</script> 
+<!--/请在上方写此页面业务相关的脚本-->
+</body>
+</html>

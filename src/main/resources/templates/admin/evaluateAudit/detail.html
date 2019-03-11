@@ -1,0 +1,82 @@
+<!DOCTYPE HTML>
+<html  xmlns:th="http://www.thymeleaf.org">
+<head th:include="_meta :: header">
+<title>项目方信息编辑 </title>
+    <meta data-n-head="true" charset="utf-8"/>
+    <meta data-n-head="true" name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta data-n-head="true" data-hid="keywords" name="keywords" content="方案设计、设计业务、建筑设计、互联网设计院、建筑众包"/>
+    <meta data-n-head="true" data-hid="description" name="description" content="建筑众包拥有国内外顶尖的建筑设计、互联网、云计算和大数据等资源，为开发商、设计师、设计公司，建材供应、施工、项目管理等建筑产业各环节的用户，提供优质的合作共赢平台。"/>
+    <title data-n-head="true">建筑众包--人工智能互联网设计院</title>
+    <link data-n-head="true" rel="icon" type="image/x-icon" th:href="@{/favicon.ico.css}"href="favicon.ico.css" />
+    <script data-n-head="true" th:src="@{/font/js/jquery.min.js}"src="font/js/jquery.min.js"></script>
+    <script data-n-head="true" th:src="@{/font/js/index.js}"src="js/index.js"></script>
+    <link rel="stylesheet" type="text/css" th:href="@{/font/css/index.css}" href="font/css/index.css"/>
+	<link rel="stylesheet" type="text/css" th:href="@{/font/css/information.css}"href="font/css/information.css"/>
+	<link rel="stylesheet" type="text/css" th:href="@{/font/css/el.css}"href="font/css/el.css"/>
+		 <script type="text/javascript" th:src="@{/lib/layer/2.4/layer.js}" src="lib/layer/2.4/layer.js"></script>
+ <script data-n-head="true" th:src="@{/js/common/layer.js}" src="js/common/layer.js"></script>
+</head>
+<body>
+<style>
+	#submit{
+		width:15%;
+	}
+</style>
+<article class="page-container">
+	<form class="form form-horizontal" id="form-purchase-add" action="#">
+	<!-- <input type="hidden" name="save" value="true"/> -->
+	
+	<div class="row cl" style="margin-bottom:4%;margin-top:5%;">
+		<label class="form-label col-xs-4 col-sm-3 col-sm-offset-1"><span class="c-red">*</span>项目名称：</label>
+		<div class="formControls col-xs-7 col-sm-5">
+			<input type="text" class="input-text" placeholder="项目方名称" name="username" id="username" th:value="${comment.projectName}"/>
+		</div>
+	</div>
+	
+	<div class="row cl" style="margin-bottom:4%">
+		<label class="form-label col-xs-4 col-sm-3 col-sm-offset-1"><span class="c-red">*</span>评论用户：</label>
+		<div class="formControls col-xs-7 col-sm-5">
+			<input type="text" class="input-text" placeholder="评论用户" name="nickname" id="nickname" th:value="${comment.userName}"/>
+		</div>
+	</div>
+	
+	<div class="row cl" style="margin-bottom:4%">
+		<label class="form-label col-xs-4 col-sm-3 col-sm-offset-1"><span class="c-red">*</span>评论类型：</label>
+		<div class="formControls col-xs-7 col-sm-5">
+			<input type="text" class="input-text" placeholder="评论类型" name="tel" id="tel" th:if="${comment.typeCode == 0}" value="设计师对项目的评价"/>
+			<input type="text" class="input-text" placeholder="评论类型" name="tel" id="tel" th:if="${comment.typeCode == 1}" value="项目方对项目的评价"/>
+			<input type="text" class="input-text" placeholder="评论类型" name="tel" id="tel" th:if="${comment.typeCode == 2}" value="设计师对平台的评价"/>
+			<input type="text" class="input-text" placeholder="评论类型" name="tel" id="tel" th:if="${comment.typeCode == 3}" value="项目方对平台的评价"/>
+		</div>
+	</div>
+	
+	<div class="row cl" style="margin-bottom:4%">
+		<label class="form-label col-xs-4 col-sm-3 col-sm-offset-1"><span class="c-red">*</span>评论内容：</label>
+		<div class="formControls col-xs-7 col-sm-5">
+			<textarea type="text" class="input-text" style="height:150px;" placeholder="评论内容" name="email" id="email" th:text="${comment.content}"></textarea>
+		</div>
+	</div>
+
+	<div class="row cl" style="margin-bottom:4%">
+		<label class="form-label col-xs-4 col-sm-3 col-sm-offset-1"><span class="c-red">*</span>创建时间：</label>
+		<div class="formControls col-xs-7 col-sm-5">
+			<input type="text" class="input-text" placeholder="创建时间" name="email" id="email" th:value="${#dates.format(comment.submitTime, 'yyyy/MM/dd HH:mm:ss')}"/>
+		</div>
+	</div>
+
+	</form>
+</article>
+
+<!--_footer 作为公共模版分离出去--> 
+<div th:replace="_footer :: footerjs"></div>
+ <!--/_footer 作为公共模版分离出去-->
+
+<!--请在下方写此页面业务相关的脚本-->
+<script type="text/javascript" th:src="@{/lib/jquery.validation/1.14.0/jquery.form.min.js}" src="lib/jquery.validation/1.14.0/jquery.form.min.js"></script>
+<script type="text/javascript" th:src="@{/lib/jquery.validation/1.14.0/jquery.validate.js}" src="lib/jquery.validation/1.14.0/jquery.validate.js"></script> 
+<script type="text/javascript" th:src="@{/lib/jquery.validation/1.14.0/validate-methods.js}" src="lib/jquery.validation/1.14.0/validate-methods.js"></script> 
+<script type="text/javascript" th:src="@{/lib/jquery.validation/1.14.0/messages_zh.js}"  src="lib/jquery.validation/1.14.0/messages_zh.js"></script> 
+<script type="text/javascript" th:src="@{/lib/My97DatePicker/4.8/WdatePicker.js}"  src="lib/My97DatePicker/4.8/WdatePicker.js"></script>
+<!--/请在上方写此页面业务相关的脚本-->
+</body>
+</html>

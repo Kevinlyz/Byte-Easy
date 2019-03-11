@@ -1,0 +1,14 @@
+<aside class="Hui-aside" th:fragment="menu">
+	<div class="menu_dropdown bk_2">
+		<dl class="my-dl" th:each="one,oneStat:${sysMenu}" th:if="${one.parentId == 1}">
+			<dt><i class="Hui-iconfont">&#xe616;</i>&nbsp;<span th:text="${one.name}"/><i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
+			<dd class="my-dd">
+				<ul >
+					<li th:each="two,twoStat:${sysMenu}"  th:if="${two.parentId eq one.id}">
+						<a th:attr="data-href=${two.url},data-title=${two.name}"  href="javascript:;" th:text="${two.name}">二级菜单</a>
+					</li>
+				</ul>
+			</dd>
+		</dl>
+	</div>
+</aside>

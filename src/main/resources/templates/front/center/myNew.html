@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html data-n-head-ssr="" data-n-head=""
+	xmlns:th="http://www.thymeleaf.org">
+<head th:include="front/common/_meta :: header"/>
+<head>
+<link data-n-head="true" rel="icon" type="image/x-icon"
+	th:href="@{/font/favicon.ico.css}" href="favicon.ico.css" />
+<script data-n-head="true" th:src="@{/font/js/jquery.min.js}"
+	src="js/jquery.min.js"></script>
+<script data-n-head="true" th:src="@{/font/js/index.min.js}"
+	src="js/index.js"></script>
+<link rel="stylesheet" type="text/css" th:href="@{/font/css/el.css}"
+	href="css/el.css" />
+<link rel="stylesheet" type="text/css" th:href="@{/font/css/auth.css}"
+	href="css/auth.css">
+<link rel="stylesheet" type="text/css" th:href="@{/font/css/myNew.css}"
+	href="css/myNew.css">
+<link rel="stylesheet" type="text/css" th:href="@{/font/css/xinxi.css}"
+	href="css/xinxi.css">
+<link rel="stylesheet" type="text/css"
+	th:href="@{/font/css/my_project.css}" href="css/my_project.css">
+</head>
+<body data-n-head="">
+	<div data-server-rendered="true" id="__nuxt">
+		<div class="nuxt-progress"
+			style="width: 0%; height: 2px; background-color: #3B8070; opacity: 0;"></div>
+		<div id="__layout">
+			<div>
+				<div data-v-1501032a="">
+					<!-- 公共顶部header -->
+					<header th:include="front/common/_header :: header" class="header"
+						data-v-8e52717c></header>
+					<!-- 公共导航 -->
+					<nav th:include="front/common/_nav :: nav" class="nav_index"
+						data-v-bdccf15a></nav>
+
+					<div class="membar" data-v-24a6dbce=""
+						th:include="front/center/_nav :: nav"></div>
+					<div class="container" style="margin-bottom: 20px;"
+						data-v-1501032a="">
+						<div class="title" data-v-1501032a="">我的消息</div>
+						<ul class="wei-ul" th:each="i:${messagelist}" data-v-1501032a="">
+							<li>
+								<div class="consult_list">
+
+									<div class="consult_list_right active">
+										<!-- <h3>这一届的筑觉杯，不一样的精彩！</h3> -->
+										
+										<a th:href="@{/center/MessageMine/newdetail}+'?id='+${i.getId()}+'&&pageNo='+${pageInfo.pageNum}+'&&pageSize='+${pageInfo.pageSize}+'&noRead='+${noRead}">
+											<div th:text="${i.getNotifyType()}" style="float:left;"></div>
+											<div th:text="${i.getTitle()}" style="float:left;margin-left:10px;"></div>
+											内容：
+											<div style="color: red;margin-left:10px;"
+												th:text="${i.getMessage()}" th:id="${i.getId()}">
+											</div>
+										</a>
+										<div class="consult_list_time">
+											<span th:text="${#calendars.format(i.getCreatTime(),'yyyy-MM-dd HH:mm:ss')}"></span>
+										</div>
+										<!-- <a title="删除" href="javascript:;" th:onclick="'javascript:admin_del(\' '+@{/admin/Usermanagement/deleteone}+'?id='+${i.id}+'\')'"
+				 						class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6e2;</i>
+										</a> -->
+									</div>
+
+								</div>
+							</li>
+						</ul>
+						
+					</div>
+					
+					<div class="bg-purple" data-v-d0b3a19c="">
+         					 <div class="block" data-v-d0b3a19c="">
+								 <form class="el-form el-form--inline" data-v-d0b3a19c="" th:action="@{/center/MessageMine/one}" method="post">
+									<input th:type="hidden" name="pageNo" id="pageNum" th:value="${pageInfo.pageNum}"/>
+	    							<input th:type="hidden" id="pages" th:value="${pageInfo.pages}"/>
+								</form>
+								<div class="pages_zt" data-v-f669c494>
+									<div class="pageDiv"></div>
+								</div>
+							</div>
+					</div>
+					<!-- 公共底部 -->
+					<div th:include="front/common/_footer :: footer" id="footer"
+						data-v-407369c6 data-v-2a183b29>
+					</div>
+					<!-- 公共js -->
+  	  				<div th:include="front/common/_js :: js"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+<p th:text="#{readedId}" style="display: none;">default message</p>
+<script th:inline="javascript">
+    $(document).ready(function(){
+    	 var message = [[${readedId}]];
+    	 var id= new Array(); //定义一数组 
+    	 id=message;
+    	 for (i=0;i<id.length ;i++ ) 
+    	 { 	
+    		 $('#'+id[i]).css("color","#111");  
+    	 }
+    });
+</script>
+</html>

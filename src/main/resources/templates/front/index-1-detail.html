@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:include="front/common/_meta :: header"/>
+ <head>
+    <title data-n-head="true"th:text="${exampleProject.getProjectName()}"></title>
+    <link data-n-head="true" rel="icon" type="image/x-icon" href="/favicon.ico"/>
+    <script data-n-head="true" th:src="@{/font/js/jquery.min.js}" src="js/jquery.min.js"></script>
+    <script data-n-head="true" th:src="@{/font/js/index.js}" src="js/index.js"></script>
+    <link rel="stylesheet" type="text/css" th:href="@{/font/css/el.css}" href="css/el.css"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/font/css/index-1-detail.css}" href="css/index-1-detail.css"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/h-ui/css/layui.css}" href="css/layui.css"/>
+ </head> 
+ <body data-n-head=""> 
+  <div data-server-rendered="true" id="__nuxt">
+   <div class="nuxt-progress" style="width:0%;height:2px;background-color:#3B8070;opacity:0;"></div>
+   <div id="__layout">
+    <div>
+     <div>
+      <!-- 公共顶部header -->
+      <header th:include="front/common/_header :: header" class="header" data-v-8e52717c></header>
+      <!-- 公共导航 -->
+      <nav th:include="front/common/_nav :: nav" class="nav_index" data-v-bdccf15a></nav>
+      <div class="asider">
+       <ul></ul>
+      </div>
+      <div class="consult_content">
+       <div class="container">
+        <div class="common_list">
+         <div class="common_left">
+          <div class="consult_details_content">
+           <div class="bgcolor_white case_padding">
+            <div class="case_title">
+             <h4 th:text="${exampleProject.getProjectName()}"/>
+              <div class="case_title_ti">
+              <span th:text="${#dates.format(exampleProject.getCreateTime(),'yyyy-MM-dd HH:mm:ss')}">2019/02/14 17:15</span>
+              <span th:text="${exampleProject.getDesignerName()}"></span>
+               <button class="layui-btn layui-btn-normal radius" style="margin-left:700px;" id="classExample">返回经典案例</button>
+             </div>
+            </div>
+           </div>
+           <div class="consult_content_s">
+               <div id="content"></div>
+           </div>
+          </div>
+         </div>
+         <div class="common_right ">
+          <div class="consult_right bgcolor_white">
+           <h3>最新案例</h3>
+           <div class="consult_right_list" th:each="example:${exampleModelList}">
+            <a th:href="@{/detail}+'?exampleid='+${example.getId()}">
+             <img data-v-27298642="" th:src="${example.getCoverImage()}" src="http://www.archcollege.com/wp-content/themes/college/timthumb.php?src=http://www.archcollege.com/wp-content/uploads/2019/02/5c626cb03cc42.jpg&amp;h=205&amp;w=348&amp;zc=1" alt="" width="230" height="135">
+             <p style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis;" th:text="${example.getProjectName()}"></p>
+            </a>
+           </div>
+          </div>
+         </div>
+         </div>
+        </div>
+       </div>
+      </div>
+        <!-- 公共底部 -->
+        <div th:include="front/common/_footer :: footer" id="footer" data-v-407369c6 data-v-2a183b29></div>
+     </div>
+    </div>
+   </div>
+  </div>
+
+  <script>
+
+      $("#li3").attr("class","main_head");
+
+      function escape2Html(str) {
+          var arrEntities={'lt':'<','gt':'>','nbsp':' ','amp':'&','quot':'"'};
+          return str.replace(/&(lt|gt|nbsp|amp|quot);/ig,function(all,t){return arrEntities[t];});
+      }
+      /*<![CDATA[*/
+      $("#content").html(escape2Html('[[${exampleProject.getContent()}]]'));
+      /*]]>*/
+  $("#classExample").on('click',function(){
+   window.location.replace("/classicexample?pageSize=16");
+  })
+  </script>
+  <!-- 公共js -->
+  <div th:include="front/common/_js :: js"></div>
+ </body>
+</html>

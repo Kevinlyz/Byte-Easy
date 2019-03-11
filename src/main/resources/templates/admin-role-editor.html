@@ -1,0 +1,135 @@
+﻿<!--_meta 作为公共模版分离出去-->
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<meta charset="utf-8"/>
+<head th:include="_meta :: header">
+<title>新建网站角色 - 管理员管理 - H-ui.admin v3.0</title>
+</head>
+<body>
+<article class="page-container">
+	<form  method="post" action="#" th:action="@{/role/editor-role}" th:object="${role}" class="form form-horizontal" id="form-admin-role-add">
+		<input type="hidden" class="input-text" value="" placeholder="" th:field="*{id}"/>
+		<input type="hidden" name="save" value="true"/>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>角色名称：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input type="text" class="input-text" value="" placeholder=""  th:field="*{name}" />
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-3">描述：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input type="text" class="input-text" value="" placeholder="" id="" th:field="*{description}"/>
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-3">网站资源：</label>			
+			<div class="formControls col-xs-8 col-sm-9" >
+				<dl class="permission-list" th:each="resource:${resourceList}" th:if="${resource.parentId  eq 1 and resource.id !=1}" >
+					<dt>
+						<label>
+							<input type="checkbox"    th:value="${resource.id}" value="" name="roleResources"  />
+							<strong><span th:text="${resource.name}"></span></strong></label>
+					</dt>
+					<dd>
+						<dl class="cl permission-list2" th:each="cResource:${resourceList}" th:if="${cResource.parentId eq resource.id}">
+							<dt>
+								<label class="">
+									<input type="checkbox"  th:value="${cResource.id}" value="" name="roleResources"  />
+									<strong><span th:text="${cResource.name}"></span></strong></label>
+							</dt>
+							<dd>
+								<label class="" th:each="ccResource:${resourceList}" th:if="${ccResource.parentId eq cResource.id}">
+									<input type="checkbox" th:value="${ccResource.id}" value="" name="roleResources"  />
+									<span th:text="${ccResource.name}"></span></label>
+							</dd>
+						</dl>
+					</dd>
+				</dl>
+			
+			</div>
+		</div>
+		<div class="row cl">
+			<div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-3">
+				<button type="submit" class="btn btn-success radius" id="admin-role-save" name="admin-role-save"><i class="icon-ok"></i> 确定</button>
+			</div>
+		</div>
+	</form>
+</article>
+
+<!--_footer 作为公共模版分离出去--> 
+<div th:replace="_footer :: footerjs">
+</div>
+ <!--/_footer 作为公共模版分离出去-->
+
+<!--请在下方写此页面业务相关的脚本-->
+<script type="text/javascript" th:src="@{/lib/jquery.validation/1.14.0/jquery.validate.js}" src="lib/jquery.validation/1.14.0/jquery.validate.js"></script> 
+<script type="text/javascript" th:src="@{/lib/jquery.validation/1.14.0/validate-methods.js}" src="lib/jquery.validation/1.14.0/validate-methods.js"></script> 
+<script type="text/javascript" th:src="@{/lib/jquery.validation/1.14.0/messages_zh.js}"  src="lib/jquery.validation/1.14.0/messages_zh.js"></script> 
+
+<script th:inline="javascript">
+//通过theamleaf+js设置角色资源选中
+/*<![CDATA[*/
+    var resources = /*[[${resources}]]*/ 'Sebastian';
+//     JSON.stringify(resources);
+// 	resources = $.parseJSON(resources); 
+    for(var x = 0; x < resources.length; x++){
+    	var resourceId =  resources[x].id;
+    	$("input[name='roleResources'][value='"+resourceId+"']").attr("checked", true);
+    }
+/*]]>*/
+</script>
+<script type="text/javascript">
+$(function(){
+	$(".permission-list dt input:checkbox").click(function(){
+		$(this).closest("dl").find("dd input:checkbox").prop("checked",$(this).prop("checked"));
+	});
+	$(".permission-list2 dd input:checkbox").click(function(){
+		var l =$(this).parent().parent().find("input:checked").length;
+		var l2=$(this).parents(".permission-list").find(".permission-list2 dd").find("input:checked").length;
+		if($(this).prop("checked")){
+			$(this).closest("dl").find("dt input:checkbox").prop("checked",true);
+			$(this).parents(".permission-list").find("dt").first().find("input:checkbox").prop("checked",true);
+		}
+		else{
+			if(l==0){
+				$(this).closest("dl").find("dt input:checkbox").prop("checked",false);
+			}
+			if(l2==0){
+				$(this).parents(".permission-list").find("dt").first().find("input:checkbox").prop("checked",false);
+			}
+		}
+	});
+	
+	$("#form-admin-role-add").validate({
+		rules:{
+			name:{
+				required:true,
+			},
+		},
+		onkeyup:false,
+		focusCleanup:true,
+		success:"valid",
+		submitHandler:function(form){
+			$(form).ajaxSubmit({
+				type: 'post',
+				url: "/role/editor-role" ,
+				success: function(data){
+					layer.msg('编辑成功!',{icon:1,time:1000},function(){
+						var index = parent.layer.getFrameIndex(window.name);
+						parent.location.reload();
+						parent.layer.close(index); 
+					});
+				},
+                error: function(XmlHttpRequest, textStatus, errorThrown){
+					layer.msg('error!',{icon:1,time:1000});
+				}
+			});
+		
+		}
+	});
+});
+</script>
+<!--/请在上方写此页面业务相关的脚本-->
+</body>
+</html>

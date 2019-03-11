@@ -1,0 +1,145 @@
+<!DOCTYPE HTML>
+<html  xmlns:th="http://www.thymeleaf.org">
+<head th:include="_meta :: header">
+<title>修改维修类别 </title>
+</head>
+<body>
+<article class="page-container">
+	<form class="form form-horizontal" id="form-admin-add" action="#" th:action="@{/admin/capitalAudit/edit}" th:object="${capitalAudit}">
+	
+	 <input type="hidden" name="id" value="" th:field="*{id}"/>
+	<div class="row cl">
+		<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>申请人姓名：</label>
+		<div class="formControls col-xs-7 col-sm-8">
+			<input type="text" disabled="disabled" class="input-text" name="applicantName" value="" placeholder="" id="applicantName" th:field="*{applicantName}" />
+			<input type="hidden" class="input-text" name="capitalAudit1" value="" th:value="${capitalAudit.applicantName}">
+		</div>
+	</div>
+	<div class="row cl">
+		<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>申请金额：</label>
+		<div class="formControls col-xs-7 col-sm-8">
+			<input type="text" disabled="disabled" class="input-text" name="money" value="" placeholder="" id="money" th:field="*{money}" />
+			<input type="hidden" class="input-text" name="money1" value="" th:value="${capitalAudit.money}">
+		</div>
+	</div>
+	<div class="row cl">
+		<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>申请类型：</label>
+		<div class="formControls col-xs-7 col-sm-8">
+			<input type="text" disabled="disabled" class="input-text" name="applicationType" value="" placeholder="" id="applicationType" th:field="*{applicationType}" />
+			<input type="hidden" class="input-text" name="applicationType1" value="" th:value="${capitalAudit.applicationType}">
+		</div>
+	</div>
+	<div class="row cl">
+		<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>状态：</label>
+		<div class="formControls col-xs-7 col-sm-8">
+			<input type="text" disabled="disabled" class="input-text" name="state" value="" placeholder="" id="state" th:field="*{state}" />
+			<input type="hidden" class="input-text" name="state1" value="" th:value="${capitalAudit.state}">
+		</div>
+	</div>
+	<div class="row cl">
+		<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>拒绝原因：</label>
+		<div class="formControls col-xs-7 col-sm-8">
+			<textarea type="text"  style="height:30px" class="input-text" name="reason" value="" placeholder="" id="reason" th:field="*{reason}" />
+			<input type="hidden" class="input-text" name="reason1" value="" th:value="${capitalAudit.reason}">
+		</div>
+	</div>
+	<div class="row cl">
+		<div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-3 "  style="float:left">
+			<input class="btn btn-primary radius" type="submit"  style="margin-left:30px;margin-right:30px;" value="&nbsp;&nbsp;确定&nbsp;&nbsp;"/>
+			<input class="btn radius" type="button" id="cancel" value="&nbsp;&nbsp;取消&nbsp;&nbsp;"/>
+		</div>
+	</div>
+	
+	</form>
+</article>
+
+<!--_footer 作为公共模版分离出去--> 
+<div th:replace="_footer :: footerjs"></div>
+ <!--/_footer 作为公共模版分离出去-->
+
+<!--请在下方写此页面业务相关的脚本-->
+<script type="text/javascript" th:src="@{/lib/jquery.validation/1.14.0/jquery.validate.js}" src="lib/jquery.validation/1.14.0/jquery.validate.js"></script> 
+<script type="text/javascript" th:src="@{/lib/jquery.validation/1.14.0/validate-methods.js}" src="lib/jquery.validation/1.14.0/validate-methods.js"></script> 
+<script type="text/javascript" th:src="@{/lib/jquery.validation/1.14.0/messages_zh.js}"  src="lib/jquery.validation/1.14.0/messages_zh.js"></script> 
+<script type="text/javascript">
+$(function(){
+	$('.skin-minimal input').iCheck({
+		checkboxClass: 'icheckbox-blue',
+		radioClass: 'iradio-blue',
+		increaseArea: '20%'
+	});
+	
+	$("#form-admin-add").validate({
+		rules:{
+			username:{
+				required:true,
+				minlength:4,
+				maxlength:16
+			},
+			code:{
+				required:true,
+			},
+			productRepairName:{
+				required:true,
+				
+			},
+			reason:{
+				required:true,
+
+			},
+			price:{
+				required:true,
+				 min: 0.01,          //输入的数字最小值为0.01，不能为0或者负数
+				 minNumber : "${price}.val()"
+			},
+		},
+		onkeyup:false,
+		success:"valid",
+		submitHandler:function(form){
+			$(form).ajaxSubmit({
+				type: 'post',
+				url: "/admin/capitalAudit/edit" ,
+				success: function(data){
+					if(data == 1){
+						//禁止重复提交
+						$('#subbtn').attr("type","button");
+						layer.msg('拒绝成功!',{icon:1,time:1000},function(){
+							var index = parent.layer.getFrameIndex(window.name);
+							parent.location.reload();
+							parent.layer.close(index); 
+						});
+					}else {
+						layer.msg('拒绝失败!',{icon:1,time:1000});
+					}
+				},
+                error: function(XmlHttpRequest, textStatus, errorThrown){
+					layer.msg('error!',{icon:1,time:1000});
+				}
+			});
+		
+		}
+	});
+});
+$("#cancel").on('click',function(){
+	var index = parent.layer.getFrameIndex(window.name);
+	parent.location.reload();
+	parent.layer.close(index);
+})
+
+//自定义validate验证输入的数字小数点位数不能大于两位
+jQuery.validator.addMethod("minNumber",function(value, element){
+    var returnVal = true;
+    inputZ=value;
+    var ArrMen= inputZ.split(".");    //截取字符串
+    if(ArrMen.length==2){
+        if(ArrMen[1].length>2){    //判断小数点后面的字符串长度
+            returnVal = false;
+            return false;
+        }
+    }
+    return returnVal;
+},"小数点后最多为两位");         //验证错误信息
+</script> 
+<!--/请在上方写此页面业务相关的脚本-->
+</body>
+</html>

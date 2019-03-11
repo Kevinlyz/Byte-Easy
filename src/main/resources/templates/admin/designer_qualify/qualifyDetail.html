@@ -1,0 +1,137 @@
+<!DOCTYPE HTML>
+<html  xmlns:th="http://www.thymeleaf.org">
+<head th:include="_meta :: header">
+    <title>设计师资质审核详情 </title>
+</head>
+<body>
+<style>
+    #submit{
+        width:15%;
+    }
+</style>
+<article class="page-container">
+    <form class="form form-horizontal" id="form-purchase-add" action="#" th:action="@{/admin/Usermanagement/designersave}">
+        <!-- <input type="hidden" name="save" value="true"/> -->
+
+        <div class="row cl" style="margin-bottom:4%;display:none;">
+            <label class="form-label col-xs-4 col-sm-3 col-sm-offset-1"><span class="c-red">*</span>设计师姓名：</label>
+            <div class="formControls col-xs-7 col-sm-5">
+                <div th:text="${designerQualify.getDesignerName()}"></div>
+            </div>
+        </div>
+        <div class="row cl" style="margin-bottom:4%">
+            <label class="form-label col-xs-4 col-sm-3 col-sm-offset-1"><span class="c-red">*</span>申请专业类型：</label>
+            <div class="formControls col-xs-7 col-sm-5">
+                <div th:if="${designerQualify.getTypeCode() == 1000}">建筑</div>
+                <div th:if="${designerQualify.getTypeCode() == 1001}">结构</div>
+                <div th:if="${designerQualify.getTypeCode() == 1002}">水</div>
+                <div th:if="${designerQualify.getTypeCode() == 1003}">电</div>
+                <div th:if="${designerQualify.getTypeCode() == 1004}">暖</div>
+            </div>
+        </div>
+
+        <div class="row cl" style="margin-bottom:4%">
+            <label class="form-label col-xs-4 col-sm-3 col-sm-offset-1"><span class="c-red">*</span>申请时间：</label>
+            <div class="formControls col-xs-7 col-sm-5">
+                <div th:text="${#dates.format(designerQualify.getSubmitTime(),'yyyy-MM-dd HH:mm:ss')}"></div>
+            </div>
+        </div>
+
+        <div class="row cl" style="margin-bottom:4%">
+            <label class="form-label col-xs-4 col-sm-3 col-sm-offset-1"><span class="c-red">*</span>资质图片：</label>
+            <div class="formControls col-xs-7 col-sm-5" th:each="pro:${professionalCertificationList}">
+                <img th:src="${pro.getPicture()}">
+            </div>
+        </div>
+
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3 col-sm-offset-1"><span class="c-red">*</span>如审核不通过可填写原因,不填写将对用户显示“未知原因”：</label>
+            <div class="col-xs-3 col-sm-3 col-xs-offset-4 col-sm-offset-5">
+                <input type="text" name="reason"/>
+            </div>
+        </div>
+
+        <div class="row cl">
+            <div class="col-xs-3 col-sm-3 col-xs-offset-4 col-sm-offset-5">
+                <input type="hidden" th:value="${designerQualify.getUserId()}" name="userId">
+                <input type="hidden" th:value="${#dates.format(designerQualify.getSubmitTime(),'yyyy-MM-dd HH:mm:ss')}" name="submitTime">
+                <input class="btn btn-primary radius" id="pass" type="button" value="&nbsp;&nbsp;通过&nbsp;&nbsp;" onclick="'javascript:pass(\'+${designerQualify.getId()}}+\')'"/>
+            </div>
+            <div class="col-xs-3 col-sm-3 col-xs-offset-4 col-sm-offset-5">
+                <input class="btn btn-primary radius" id="refuse" type="button" value="&nbsp;&nbsp;拒绝&nbsp;&nbsp;" onclick="'javascript:refuse(\'+${designerQualify.getId()}}+\')'"/>
+            </div>
+        </div>
+    </form>
+</article>
+
+<!--_footer 作为公共模版分离出去-->
+<div th:replace="_footer :: footerjs"></div>
+<!--/_footer 作为公共模版分离出去-->
+
+<!--请在下方写此页面业务相关的脚本-->
+<script type="text/javascript" th:src="@{/lib/jquery.validation/1.14.0/jquery.validate.js}" src="lib/jquery.validation/1.14.0/jquery.validate.js"></script>
+<script type="text/javascript" th:src="@{/lib/jquery.validation/1.14.0/validate-methods.js}" src="lib/jquery.validation/1.14.0/validate-methods.js"></script>
+<script type="text/javascript" th:src="@{/lib/jquery.validation/1.14.0/messages_zh.js}"  src="lib/jquery.validation/1.14.0/messages_zh.js"></script>
+<script type="text/javascript" th:src="@{/lib/My97DatePicker/4.8/WdatePicker.js}"  src="lib/My97DatePicker/4.8/WdatePicker.js"></script>
+<script type="text/javascript">
+
+    var result;
+    /**
+     * 通过审核
+     */
+
+    function pass(id)
+    {
+        $.ajax({
+            type: 'POST',
+            url: "/admin/designerQualify/qualify?id="+id,
+            dataType: 'json',
+            async:false,
+            success: function(data){
+                if(data.code == "000000"){
+                    layer.msg('审核成功!',{icon:1,time:1000});
+                    var index = parent.layer.getFrameIndex(window.name);
+                    parent.layer.close(index);
+                    parent.reload();
+                }else{
+                    layer.msg('审核失败!',{icon:5,time:1000});
+                }
+
+            },
+            error:function(data) {
+                console.log("错误!");
+            },
+        });
+    }
+
+    /**
+     * 审核拒绝
+     * @param id
+     */
+    function refuse(id)
+    {
+        $.ajax({
+            type: 'POST',
+            url: "/admin/designerQualify/refuse?id="+id,
+            dataType: 'json',
+            async:false,
+            success: function(data){
+                if(data.code == "000000"){
+                    layer.msg('拒绝成功!',{icon:1,time:1000});
+                    var index = parent.layer.getFrameIndex(window.name);
+                    parent.layer.close(index);
+                    parent.reload();
+                }else{
+                    layer.msg('拒绝失败!',{icon:5,time:1000});
+                }
+
+            },
+            error:function(data) {
+                console.log("错误!");
+            },
+        });
+    }
+</script>
+<!--/请在上方写此页面业务相关的脚本-->
+</body>
+</html>

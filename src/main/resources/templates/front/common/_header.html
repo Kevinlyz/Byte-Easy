@@ -1,0 +1,34 @@
+<header class="navbar-wrapper" th:fragment="header">
+	 <div class="container" data-v-8e52717c>
+          <div id="publicHeader" data-v-8e52717c class="header_left" >
+              <ul data-v-8e52717c>
+              	  <li  data-v-8e52717c  th:if="${session.font_session!=null and session.font_session.photo!=null and session.font_session.photo.length() > 0}">
+                      <a th:href="@{/center/information}">
+              	        <img th:src="${session.font_session.photo} "  type="image/x-icon" style="width:30px;height:30px;margin-top:5px;">
+                      </a>
+                  </li>
+                  <li data-v-8e52717c id="login">
+                  <a th:href="@{/login}" th:if="${session.font_session==null}"data-v-8e52717c>登录</a>
+                  <a  th:href="@{/center/myProject}" th:if="${session.font_session}!=null" style="font-family:KaiTi;" th:text="${session.font_session.nickname}"></a>
+                  </li>
+                  <li data-v-8e52717c>
+                  	<a th:href="@{/front/}"th:if="${session.id}==null" data-v-8e52717c>注册</a>
+                    <a th:if="${session.id}!=null"th:href="@{/front/logout}">注销</a>
+                  </li>
+              </ul>
+          </div>
+          <div class="header_right">
+              <ul data-v-8e52717c>
+                  <li data-v-8e52717c>
+                      <a th:href="@{/center/myProject}" data-v-8e52717c><img data-v-8e52717c th:src="@{/font/images/index_03.3f15414.png}" alt="" />
+                       <span data-v-8e52717c th:if="${session.font_session==null}">个人中心</span>
+                      <span data-v-8e52717c th:if="${session.font_session !=null and session.font_session.roleCode==1001}">设计师个人中心</span>
+                      <span data-v-8e52717c th:if="${session.font_session !=null and session.font_session.roleCode==1002}">项目方个人中心</span>
+                      <span data-v-8e52717c th:if="${session.font_session !=null and session.font_session.roleCode==1003}">专家个人中心</span>
+                      </a>
+                  </li>
+              </ul>
+          </div>
+          <div class="clear" ></div>
+      </div>
+</header>

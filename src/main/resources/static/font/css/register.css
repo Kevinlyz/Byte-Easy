@@ -1,0 +1,73 @@
+.register[data-v-f11a6d84] {
+	background: #f8f8f8;
+	padding: 43px 0 60px
+}
+
+.register .register_box[data-v-f11a6d84] {
+	margin: 0 auto;
+	width: 700px;
+	height: 715px;
+	background: #fff
+}
+
+.register .register_box .skewing[data-v-f11a6d84] {
+	padding: 42px 160px 0 45px
+}
+
+.register .register_box .skewing .protocoltips[data-v-f11a6d84] {
+	color: red;
+	padding: 0;
+	margin: 0;
+	line-height: 14px
+}
+
+.register .register_box .skewing .protocolLists[data-v-f11a6d84]:hover {
+	color: #ae433d
+}
+
+.register .register_box .skewing h4[data-v-f11a6d84] {
+	color: #bf4e44;
+	font-size: 18px;
+	margin-bottom: 40px
+}
+
+.register .register_box .skewing img[data-v-f11a6d84] {
+	vertical-align: middle
+}
+
+.register .register_box .skewing p[data-v-f11a6d84] {
+	display: inline-block;
+	cursor: pointer
+}
+
+.register .register_box .skewing span[data-v-f11a6d84] {
+	margin-left: 5px;
+	cursor: pointer
+}
+
+.register .register_box .skewing .loginBtn[data-v-f11a6d84] {
+	height: 40px;
+	width: 395px;
+	color: #fff;
+	border-color: #bf4e44;
+	background-color: #bf4e44
+}
+
+.register .register_box .skewing .loginBtnS[data-v-f11a6d84] {
+	margin: 30px auto 6px
+}
+
+.register .register_box .skewing .Mask[data-v-f11a6d84] {
+	opacity: .5;
+	z-index: 10
+}
+
+.register .register_box .goLogin[data-v-f11a6d84] {
+	text-align: center;
+	font-size: 14px
+}
+
+.register .register_box .goLogin span[data-v-f11a6d84] {
+	margin-left: 4px;
+	color: #bf4e44
+}

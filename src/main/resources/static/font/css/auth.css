@@ -1,0 +1,87 @@
+.container[data-v-5ddc5642] {
+	border: 1px solid #e8e8e8
+}
+
+.container .title[data-v-5ddc5642] {
+	margin-bottom: 20px;
+	height: 40px;
+	line-height: 40px;
+	background-color: #858891;
+	font-size: 16px;
+	color: #fff;
+	text-indent: 2em;
+	border-bottom: 1px solid #e8e8e8
+}
+
+.container .auth-img[data-v-5ddc5642] {
+	vertical-align: top;
+	margin-left: 80px
+}
+
+.container .auth-content[data-v-5ddc5642] {
+	display: inline-block;
+	margin-left: 40px
+}
+
+.container .auth-content h3[data-v-5ddc5642] {
+	margin-bottom: 30px;
+	font-size: 24px;
+	font-weight: 700
+}
+
+.container .auth-content p[data-v-5ddc5642] {
+	margin-bottom: 20px;
+	font-size: 14px
+}
+
+.container .auth-content p i[data-v-5ddc5642] {
+	margin-right: 10px
+}
+
+.red[data-v-5ddc5642] {
+	color: red
+}
+
+.issue_btn[data-v-24a6dbce] {
+	position: absolute;
+	right: 0;
+	top: -60px;
+	z-index: 10;
+	margin-right: 40px
+}
+
+.membar[data-v-24a6dbce] {
+	padding: 24px 0;
+	background: #f2f2f2
+}
+
+.membar ul[data-v-24a6dbce] {
+	width: 1102px;
+	height: 78px;
+	margin: 0 auto;
+	padding: 0 48px;
+	background: #fff;
+	border: 1px solid #dcdcdc
+}
+
+.membar ul li[data-v-24a6dbce] {
+	display: inline-block;
+	margin-right: 80px;
+	font-size: 18px;
+	color: #838794;
+	line-height: 78px
+}
+
+.membar ul li a[data-v-24a6dbce] {
+	color: #838794
+}
+
+.membar ul .check[data-v-24a6dbce] {
+	border-bottom: 2px solid #be4f44;
+	color: #be4f44;
+	font-weight: 700
+}
+
+.membar ul .check a[data-v-24a6dbce] {
+	color: #be4f44
+}

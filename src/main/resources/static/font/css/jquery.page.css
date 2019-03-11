@@ -1,0 +1,9 @@
+.pageDiv{text-align:center;padding: 15px 20px;text-align: center;color: #ccc;clear: both;}
+.pageDiv a{display: inline-block;color: #4c4c4c;background: #fff;display: inline-block;height: 25px;	line-height: 25px;	padding: 3px 12px;border: 1px solid #ddd;	margin: 0 2px;vertical-align: middle;font-size: 14px;}
+.pageDiv a:hover{text-decoration: none;background: #be4f44;color:#fff5d4;}
+.pageDiv span.current{background: #be4f44;display: inline-block;color: #fff;display: inline-block;height: 25px;	line-height: 25px;	padding: 3px 12px;	margin: 0 2px;vertical-align: middle;font-size: 14px;}
+.pageDiv span.disabled{display: inline-block;height: 25px;line-height: 25px;padding: 3px 18px;margin: 0 2px;	color: #bfbfbf;background: #f2f2f2;border: 1px solid #bfbfbf;vertical-align: middle;}
+.pageDiv span.pagecount{padding: 0 10px;font-size: 14px;color: #999999;margin-right: -30px;}
+.pageDiv span.countYe{color: #4C4C4C;font-size: 14px;margin-left: 30px;}
+.pageDiv span.countYe input{outline: none;border: 1px solid #ddd;height: 25px;padding: 3px 10px;width: 25px;margin: 0 5px;}
+.pageDiv a.turndown{padding: 3px 10px;}

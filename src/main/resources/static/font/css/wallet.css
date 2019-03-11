@@ -1,0 +1,290 @@
+.withdraw{
+	margin-top:20px;
+}
+.choose_title{
+	margin:10px 0;
+	font-weight:700;
+	font-size:16px;
+}
+.MYWALLET {
+	padding-bottom: 50px
+}
+
+.MYWALLET h2 {
+	background-color: #858891;
+	color: #fff;
+	padding: 10px 30px
+}
+
+.MYWALLET .myInformation {
+	padding: 30px;
+	margin: 0 30px
+}
+
+.MYWALLET .myInformation .mine0 {
+	float: left;
+	height: 100px;
+	width: 33%;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box
+}
+
+.MYWALLET .myInformation .mine {
+	border-right: 1px dashed #ddd
+}
+
+.MYWALLET .myInformation .mine .headPic {
+	float: left;
+	padding-top: 20px;
+	padding-right: 15px
+}
+
+.MYWALLET .myInformation .mine ul {
+	float: left;
+	padding-top: 25px;
+	padding-left: 25px
+}
+
+.MYWALLET .myInformation .allMoney {
+	border-right: 1px dashed #ddd;
+	text-align: center;
+	font-size: 22px;
+	color: #cc443d;
+	padding-top: 20px
+}
+
+.MYWALLET .myInformation .elseMoney {
+	color: #6b6b6b;
+	text-align: center;
+	padding-top: 30px
+}
+
+.MYWALLET .PDB10 {
+	padding-bottom: 10px
+}
+
+.MYWALLET .someActive .el-tabs__header .el-tabs__nav .is-left {
+	font-size: 16px;
+	height: 70px;
+	line-height: 70px
+}
+
+.clearfix:after {
+	content: "";
+	display: block;
+	height: 0;
+	overflow: hidden;
+	clear: both;
+	zoom: 1
+}
+
+
+.choose[data-v-2169a905] {
+	margin-top: 10px;
+	text-align: center
+}
+
+.choose ul[data-v-2169a905] {
+	width: 950px;
+	overflow: hidden;
+	margin: 20px auto
+}
+
+.choose .chooseZFBitem span[data-v-2169a905] {
+	left: 30px;
+	right: auto;
+	bottom: 30px
+}
+
+.choose .chooseZFBitem .account[data-v-2169a905] {
+	left: 30px;
+	right: auto;
+	bottom: 55px
+}
+
+.choose li[data-v-2169a905] {
+	position: relative;
+	float: right;
+	width: 270px
+}
+
+.choose li img[data-v-2169a905] {
+	width: 100%
+}
+
+.choose li span[data-v-2169a905] {
+	position: absolute;
+	right: 30px;
+	bottom: 40px;
+	color: #fff
+}
+
+.choose li .bankName[data-v-2169a905] {
+	left: 30px;
+	right: auto;
+	bottom: 130px;
+	font-size: 18px;
+	font-weight: 700;
+	letter-spacing: 1px
+}
+
+.choose li .type[data-v-2169a905] {
+	left: 85px;
+	bottom: 110px
+}
+
+.choose li .account[data-v-2169a905] {
+	left: 30px;
+	right: auto;
+	bottom: 40px
+}
+
+.protocol[data-v-2169a905] {
+	cursor: pointer
+}
+
+.protocol[data-v-2169a905]:hover {
+	color: red
+}
+
+.total[data-v-2169a905] {
+	color: red;
+	text-align: center;
+	padding: 20px;
+	font-size:1.2em;
+	
+}
+
+.buttonBox[data-v-2169a905] {
+	margin-top: 10px;
+	text-align: center
+}
+
+.dialog p span[data-v-2169a905] {
+	display: inline-block;
+	width: 75px
+}
+
+#walletExtract .mune .el-radio__label {
+	display: none
+}
+
+
+
+.add ul[data-v-35d19f18] {
+	width: 950px;
+	overflow: hidden;
+	margin: 20px auto
+}
+
+.add ul li[data-v-35d19f18] {
+	position: relative;
+	float: left;
+	width: 270px;
+	margin-right: 40px
+}
+
+.add ul li img[data-v-35d19f18] {
+	width: 100%
+}
+
+.add ul li .del[data-v-35d19f18] {
+	position: absolute;
+	right: 20px;
+	top: 20px
+}
+
+.add ul li span[data-v-35d19f18] {
+	position: absolute;
+	right: 30px;
+	bottom: 30px;
+	color: #fff
+}
+
+.add ul li .bankName[data-v-35d19f18] {
+	left: 30px;
+	top: 23px;
+	font-size: 18px;
+	font-weight: 700;
+	letter-spacing: 1px
+}
+
+.add ul li .type[data-v-35d19f18] {
+	left: 85px;
+	bottom: 110px
+}
+
+.add ul li .account[data-v-35d19f18] {
+	left: 30px;
+	bottom: 30px
+}
+
+.add .ZFB .account[data-v-35d19f18] {
+	bottom: 55px
+}
+
+.add .ZFB li span[data-v-35d19f18] {
+	left: 30px
+}
+
+.dialog .headline[data-v-35d19f18] {
+	margin-bottom: 10px
+}
+
+.el-radio+.el-radio[data-v-35d19f18] {
+	margin-left: 0
+}
+
+#bankManage .dialog .el-form-item__content {
+	position: relative
+}
+
+#bankManage .dialog .el-form-item__content .el-form-item__error {
+	left: 65%;
+	top: 35%
+}
+
+#bankManage .dialog .el-form-item {
+	margin-bottom: 0
+}
+
+#bankManage .add .el-radio__input {
+	position: absolute
+}
+
+#bankManage .add .el-radio__label {
+	display: block
+}
+
+
+.refer[data-v-6a564e18] {
+	margin-bottom: 10px;
+	text-align: right
+}
+
+.mune[data-v-6a564e18] {
+	padding-right: 10px
+}
+
+.dealListDetail[data-v-6a564e18] {
+	padding-left: 25%
+}
+
+.dealListDetail p span[data-v-6a564e18] {
+	display: -webkit-inline-box;
+	width: 70px
+}
+
+.Page[data-v-6a564e18] {
+	padding-top: 20px
+}
+
+
+.refer[data-v-21877f78] {
+	margin-bottom: 10px;
+	text-align: right
+}
+
+.mune[data-v-21877f78] {
+	padding-right: 10px
+}

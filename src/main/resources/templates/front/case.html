@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:city="http://www.w3.org/1999/xhtml">
+ <head> 
+  <link rel="stylesheet" type="text/css" th:href="@{/font/css/case.css}" /> 
+ </head> 
+ <style>
+ 	.serch_container{
+ 		width:200px;
+ 		margin:0 auto;
+ 	}
+ 	#subbtn{
+		   display: inline-block;
+		   height: 38px;
+		   line-height: 38px;
+		   padding: 0 18px;
+		   background-color: #04ccb9;
+		   color: #fff;
+		   white-space: nowrap;
+		   text-align: center;
+		   font-size: 14px;
+		   border: none;
+		   border-radius: 2px;
+		   cursor: pointer;
+		   outline: 0;
+		   border-radius: 4px;
+	 }
+	 #resetbtn{
+	 		margin-left:25px;
+		   display: inline-block;
+		   height: 38px;
+		   line-height: 38px;
+		   padding: 0 18px;
+		   background-color: #6fc1fa;
+		   color: #fff;
+		   white-space: nowrap;
+		   text-align: center;
+		   font-size: 14px;
+		   border: none;
+		   border-radius: 2px;
+		   cursor: pointer;
+		   outline: 0;
+		   border-radius: 4px;
+	 }
+	 
+ </style>
+ <head th:include="front/common/_meta :: header"/>
+ <body data-n-head=""> 
+ <form action="#" th:action="@{/hall}"  method="get" id="getProjects">
+ 	<input name="modelCode" id= "modelCode" style="display:none" th:value="${projectDetail.modelCode}"/>
+ 	<input name="typeCode" id= "typeCode" style="display:none" th:value="${projectDetail.typeCode}"/>
+ 	<input name=constructionBudgetFrom id= "constructionBudgetFrom" style="display:none" th:value="${screeningConditions.constructionBudgetFrom}"/>
+ 	<input name=constructionBudgetTo id= "constructionBudgetTo" style="display:none" th:value="${screeningConditions.constructionBudgetTo}"/>
+ 	<input name="constructionPeriodFrom" id= "constructionPeriodFrom" style="display:none" th:value="${screeningConditions.constructionPeriodFrom}"/>
+ 	<input name="constructionPeriodTo" id= "constructionPeriodTo" style="display:none" th:value="${screeningConditions.constructionPeriodTo}"/>
+ 	<input name="stageCode" id= "stageCode" style="display:none" th:value="${projectDetail.stageCode}"/>
+ 	<input name="designers" id= "designers" style="display:none"/>
+ 	<input name="cityId" id= "cityId" style="display:none" th:value="${screeningConditions.cityId}"/>
+ 	<input name="cityDescription" id= "cityDescription" style="display:none" th:value="${screeningConditions.cityDescription}"/>
+ 	<input name="processCode" id= "processCode" style="display:none" th:value="${projectDetail.processCode}"/>
+ 	<input name="component" id= "component" style="display:none" th:value="${screeningConditions.component}"/>
+ 	
+    <input th:type="hidden" name="pageNo" id="pageNum" th:value="${pageInfo.pageNum}"/>
+    <input th:type="hidden" id="pages" th:value="${pageInfo.pages}"/>
+    <input th:type="hidden" id="pageSize" name="pageSize" value="16"/>
+ </form>
+  <div data-server-rendered="true" id="__nuxt"> 
+   <div class="nuxt-progress" style="width:0%;height:2px;background-color:#3B8070;opacity:0;"></div> 
+   <div id="__layout"> 
+    <div> 
+     <div> 
+	      <!-- 公共顶部header -->
+	      <header th:include="front/common/_header :: header" class="header" data-v-8e52717c></header>
+	      <!-- 公共导航 -->
+	      <nav th:include="front/common/_nav :: nav" class="nav_index" data-v-bdccf15a></nav>
+      </div> 
+      <div data-v-1e4b05ed> 
+  <div class="saixuan" data-v-1e4b05ed>
+    <div class="filter">
+        <div class="container">
+            <div class="box">
+            <div class="title-h">按条件筛选</div>
+            <dl>
+                <dt>工程规模</dt>
+                <dd >
+                    <a href="#" class="sx_child model" th:each="model : ${models}" th:name="${model.code}"
+                       th:text="${model.description}">200㎡以下</a>
+                </dd>
+            </dl>
+            <dl>
+                <dt>工程类型</dt>
+                <dd>
+                    <a href="#" th:name="${type.code}" class="sx_child type" th:each="type : ${types}"
+                       th:text="${type.description}">居住建筑</a>
+                </dd>
+            </dl>
+            <dl>
+                <dt>工程费用</dt>
+                <dd id="feeDd">
+                    <a href="#" th:name="${fee.description}" class="sx_child fee" th:each="fee : ${fees}"
+                       th:text="${fee.description}">10k-15k</a>
+                </dd>
+            </dl>
+            <dl>
+                <dt>工程工期</dt>
+                <dd id="periodDd">
+                    <a href="#" th:name="${period.description}" class="sx_child period" th:each="period : ${periods}"
+                       th:text="${period.description}">两个月以下</a>
+                </dd>
+            </dl>
+            <dl>
+                <dt>工程阶段</dt>
+                <dd>
+                    <a href="#" th:name="${stage.code}" class="sx_child stage" th:each="stage : ${stages}"
+                       th:text="${stage.description}">施工图阶段</a>
+                </dd>
+            </dl>
+            <dl>
+                <dt>组建分类</dt>
+                <dd>
+                    <a href="#" th:name="${component.code}" class="sx_child component" th:each="component : ${components}"
+                       th:text="${component.description}">电</a>
+                </dd>
+            </dl>
+            <dl>
+                <dt>工程地区</dt>
+                <dd>
+                    <a href="#" rel="北京" name="110100" class="sx_child city">北京</a>
+                    <a href="#" rel="上海" name="310100" class="sx_child city">上海</a>
+                    <a href="#" rel="广州" name="440100" class="sx_child city">广州</a>
+                    <a href="#" rel="杭州" name="330100" class="sx_child city">杭州</a>
+                    <a href="#" rel="成都" name="510100" class="sx_child city">成都</a>
+                    <a>
+                      <select id="citySelect" style="width:180px">
+                     	  <option value="" >待选择</option>
+                     	  <option th:value="${screeningConditions.cityId}" th:unless='${"".equals(screeningConditions.cityDescription)}'
+                     	  	th:text="${screeningConditions.cityDescription}">待选择</option>
+                     	  <option value="-1" >加载中...</option>
+                     	  <option value="-1" >加载中...</option>
+                     	  <option value="-1" >加载中...</option>
+                     	  <option value="-1" >加载中...</option>
+                     	  <option value="-1" >加载中...</option>
+                     	  <option value="-1" >加载中...</option>
+                     	  <option value="-1" >加载中...</option>
+                     	  <option value="-1" >加载中...</option>
+                      </select>
+                  </a>
+                </dd>
+            </dl>
+            <dl>
+                <dt>工程状态</dt>
+                <dd>
+                    <a href="#" name="1004" class="sx_child process" >已发布</a>
+                    <a href="#" name="1005" class="sx_child process" >在建</a>
+                    <a href="#" name="1006" class="sx_child process" >已结项</a>
+                </dd>
+            </dl>
+            <div class="serch_container">
+				<div class="">
+					<button id="subbtn" type="submit" value="&nbsp;&nbsp;提交&nbsp;&nbsp;">查询</button>
+					<button id="resetbtn" type="button" value="&nbsp;&nbsp;重置&nbsp;&nbsp;">重置</button>
+				</div>
+			</div>
+          </div>
+        </div>
+    </div>
+       </div>
+       <div element-loading-text="拼命加载中" class="project_list" data-v-f669c494 data-v-1e4b05ed> 
+        <div class="container" data-v-f669c494> 
+         <ul class="project_list_ul clearfix" data-v-f669c494>
+          <li data-v-f669c494 th:each="project:${pageInfo.list}"><a th:href="'projectdetail?id='+${project.id}" >
+            <img data-v-27298642 data-v-f669c494 th:src="${project.coverImage}">
+            <div class="project_task project_task_color" data-v-f669c494>
+              <div class="project_task_name" data-v-f669c494 th:each="status:${statuses}" th:if="${project.statusCode eq status.code}"
+              	th:text="${status.description}">已结束</div>
+            </div>
+            <div class="project_xm_name" data-v-f669c494>
+              <h4 data-v-f669c494 style="border-bottom: 1px solid #F3F3F3;padding-bottom: 7px"
+              		th:text="${project.name}">旗峰初级中学新建生活楼项目</h4>
+              <div style="font-size: 16px;display: inline-block;float:left;margin-left:7px;margin-top: 7px">
+                <span class="period">
+                	工期:
+                	<span th:text="${project.constructionPeriod}" class="constructionPeriod"></span>
+                	个月
+                </span>
+              </div>
+              <div style="font-size: 16px;display: inline-block;float:right;margin-left:7px;margin-top: 7px">
+              	<span>施工费用:
+              		<span th:text="${project.constructionBudget}" class="span_fee"></span>
+              		万
+              	</span>
+              </div>
+              <div style="clear:both"></div>
+              <div class="type_list" style="margin-top: 12px; font-size:16px">
+              	<div class="type">
+              		<span th:name="${project.componentCode}" class="span_componentCode"></span>
+<!-- 	            <span th:unless="${#arrays.isEmpty(project.unSelectedDesigners)}">待投标设计师:</span>
+              		<span th:text="${designer}" th:each="designer:${project.unSelectedDesigners}" 
+              			th:unless="${#arrays.isEmpty(project.unSelectedDesigners)}">
+              			建筑
+              		</span>
+              		<span th:if="${#arrays.isEmpty(project.unSelectedDesigners)}">设计师选择已完成</span> -->
+              	</div>
+          	 </div>
+         </a>
+        </li> 
+          
+         </ul> 
+         <div class="pages_zt" data-v-f669c494>
+           <div class="pageDiv"></div>
+         </div>
+        </div> 
+       </div> 
+      </div> 
+	       <!-- 公共底部 -->
+	       <div th:include="front/common/_footer :: footer" id="footer" data-v-407369c6 data-v-2a183b29></div>
+	       <!-- 公共js -->
+  		   <div th:include="front/common/_js :: js"></div>
+     </div> 
+    </div> 
+   </div> 
+  </div> 
+<script>  
+
+//工程费用字典数字转描述
+$(function(){
+	var preFee = 0;
+	$('#feeDd').children().each(function(){
+		$(this).text(preFee+'-'+$(this).text()+'K');
+		preFee = Number($(this).prop('name'));
+	});
+	$('#feeDd').append('<a href="#" class="sx_child fee">'+preFee+'K以上</a>');
+})
+
+//工期字典数字转描述
+$(function(){
+	var prePeriod = 0;
+	$('#periodDd').children().each(function(){
+		$(this).text(prePeriod+'-'+$(this).text()+'个月');
+		prePeriod = Number($(this).prop('name'));
+	});
+	$('#periodDd').append('<a href="#" class="sx_child period">'+prePeriod+'个月以上</a>');
+})
+
+//条件点击事件
+$(function(){
+	$('.sx_child').on('click',function(){
+		$(this).siblings('.sx_child').removeClass('sx_child_check');
+		$(this).toggleClass('sx_child_check');
+	})
+})
+//点击提交按钮
+$('#subbtn').on('click',function(){
+	getScreenings();
+});
+//点击重置按钮
+$('#resetbtn').on('click',function(){
+	$('.sx_child_check').toggleClass('sx_child_check');
+	$('#citySelect').val('');
+});
+//城市下拉框改变事件
+$('#citySelect').change(function(){
+	$(".city").removeClass('sx_child_check');
+});
+//条件处理并提交
+function getScreenings(){
+	$('#modelCode').val($('.model.sx_child_check').prop("name"));
+	$('#typeCode').val($('.type.sx_child_check').prop("name"));
+	$('#stageCode').val($('.stage.sx_child_check').prop("name"));
+	$('#processCode').val($('.process.sx_child_check').prop("name"));
+	$('#component').val($('.component.sx_child_check').prop("name"));
+	//城市下拉框
+	$('#cityId').val($('#citySelect').val());
+	if($('#citySelect').val() != ""){
+		$('#cityDescription').val($('#citySelect').find("option:selected").text());
+	}else{
+		$('#cityDescription').val("");
+	}
+	//城市选择
+	if($('.city.sx_child_check').length != 0){
+		$('#cityId').val($('.city.sx_child_check').prop("name"));
+		$('#cityDescription').val($('.city.sx_child_check').text());
+	}
+	//保存工程费用
+	getFee();
+	//保存工期
+	getPeriod();
+	$("#getProjects").submit()
+}
+
+//工期取整
+$(function(){
+	$('.constructionPeriod').each(function(){
+		var period = parseInt($(this).text());
+		if(period >= 30){
+			$(this).text(parseInt(period/30));
+		}else{
+			$(this).parent().text("工期:"+period+"天");
+		}
+	});
+	
+})
+//费用保留二位小数
+$(function(){
+	$('.span_fee').each(function(){
+		var fee = parseInt($(this).text());
+		fee = parseInt(fee/100);
+		$(this).text(fee/100);
+	});
+	
+})
+
+
+//筛选条件回显
+$(function(){
+	$('.model[name="'+$('#modelCode').val()+'"]').toggleClass('sx_child_check');
+	$('.type[name="'+$('#typeCode').val()+'"]').toggleClass('sx_child_check');
+	$('.stage[name="'+$('#stageCode').val()+'"]').toggleClass('sx_child_check');
+	$('.process[name="'+$('#processCode').val()+'"]').toggleClass('sx_child_check');
+	$('.city[name="'+$('#cityId').val()+'"]').toggleClass('sx_child_check');
+	$('.component[name="'+$('#component').val()+'"]').toggleClass('sx_child_check');
+	$('#citySelect').val($('#cityId').val());
+	
+	//回显工程费用
+	reFee();
+	//回显工期
+	rePeriod();
+})
+
+//保存工程费用
+function getFee(){
+	//勾选的第一个元素
+	if($('#feeDd').children("a:first-child").hasClass('sx_child_check')){
+		$('#constructionBudgetFrom').val(0);
+		$('#constructionBudgetTo').val($('#feeDd .sx_child_check').prop('name'));
+	}else if($('#feeDd').children("a:last-child").hasClass('sx_child_check')){
+		//勾选的是最后一个元素
+		$('#constructionBudgetFrom').val($('#feeDd .sx_child_check').prev().prop('name'));
+		$('#constructionBudgetTo').val('');
+	}else{
+		$('#constructionBudgetFrom').val($('#feeDd .sx_child_check').prev().prop('name'));
+		$('#constructionBudgetTo').val($('#feeDd .sx_child_check').prop('name'));
+	}
+}
+
+//保存工期
+function getPeriod(){
+	//勾选的第一个元素
+	if($('#periodDd').children("a:first-child").hasClass('sx_child_check')){
+		$('#constructionPeriodFrom').val(0);
+		$('#constructionPeriodTo').val($('#periodDd .sx_child_check').prop('name'));
+	}else if($('#periodDd').children("a:last-child").hasClass('sx_child_check')){
+		//勾选的是最后一个元素
+		$('#constructionPeriodFrom').val($('#periodDd .sx_child_check').prev().prop('name'));
+		$('#constructionPeriodTo').val('');
+	}else{
+		$('#constructionPeriodFrom').val($('#periodDd .sx_child_check').prev().prop('name'));
+		$('#constructionPeriodTo').val($('#periodDd .sx_child_check').prop('name'));
+	}
+}
+
+
+//回显工程费用
+function reFee(){
+	$('.fee[name="'+$('#constructionBudgetTo').val()+'"]').toggleClass('sx_child_check');
+	//选择的是最后一个
+	if($('#constructionBudgetTo').val()=="" && $('#constructionBudgetFrom').val() != ""){
+		$('#feeDd').children("a:last-child").toggleClass('sx_child_check');
+	}
+}
+
+//回显工期
+function rePeriod(){
+	$('.period[name="'+$('#constructionPeriodTo').val()+'"]').toggleClass('sx_child_check');
+	//选择的是最后一个
+	if($('#constructionPeriodTo').val()=="" && $('#constructionPeriodFrom').val() != ""){
+		$('#periodDd').children("a:last-child").toggleClass('sx_child_check');
+	}
+}
+
+//用于点击city时清空城市下拉框
+$('.city').on('click',function(){
+	$('#citySelect').val("");
+});
+
+var codeArr=[];
+var typeArr=[];
+//自动填充数组
+$(function(){
+	$('.component').each(function(){
+		typeArr.push($(this).text());
+		codeArr.push($(this).attr('name'));
+	});
+	
+})
+//code转换成描述
+function sub(code){
+	for(var i=0;i<codeArr.length;i++){
+		if(codeArr[i] == code){
+			return typeArr[i];
+		}
+	}
+}
+
+//加载每个项目需要设计师
+$(function(){
+	$('.span_componentCode').each(function(){
+		var codes = $(this).attr('name').split(',');
+		if(codes.length == 0 || codes == ""){
+			$(this).text('设计师已满');
+			return;
+		}
+		$(this).text('组建分类:');
+		var thisEle = $(this);
+		$.each(codes,function(index,value){
+			thisEle.append("  "+sub(value));
+		});
+	})
+})
+
+var result;//记录城市
+//记录城市是否加载过,防止重复加载
+var isLoad = false;
+$('#citySelect').on('mouseover',function(){
+	if(isLoad == true){
+		return;
+	}
+	//记录选中的,加载完再次勾选
+	var record = $("#citySelect").val();
+	//先清空城市
+	$("#citySelect").empty();
+	$('#citySelect').append("<option value=''>待选择</option>");
+	chooseDic();
+	for (i in result){
+		$("#citySelect").append("<option value='"+result[i].cityId+"'>"+result[i].name+"</option>");
+	}
+	$("#citySelect").val(record);
+	isLoad = true;
+});
+
+//选择下拉菜单时和后台要字典的交互方法
+function chooseDic(){
+	//此处请求后台程序，下方是成功后的前台处理……
+	$.ajax({
+		type: 'POST',
+		url: "/hall/getareadic",
+		dataType: 'json',
+		async:false,
+		success: function(data){
+			//返回服务器返回的字典对象
+			result = data;
+		},
+		error:function(data) {
+			console.log("获取字典错误!");
+		},
+	});
+}
+
+//默认页码
+$(function(){
+	$(".countYe").find("input").val($('#pages').val());
+});
+
+</script>
+ </body>
+</html>

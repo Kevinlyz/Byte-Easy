@@ -1,0 +1,97 @@
+@charset "utf-8";
+/* 蓝色 */
+/*全站默认字体颜色*/
+a {
+	color: #333
+}
+
+a:hover,a:focus,.maincolor,.maincolor a {
+	/*color: #06c*/
+}
+
+.navbar {
+	background: #2577e3
+}/*顶部导航*/
+.navbar-logo,.navbar-logo-m,.navbar-slogan,.navbar-userbar {
+	color: #fff
+}/*logo 及 用户信息文字颜色*/
+.navbar-logo:hover,.navbar-logo-m:hover {
+	color: #fff;
+	text-decoration: none
+}
+
+.navbar-nav > ul > li, .navbar-nav > ul > li > a {
+	color: #fff
+}/*顶部导航文字颜色*/
+.navbar-userbar > ul> > li,.navbar-userbar > ul> > li > a {
+	color: #fff
+}
+
+.Hui-aside {
+	background: #2c74d2;
+}/*侧边栏*/
+.Hui-aside .menu_dropdown dt {
+	color: #fff
+}/*左侧二级导航菜单*/
+.Hui-aside .menu_dropdown dt.selected {
+	color: #fff;
+	background: #2968bc
+}
+
+.Hui-aside .menu_dropdown dt:hover {
+	color: #fff;
+	background: #2968bc
+}
+
+.Hui-aside .menu_dropdown dt:hover [class^="icon-"] {
+	color: #7e8795
+}
+
+.Hui-aside .menu_dropdown dd ul {
+	background: #4c86d3;
+}
+
+.Hui-aside .menu_dropdown li a {
+	color: #fff;
+	border-bottom: 1px solid #e5e5e5
+}
+
+.Hui-aside .menu_dropdown li a:hover {
+	color: #fff;
+	background: #2968bc
+}
+
+.hightlight {
+	color: #fff;
+	border-left:3px solid #ffffff;
+	background: #2968bc;
+}
+
+.Hui-aside .menu_dropdown li.current a,.menu_dropdown li.current a:hover {
+	color: #148cf1
+}
+
+.Hui-aside .menu_dropdown dt .Hui-iconfont {
+	color: #fff;
+	margin-right: 10px;
+}
+
+.Hui-aside .menu_dropdown dt .menu_dropdown-arrow {
+	color: #fff;
+	font-size: 11px;
+}
+
+.dislpayArrow a {
+	background: url(icon_arrow.png) no-repeat 0 0
+}
+
+.tabBar {
+	border-bottom: 2px solid #2d6dcc
+}
+
+.tabBar span.current {
+	background-color: #2d6dcc
+}
+
+
+

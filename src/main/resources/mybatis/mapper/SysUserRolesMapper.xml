@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mbyte.easy.mapper.SysUserRolesMapper">
+  <resultMap id="BaseResultMap" type="com.mbyte.easy.entity.SysUserRoles">
+    <result column="sys_user_id" jdbcType="BIGINT" property="sysUserId" />
+    <result column="roles_id" jdbcType="BIGINT" property="rolesId" />
+  </resultMap>
+  <insert id="insert" parameterType="com.mbyte.easy.entity.SysUserRoles">
+    insert into sys_user_roles (sys_user_id, roles_id)
+    values (#{sysUserId,jdbcType=BIGINT}, #{rolesId,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.mbyte.easy.entity.SysUserRoles">
+    insert into sys_user_roles
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="sysUserId != null">
+        sys_user_id,
+      </if>
+      <if test="rolesId != null">
+        roles_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="sysUserId != null">
+        #{sysUserId,jdbcType=BIGINT},
+      </if>
+      <if test="rolesId != null">
+        #{rolesId,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  
+   <select id="selectByUserId" parameterType="Long" resultMap="BaseResultMap">
+    select 
+      sys_user_id, roles_id 
+    from sys_user_roles
+    where sys_user_id = #{sysUserId,jdbcType=BIGINT}
+  </select>
+  
+  <delete id="deleteUserRolesById" parameterType="java.lang.Long">
+    delete from sys_user_roles
+    where roles_id = #{roleId,jdbcType=BIGINT}
+  </delete>
+  
+  <delete id="deleteByUserRoleId" parameterType="java.lang.Long">
+    delete from sys_user_roles
+    where sys_user_id = #{roleId,jdbcType=BIGINT}
+  </delete>
+  
+</mapper>

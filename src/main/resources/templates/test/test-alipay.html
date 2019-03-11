@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:include="_meta :: header">
+	<title>电脑网站支付宝支付测试</title>
+</head>
+<body>
+	<article class="page-container">
+        <form class="form form-horizontal" action="#" th:action="@{/aliPay/payPC}" method="post" target="_blank">
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3">支付测试：</label>
+            </div>
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3">唯一订单号：</label>
+                <div class="formControls col-xs-7 col-sm-8">
+                    <input class="input-text upload-url" type="text"  th:value="${orderId}" name="outTradeNo" style="width:400px">
+                </div>
+            </div>
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3">总金额：</label>
+                <div class="formControls col-xs-7 col-sm-8">
+                    <input class="input-text upload-url" type="text"  name="totalFee" style="width:400px">
+                </div>
+            </div>
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3">订单标题：</label>
+                <div class="formControls col-xs-7 col-sm-8">
+                    <input class="input-text upload-url" type="text"  name="subject" style="width:400px">
+                </div>
+            </div>
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3">订单描述（可选）：</label>
+                <div class="formControls col-xs-7 col-sm-8">
+                    <input class="input-text upload-url" type="text"  name="body" style="width:400px">
+                </div>
+            </div>
+            <div class="row cl">
+                <div class="col-xs-8 col-sm-9 col-xs-offset-7 col-sm-offset-5">
+                    <input class="btn btn-primary radius" type="submit" value="&nbsp;&nbsp;支付&nbsp;&nbsp;"/>
+                </div>
+            </div>
+        </form>
+        <br/><hr/>
+        <form class="form form-horizontal" action="#" th:action="@{/aliPay/refund}" method="post">
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3">（部分或全部）退款测试：</label>
+            </div>
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3">唯一订单号：</label>
+                <div class="formControls col-xs-7 col-sm-8">
+                    <input class="input-text upload-url" type="text"  id="outTradeNo" value="" style="width:400px">
+                </div>
+            </div>
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3">退款单号：</label>
+                <div class="formControls col-xs-7 col-sm-8">
+                    <input class="input-text upload-url" type="text"  id="outRequestNo" value="" style="width:400px">
+                </div>
+            </div>
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3">退款金额：</label>
+                <div class="formControls col-xs-7 col-sm-8">
+                    <input class="input-text upload-url" type="text"  id="refundAmount" value="" style="width:400px">
+                </div>
+            </div>
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3">退款原因（可选）：</label>
+                <div class="formControls col-xs-7 col-sm-8">
+                    <input class="input-text upload-url" type="text"   id="refundReason" value="" style="width:400px">
+                </div>
+            </div>
+            <div class="row cl">
+                <div class="col-xs-8 col-sm-9 col-xs-offset-7 col-sm-offset-5">
+                    <input class="btn btn-primary radius" id="refund" type="button" value="&nbsp;&nbsp;退款&nbsp;&nbsp;"/>
+                </div>
+            </div>
+        </form>
+	</article>
+<!--_footer 作为公共模版分离出去-->
+<div th:replace="_footer :: footerjs"/>
+<script>
+    $('#refund').click(function () {
+        $.ajax({
+            type: 'POST',
+            url: '/alipay/refund',
+            data:JSON.stringify({
+                'outTradeNo':$('#outTradeNo').val(),
+                'outRequestNo':$('#outRequestNo').val(),
+                'refundAmount':$('#refundAmount').val(),
+                'refundReason':$('#refundReason').val()
+            }),
+            type:'post',
+            cache:false,
+            dataType:'json',
+            contentType:"application/json",  //发送信息至服务器时内容编码类型。
+            success: function(data){
+                if (data.code == CODE_SUCCESS){
+                    layer.designMsg("退款成功！",1,function () {
+                        window.location.reload();//页面刷新
+                    });
+                }else{
+                    layer.designMsg(data.message);
+                }
+            },
+            error:function(data) {
+                layer.designMsg("资源访问失败");
+            },
+        });
+    });
+</script>
+</body>
+</html>

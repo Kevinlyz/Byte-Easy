@@ -1,0 +1,65 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:include="front/common/_meta :: header"/>
+ <head>
+  <link data-n-head="true" rel="icon" type="image/x-icon" href="/favicon.ico"/>
+    <script data-n-head="true" th:src="@{/font/js/jquery.min.js}" src="js/jquery.min.js"></script>
+    <script data-n-head="true" th:src="@{/font/js/index.js}" src="js/index.js"></script>
+    <link rel="stylesheet" type="text/css" th:href="@{/font/css/el.css}" href="css/el.css"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/font/css/guide.css}" href="guide.css"/>
+ </head>  
+ <body data-n-head=""> 
+  <div data-server-rendered="true" id="__nuxt">
+   <div class="nuxt-progress" style="width:0%;height:2px;background-color:#3B8070;opacity:0;"></div>
+   <div id="__layout">
+    <div>
+     <div data-v-aac1761e>
+            	<!-- 公共顶部header -->
+                <header th:include="front/common/_header :: header" class="header" data-v-8e52717c></header>
+                <!-- 公共导航 -->
+                <nav th:include="front/common/_nav :: nav" class="nav_index" data-v-bdccf15a></nav>
+
+        <div class="clear" data-v-bdccf15a></div>
+       </div>
+      </nav>
+      <div class="guide_content" data-v-aac1761e>
+       <div class="container" style="text-align: center" data-v-aac1761e>
+        <div class="title" data-v-aac1761e>
+         <h1 data-v-aac1761e>加入我们 <span data-v-aac1761e>您能</span></h1>
+        </div>
+        <div class="guide_main" data-v-aac1761e>
+         <ul data-v-aac1761e>
+          <li data-v-aac1761e style="width:43%"><a th:href="@{/front/register}" data-v-aac1761e>
+            <div class="guide_title" data-v-aac1761e>
+             <div class="guide_img guide_img1" data-v-aac1761e></div>
+             <h2 class="guide_active" data-v-aac1761e>发布项目需求</h2>
+             <i style="margin-left: 45%;" class="guide_line" data-v-aac1761e></i>
+            </div></a><a th:href="@{/front/register}" data-v-aac1761e></a><h3 data-v-aac1761e>专业项目管家全程为您服务</h3><h3 data-v-aac1761e>提供更多更好的设计成果</h3></li>
+          <li data-v-aac1761e style="width:43%">
+            <a th:href="@{/DesignerRegister/regist}" data-v-aac1761e>
+            <div class="guide_title" data-v-aac1761e>
+             <div class="guide_img guide_img2" data-v-aac1761e></div>
+             <h2 data-v-aac1761e>参与设计</h2>
+            </div></a><h3 data-v-aac1761e>用您的创意、技能和闲暇时间</h3><h3 data-v-aac1761e>赚取更丰厚的回报</h3></li>
+         </ul>
+        </div>
+        <div class="clear" data-v-aac1761e></div>
+       </div>
+      </div>
+        <div class="container" style="position:relative;" data-v-f11a6d84>
+       <div transition="fade" class="backTop">
+        <div class="back" style="display:none;">
+         <a th:href="@{/font/#__nuxt}" target="_self">
+          <div>
+           <img th:src="@{/font/images/icon_top.0189719.png}" alt="" />
+          </div><p>顶部</p></a>
+        </div>
+       </div>
+      </div>
+                <!-- 公共底部 -->
+                <div th:include="front/common/_footer :: footer" id="footer" data-v-407369c6 data-v-2a183b29></div>
+     </div>
+    </div>
+   </div>
+  </div>  
+   </body>
+</html>

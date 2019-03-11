@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:include="front/common/_meta :: header"/>
+ <head>
+  <link data-n-head="true" rel="icon" type="image/x-icon" href="favicon.ico.css" />
+  <script data-n-head="true" th:src="@{/font/js/jquery.min.js}" src="js/jquery.min.js"></script> 
+  <script data-n-head="true" th:src="@{/font/js/index.js}" src="js/index.js"></script>
+  <link rel="stylesheet" type="text/css" th:href="@{/font/css/left_menu.css}" href="css/left_menu.css"> 
+  <link rel="stylesheet" type="text/css" th:href="@{/font/css/us.css}" href="css/us.css"> 
+ </head> 
+ <body data-n-head=""> 
+  <div data-server-rendered="true" id="__nuxt">
+   <div class="nuxt-progress" style="width:0%;height:2px;background-color:#3B8070;opacity:0;"></div>
+   <div id="__layout">
+    <div>
+     <div>
+      <!-- 公共顶部header -->
+      <header th:include="front/common/_header :: header" class="header" data-v-8e52717c></header>
+      <!-- 公共导航 -->
+      <nav th:include="front/common/_nav :: nav" class="nav_index" data-v-bdccf15a></nav>
+      <div class="common_about">
+       <div class="container">
+        <div th:include="front/aboutUs/_nav :: nav" class="common_about_left" data-v-4a249bd8></div>
+        <div class="common_about_right bgcolor_white">
+         <h4 th:text="${column.title}">常见问题</h4>
+		 <div class="aboutus_content" th:utext="${column.content}"></div>
+        </div>
+       </div>
+      </div>
+      <!-- 公共底部 -->
+      <div th:include="front/common/_footer :: footer" id="footer" data-v-407369c6 data-v-2a183b29></div>
+     </div>
+    </div>
+   </div>
+  </div>  
+ </body>
+</html>

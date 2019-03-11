@@ -1,0 +1,109 @@
+<!DOCTYPE HTML>
+<html  xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head th:include="_meta :: header">
+<title>阶段审核列表</title>
+</head>
+<body>
+	<div class="page-container">
+	<form action="#" th:action="@{/admin/phaseaudit}"  method="get">
+		<div class="layui-body">
+			<!-- 内容主体区域 -->
+			<fieldset class="layui-elem-field">
+				<legend>阶段审核列表</legend>
+				<div class="layui-field-box">
+					<div class="search_condition">
+						<div class="layui-form-item ">
+
+							<div class="row">
+								<div class="col-xs-12 col-sm-3">
+									<input type="text" placeholder="项目编号" class="input-text" id="projectId" 
+										name="projectId" th:value="${audit.projectId}"/>
+								</div>
+								<div class="col-xs-12 col-sm-3">
+									<input type="text" placeholder="项目名称" class="input-text" id="projectName" 
+										name="projectName" th:value="${audit.projectName}"/>
+								</div>
+								<div class="col-xs-12 col-sm-3">
+									<select id="stageCode" name="stageCode"  class="input-text mySelect"
+											th:field="${audit.stageCode}">
+										<option value="">项目阶段待选择</option>
+										<option th:each="stage:${stages}" th:text="${stage.description}"
+												th:value="${stage.code}">空
+										</option>
+									</select>
+								</div>
+								<div class="col-xs-12 col-sm-3">
+									<select id="reviewCode" name="reviewCode"  class="input-text mySelect"
+											th:field="${audit.reviewCode}">
+										<option value="">项目阶段状态待选择</option>
+										<option th:each="review:${reviewStatus}" th:text="${review.description}"
+												th:value="${review.code}">空
+										</option>
+									</select>
+								</div>
+							</div>
+							<div class="clearfix blank_10"></div>
+							<div class="row">
+								<div class="col-xs-12 col-sm-2 col-sm-offset-5">
+									<button class="layui-btn layui-btn-success radius" id="subbtn" type="submit" value="&nbsp;&nbsp;提交&nbsp;&nbsp;"><i class="Hui-iconfont">&#xe665;</i> 查询</button>
+								</div>
+							</div>
+						</div>
+					</div>
+					<hr style="margin: 0">
+						<div class="cl pd-5 bg-1 bk-gray">
+							<span class="r wei-height">共有数据：<strong th:text="${pageInfo.total}"></strong> 条</span>
+						</div>
+					<hr>
+					<table class="layui-table text-c">
+						<thead>
+						<tr class="text-c">
+							<th width="40">项目编号</th>
+							<th width="150">项目名</th>
+							<th width="60">项目阶段</th>
+							<th width="60">阶段审核状态</th>
+							<th width="100">创建时间</th>
+							<th width="100">审核时间</th>
+						</tr>
+						</thead>
+						<tbody>
+						<tr class="text-c" th:if="${pageInfo.getSize() == 0}"><td colspan="15"><strong>暂无数据</strong></td></tr>
+						<tr class="text-c" th:each="project:${pageInfo.list}">
+							<td th:text="${project.projectId}"></td>
+							<td th:text="${project.projectName}"></td>
+							<td th:text="${project.stage}"></td>
+							<td th:text="${project.reviewStatus}"></td>
+							<td th:text="${#calendars.format(project.createTime,'yyyy-MM-dd')}"></td>
+							<td th:text="${#calendars.format(project.updateTime,'yyyy-MM-dd')}">未审核</td>
+							
+						</tr>
+						</tbody>
+					</table>
+				</div>
+			</fieldset>
+		</div>
+
+	<div th:include="_pagination :: page"></div>
+	</form>
+</div>
+<!--_footer 作为公共模版分离出去-->
+<div th:replace="_footer :: footerjs">
+</div>
+<!--/_footer 作为公共模版分离出去-->
+
+<!--请在下方写此页面业务相关的脚本-->
+<script type="text/javascript" th:src="@{/lib/My97DatePicker/4.8/WdatePicker.js}" src="lib/My97DatePicker/4.8/WdatePicker.js"></script>
+<script type="text/javascript" th:src="@{/lib/datatables/1.10.0/jquery.dataTables.min.js}" src="lib/datatables/1.10.0/jquery.dataTables.min.js"></script>
+<script type="text/javascript" th:src="@{/lib/laypage/1.2/laypage.js}" src="lib/laypage/1.2/laypage.js"></script>
+<script type="text/javascript">
+/*
+	参数解释：
+	title	标题
+	url		请求的url
+	id		需要操作的数据id
+	w		弹出层宽度（缺省调默认值）
+	h		弹出层高度（缺省调默认值）
+*/
+</script>
+</body>
+</html>

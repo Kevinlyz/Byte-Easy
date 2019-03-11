@@ -1,0 +1,40 @@
+.container[data-v-1501032a] {
+	border: 1px solid #e8e8e8
+}
+
+.container .title[data-v-1501032a] {
+	margin-bottom: 10px;
+	height: 40px;
+	line-height: 40px;
+	background-color: #858891;
+	font-size: 16px;
+	color: #fff;
+	text-indent: 2em;
+	border-bottom: 1px solid #e8e8e8
+}
+
+.container ul li[data-v-1501032a] {
+	font-size: 16px;
+	height: 50px;
+	line-height: 50px;
+	padding: 0 15px;
+	margin: 0 25px;
+	border-bottom: 1px solid #e8e8e8
+}
+
+.container ul li .text[data-v-1501032a] {
+	cursor: pointer
+}
+
+.container ul li img[data-v-1501032a] {
+	vertical-align: text-bottom
+}
+
+.block[data-v-1501032a] {
+	text-align: center;
+	padding: 15px 0
+}
+
+.red[data-v-1501032a] {
+	color: red
+}

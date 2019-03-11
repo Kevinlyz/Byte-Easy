@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name='renderer' content='webkit' />
+    <meta name='renderer' content='ie-stand' />
+    <title>建筑设计众包服务平台后台登录</title>
+    <link th:href="@{/css/login.css}" href="static/css/login.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" th:src="@{/lib/jquery/1.9.1/jquery.min.js}" src="lib/jquery/1.9.1/jquery.min.js"></script>
+</head>
+<body class="body_bg">
+	<div class="whole">
+		<div class="title">建筑设计众包服务平台后台登录</div>
+		<form id="form1" th:action="@{/admin/login}" action="/login"  method="post" class="form_box">
+
+			<div class="input_box">
+                <input name="username" type="text" placeholder="请输入账户" class="input_self"/>
+			</div>
+			<div class='blank_20'></div>
+			<div class="input_box">
+				<!--<input class="input_self" type="text" placeholder="请输入密码" name="" id="" />-->
+                <input name="password" type="password" placeholder="请输入密码" class="input_self"/>
+			</div>
+			<div class='blank_20'></div>
+			<!--<div class="input_box">-->
+				<!--<input class="input_self" style="width:60%" type="text" placeholder="请输入验证码" name="" id="" />-->
+				<!--<img src="http://api2.itenscen.cn/captcha.html" style="width:30%;height:30px;float:right;border:1px solid #ccc;">-->
+			<!--</div>-->
+            <center>
+                <p th:if="${param.logout}" style = "font-size:13px;color:red;"  class="alert">您已退出登录</p>
+                <p th:if="${param.error}" th:text="${session.validatecode_error}" style = "font-size:13px;color:red;" class="alert alert-error">There was an error, please try again</p>
+            </center>
+
+			<div class="finish_box">
+				<input class="finish_btn" type="submit" id="finish" name="finish" value="登录" />
+			</div>
+		</form>
+	</div>
+</body>
+<script type="text/javascript">
+	$(function(){
+		$(window).on('resize load',function(){
+			var win_height = $(window).height();
+			var whole_height = $(".whole").height();
+			$(".whole").css('top',win_height/2 - whole_height/2 - 60 + 'px')
+			
+		})
+	})
+</script>
+</html>

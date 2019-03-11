@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mbyte.easy.mapper.SysResourceMapper">
+  <resultMap id="BaseResultMap" type="com.mbyte.easy.entity.SysResource">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="available" jdbcType="BIT" property="available" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="order_num" jdbcType="INTEGER" property="orderNum" />
+    <result column="permission" jdbcType="VARCHAR" property="permission" />
+    <result column="type" jdbcType="INTEGER" property="type" />
+    <result column="url" jdbcType="VARCHAR" property="url" />
+    <result column="parent_id" jdbcType="BIGINT" property="parentId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, available, name, order_num, permission, type, url, parent_id
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sys_resource
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  
+  <select id="selectByUsername" parameterType="java.lang.String"  resultMap="BaseResultMap">
+    SELECT
+	sys_resource.id as id,
+	sys_resource.available as available,
+	sys_resource.`name` as name ,
+	sys_resource.permission as permission,
+	sys_resource.order_num as order_num,
+	sys_resource.type as type,
+	sys_resource.url as url,
+	sys_resource.parent_id as parent_id
+	FROM
+	sys_user
+	inner JOIN sys_user_roles ON sys_user.id = sys_user_roles.sys_user_id
+	inner JOIN sys_role ON sys_user_roles.roles_id = sys_role.id
+	inner JOIN sys_role_resources ON sys_role.id = sys_role_resources.sys_role_id
+	inner JOIN sys_resource ON sys_role_resources.resources_id = sys_resource.id
+	where sys_user.username = #{userName} order by sys_resource.order_num asc
+  </select>
+  
+  <select id="selectResourceByRoleId" parameterType="java.lang.Long"  resultMap="BaseResultMap">
+    SELECT
+	sys_resource.id as id,
+	sys_resource.available as available,
+	sys_resource.`name` as name ,
+	sys_resource.permission as permission,
+	sys_resource.order_num as order_num,
+	sys_resource.type as type,
+	sys_resource.url as url,
+	sys_resource.parent_id as parent_id
+	FROM
+	sys_role_resources
+	INNER JOIN sys_resource ON sys_role_resources.resources_id = sys_resource.id
+	where sys_role_id = #{roleId}
+  </select>
+  
+  
+   <select id="selectByResource" parameterType="com.mbyte.easy.entity.SysResource"
+                                 resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sys_resource
+    where  1=1 
+    <if test="available != null and available != ''">
+        and available = #{available}
+    </if>
+     <if test="name != null and name != ''">
+        and name like '%${name}%'
+    </if>
+    <if test="type != null ">
+        and type = #{type}
+    </if>
+    <if test="parentId != null ">
+        and parent_id = #{parentId}
+    </if>
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from sys_resource
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.mbyte.easy.entity.SysResource">
+    insert into sys_resource (id, available, name, 
+      order_num, permission, type, 
+      url, parent_id)
+    values (#{id,jdbcType=BIGINT}, #{available,jdbcType=BIT}, #{name,jdbcType=VARCHAR}, 
+      #{orderNum,jdbcType=INTEGER}, #{permission,jdbcType=VARCHAR}, #{type,jdbcType=INTEGER}, 
+      #{url,jdbcType=VARCHAR}, #{parentId,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.mbyte.easy.entity.SysResource">
+    insert into sys_resource
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="available != null">
+        available,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="orderNum != null">
+        order_num,
+      </if>
+      <if test="permission != null">
+        permission,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="url != null">
+        url,
+      </if>
+      <if test="parentId != null">
+        parent_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="available != null">
+        #{available,jdbcType=BIT},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="orderNum != null">
+        #{orderNum,jdbcType=INTEGER},
+      </if>
+      <if test="permission != null">
+        #{permission,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=INTEGER},
+      </if>
+      <if test="url != null">
+        #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="parentId != null">
+        #{parentId,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.mbyte.easy.entity.SysResource">
+    update sys_resource
+    <set>
+      <if test="available != null">
+        available = #{available,jdbcType=BIT},
+      </if>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="orderNum != null">
+        order_num = #{orderNum,jdbcType=INTEGER},
+      </if>
+      <if test="permission != null">
+        permission = #{permission,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        type = #{type,jdbcType=INTEGER},
+      </if>
+      <if test="url != null">
+        url = #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="parentId != null">
+        parent_id = #{parentId,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.mbyte.easy.entity.SysResource">
+    update sys_resource
+    set available = #{available,jdbcType=BIT},
+      name = #{name,jdbcType=VARCHAR},
+      order_num = #{orderNum,jdbcType=INTEGER},
+      permission = #{permission,jdbcType=VARCHAR},
+      type = #{type,jdbcType=INTEGER},
+      url = #{url,jdbcType=VARCHAR},
+      parent_id = #{parentId,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

@@ -1,0 +1,45 @@
+<header class="navbar-wrapper" th:fragment="nav">
+	<script data-n-head="true" th:src="@{/font/js/jquery.min.js}"  src="font/js/jquery.min.js"></script>
+    <script data-n-head="true" th:src="@{/font/js/index.js}"  src="font/js/index.js"></script>
+    <!-- 搜狐定位服务,默认筛选地区用 -->
+	<script src="http://pv.sohu.com/cityjson?ie=utf-8"></script>
+	 <div class="container" data-v-bdccf15a>
+          <div class="logo" data-v-bdccf15a>
+              <p data-v-bdccf15a>
+                  <a th:href="@{/}" th:src="${setting.webUrl}" href="index.html" data-v-bdccf15a>
+                  	<img data-v-bdccf15a th:src="${setting.titleImg}" alt="" />
+                  </a>
+              </p>
+          </div>
+          <div class="nav_list" data-v-bdccf15a>
+              <ul class="nav_list_one" id="nav" data-v-bdccf15a>
+                  <li id="li1" data-v-bdccf15a><a data-v-bdccf15a th:href="@{/}" href="index.html">首页</a></li>
+                  <li id="li2" data-v-bdccf15a><a data-v-bdccf15a th:href="@{/hall?pageSize=16}" id="a_hall" href="project.html">项目大厅</a></li>
+                  <li id="li3" data-v-bdccf15a><a data-v-bdccf15a th:href="@{/classicexample?pageSize=16}" href="index-1.html">经典案例</a></li>
+                  <li id="li4" data-v-bdccf15a><a data-v-bdccf15a th:href="@{/bindAbout/aboutUs}" href="us.html">关于我们</a></li>
+              </ul>
+              <div class="clear"></div>
+          </div>
+          <div class="clear"></div>
+      </div>
+      
+      <script>
+	      var r = /^\+?[1-9][0-9]*$/;
+	      function getCityId(){
+	    	  return r.test(returnCitySN['cid'])?returnCitySN['cid']:'';
+	      }
+	      //js获取地区code给项目大厅传参
+	      $(function(){
+	    	  $('#a_hall').attr("href",$('#a_hall').attr('href')+"&cityId="+getCityId());
+	      });
+      $(function(){
+    	  /*<![CDATA[*/
+	    	var id = [[${nav == null?-1:nav}]];
+	    	/*]]>*/
+    	    $("#nav li").each(function() {
+    	        $(this).siblings('li').removeClass('active');  // 删除其他兄弟元素的样式
+    	    });
+    	    $(id).addClass('active');                   // 添加当前元素的样式
+    	});
+      </script>
+</header>

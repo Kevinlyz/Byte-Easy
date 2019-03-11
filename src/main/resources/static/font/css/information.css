@@ -1,0 +1,413 @@
+.membar[data-v-24a6dbce] {
+	padding: 24px 0;
+	background: #f2f2f2
+}
+.membar ul[data-v-24a6dbce] {
+	width: 1102px;
+	height: 78px;
+	margin: 0 auto;
+	padding: 0 48px;
+	background: #fff;
+	border: 1px solid #dcdcdc
+}
+.membar ul li[data-v-24a6dbce] {
+	display: inline-block;
+	margin-right: 80px;
+	font-size: 18px;
+	color: #838794;
+	line-height: 78px
+}
+.membar ul li a[data-v-24a6dbce] {
+	color: #838794
+}
+.membar ul .check[data-v-24a6dbce] {
+	border-bottom: 2px solid #be4f44;
+	color: #be4f44;
+	font-weight: 700
+}
+.membar ul .check a[data-v-24a6dbce] {
+	color: #be4f44
+}
+#MyPersonalBasicNews {
+	background-color: #f2f2f2
+}
+
+#MyPersonalBasicNews .container {
+	background-color: #fff
+}
+
+#MyPersonalBasicNews h2 {
+	font-size: 18px;
+	line-height: 18px;
+	color: #353947;
+	padding: 26px 48px;
+	background-color: #f9f9f9;
+	border: 1px solid #dcdcdc;
+	border-left: 0;
+	border-right: 0
+}
+
+#MyPersonalBasicNews .hintPic {
+	vertical-align: middle;
+	margin-right: 10px;
+	float: left
+}
+
+#MyPersonalBasicNews .hintContent {
+	color: #838793!important;
+	font-size: 16px;
+	display: inline-block;
+	height: 24px
+}
+
+#MyPersonalBasicNews .basicNews {
+	padding: 40px 48px;
+	border: 1px solid transparent;
+	position: relative
+}
+
+#MyPersonalBasicNews .basicNews .content .headerPic {
+	width: 128px;
+	height: 128px;
+	float: left
+}
+
+#MyPersonalBasicNews .basicNews .content .perNews {
+	float: left;
+	padding-left: 32px
+}
+
+#MyPersonalBasicNews .basicNews .content .perNews .name h3 {
+	font-size: 24px;
+	line-height: 24px;
+	color: #353947;
+	display: -webkit-inline-box
+}
+
+#MyPersonalBasicNews .basicNews .content .perNews .name .stage {
+	display: -webkit-inline-box;
+	font-size: 16px;
+	line-height: 24px;
+	width: 56px;
+	text-align: -webkit-center;
+	color: #fff;
+	border-radius: 12px;
+	margin: 0 8px;
+	position: relative;
+	background-image: -webkit-gradient(linear,left bottom,left top,from(#fc553c),to(#f12009));
+	background-image: linear-gradient(0deg,#fc553c,#f12009);
+	text-shadow: 1px 1px 2px #910700
+}
+
+#MyPersonalBasicNews .basicNews .content .perNews .name .stage .userKpi {
+	position: absolute;
+	background-color: #fff;
+	top: -210px;
+	display: none;
+	text-align: center;
+	left: 50%;
+	-webkit-box-shadow: 0 5px 10px #ddd;
+	box-shadow: 0 5px 10px #ddd;
+	-webkit-transform: translate(-50%);
+	transform: translate(-50%);
+	z-index: 100000
+}
+
+#MyPersonalBasicNews .basicNews .content .perNews .name .stage .userKpi #myChartKpi {
+	position: relative
+}
+
+#MyPersonalBasicNews .basicNews .content .perNews .name .stage .userKpi .totalPoints {
+	position: absolute;
+	top: 60%;
+	left: 50%;
+	-webkit-transform: translate(-50%,-50%);
+	transform: translate(-50%,-50%);
+	font-size: 25px;
+	color: #fff
+}
+
+#MyPersonalBasicNews .basicNews .content .perNews .name .stage:hover .userKpi {
+	display: block
+}
+
+#MyPersonalBasicNews .basicNews .content .perNews .PhoneAndEmail {
+	padding-top: 30px
+}
+
+#MyPersonalBasicNews .basicNews .content .perNews .PhoneAndEmail img {
+	vertical-align: middle;
+	margin-right: 16px
+}
+
+#MyPersonalBasicNews .basicNews .content .perNews .PhoneAndEmail .Phone {
+	display: -webkit-inline-box
+}
+
+#MyPersonalBasicNews .basicNews .content .perNews .PhoneAndEmail .Email {
+	display: -webkit-inline-box;
+	padding-left: 40px
+}
+
+#MyPersonalBasicNews .basicNews .content .perNews .location {
+	padding-top: 8px
+}
+
+#MyPersonalBasicNews .basicNews .content .perNews .location img {
+	vertical-align: middle;
+	margin-right: 16px
+}
+
+#MyPersonalBasicNews .basicNews .intro {
+	padding-top: 64px;
+	color: #838793;
+	font-size: 16px
+}
+
+#MyPersonalBasicNews .basicNews .intro span {
+	color: #333947;
+	line-height: 26px;
+	word-break: break-all;
+	word-wrap: break-word
+}
+
+#MyPersonalBasicNews .basicNews .hoverShow {
+	width: 24px;
+	height: 24px;
+	background: url(../images/icon_edit_nor.aab3cab.png)/*tpa=http://www.zhongtunet.com/_nuxt/img/icon_edit_nor.aab3cab.png*/ 0 0 no-repeat;
+	cursor: pointer;
+	position: absolute;
+	top: 48px;
+	right: 48px;
+	display: none
+}
+
+#MyPersonalBasicNews .basicNews .hoverShow:hover {
+	background: url(../images/icon_edit_pressed.49703c0.png)/*tpa=http://www.zhongtunet.com/_nuxt/img/icon_edit_pressed.49703c0.png*/ 0 0 no-repeat
+}
+
+#MyPersonalBasicNews .basicNews:hover {
+	border: 1px solid #cc4548
+}
+
+#MyPersonalBasicNews .basicNews:hover .hoverShow {
+	display: block
+}
+
+#MyPersonalBasicNews .changeBasic {
+	border: 1px solid #cc4548;
+	padding: 40px 48px
+}
+
+#MyPersonalBasicNews .changeBasic .headerPic {
+	float: left
+}
+
+#MyPersonalBasicNews .changeBasic .headerPic .clickChange {
+	color: #218fe4;
+	position: absolute;
+	bottom: -40px;
+	left: 50%;
+	-webkit-transform: translate(-50%);
+	transform: translate(-50%);
+	font-size: 14px
+}
+
+#MyPersonalBasicNews .changeBasic .headerPic .el-form-item__content {
+	margin-left: 0!important
+}
+
+#MyPersonalBasicNews .changeBasic .content {
+	float: left
+}
+
+#MyPersonalBasicNews .changeBasic .content .changeWidth .el-input__inner {
+	width: 320px
+}
+
+#MyPersonalBasicNews .changeBasic .content .NameAndEmail .Email,#MyPersonalBasicNews .changeBasic .content .NameAndEmail .Name {
+	float: left
+}
+
+#MyPersonalBasicNews .changeBasic .content .btn {
+	width: 152px;
+	height: 40px;
+	text-align: center;
+	line-height: 40px;
+	font-size: 16px;
+	border-radius: 4px;
+	cursor: pointer;
+	display: inline-block
+}
+
+#MyPersonalBasicNews .changeBasic .content .save {
+	background-color: #cc4548;
+	border: 1px solid #cc4548;
+	color: #fff;
+	margin-left: 125px
+}
+
+#MyPersonalBasicNews .changeBasic .content .cancel {
+	background-color: #fff;
+	border: 1px solid #dcdfe6;
+	color: #a0a0a0;
+	margin-left: 25px
+}
+
+#MyPersonalBasicNews .changeBasic .content .cancel:hover {
+	background-color: #eee
+}
+
+#MyPersonalBasicNews .changeBasic .avatar-uploader {
+	width: 128px;
+	height: 128px;
+	text-align: center;
+	overflow: hidden
+}
+
+#MyPersonalBasicNews .changeBasic .avatar-uploader-icon {
+	font-size: 28px;
+	color: #8c939d;
+	width: 128px;
+	height: 128px;
+	line-height: 128px;
+	text-align: center
+}
+
+#MyPersonalBasicNews .changeBasic .avatar {
+	width: 128px;
+	height: 128px;
+	display: block
+}
+
+.clearfix:after {
+	content: "";
+	display: block;
+	height: 0;
+	overflow: hidden;
+	clear: both;
+	zoom: 1
+}
+
+#MyPersonalMajorNews {
+	background-color: #f2f2f2;
+	padding-bottom: 64px
+}
+
+#MyPersonalMajorNews .container {
+	background-color: #fff
+}
+
+#MyPersonalMajorNews h2 {
+	font-size: 18px;
+	line-height: 18px;
+	color: #353947;
+	padding: 26px 48px;
+	background-color: #f9f9f9;
+	border: 1px solid #dcdcdc;
+	border-left: 0;
+	border-right: 0
+}
+
+#MyPersonalMajorNews .hintPic {
+	vertical-align: middle;
+	margin-right: 10px;
+	float: left
+}
+
+#MyPersonalMajorNews .hintContent {
+	color: #838793!important;
+	font-size: 16px;
+	display: inline-block;
+	height: 24px
+}
+
+#MyPersonalMajorNews .hintContent span {
+	display: inline-block;
+	height: 24px;
+	line-height: 24px
+}
+
+#MyPersonalMajorNews .module {
+	padding: 8px 0 40px;
+	position: relative
+}
+
+#MyPersonalMajorNews .module h3 {
+	font-size: 16px;
+	line-height: 16px;
+	color: #838794;
+	padding: 32px 0 8px 64px;
+	position: relative
+}
+
+#MyPersonalMajorNews .module h3 .addNewSome {
+	position: absolute;
+	color: #0090ff;
+	right: 48px;
+	bottom: 8px;
+	cursor: pointer
+}
+
+#MyPersonalMajorNews .module .basic {
+	padding: 8px 0 8px 80px;
+	font-size: 16px;
+	color: #353947;
+	border: 1px solid transparent;
+	
+}
+
+#MyPersonalMajorNews .module  .hoverShow {
+	width: 24px;
+	height: 24px;
+	background: url(../images/icon_edit_nor.aab3cab.png) 0 0 no-repeat;
+	cursor: pointer;
+	position: absolute;
+	top: 38px;
+	right: 48px;
+	display: none
+}
+
+#MyPersonalMajorNews .module  .hoverShow:hover {
+	background: url(../images/icon_edit_pressed.49703c0.png) 0 0 no-repeat
+}
+
+#MyPersonalMajorNews .module:hover {
+	border: 1px solid #cc4548
+}
+
+#MyPersonalMajorNews .module:hover .hoverShow {
+	display: block
+}
+
+#MyPersonalMajorNews  .changeBasic{
+	padding: 30px 0;
+    border: 1px solid #cc4548;
+}
+#MyPersonalMajorNews .basic span{
+	margin:20px;
+}  
+
+#MyPersonalMajorNews .changeBasic .changeBtn {
+	width: 152px;
+	height: 40px;
+	text-align: center;
+	line-height: 40px;
+	font-size: 16px;
+	border-radius: 4px;
+	cursor: pointer;
+	display: inline-block
+}
+#MyPersonalMajorNews .changeBasic .save {
+	background-color: #cc4548;
+	border: 1px solid #cc4548;
+	color: #fff;
+	margin-left: 200px
+}
+
+#MyPersonalMajorNews .changeBasic .cancel {
+	background-color: #fff;
+	border: 1px solid #dcdfe6;
+	color: #a0a0a0;
+	margin-left: 25px
+}

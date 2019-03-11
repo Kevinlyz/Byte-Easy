@@ -1,0 +1,91 @@
+<!DOCTYPE HTML>
+<html  xmlns:th="http://www.thymeleaf.org">
+<head th:include="_meta :: header">
+<title>项目审核 - 拒绝理由 </title>
+</head>
+<body>
+<article class="page-container">
+	<form class="form form-horizontal" id="form-admin-add" action="#" th:action="@{/admin/projectexamine/rejectapplication}" th:object="${detail}">
+	 <input type="hidden" name="save" value="true"/>
+	 <input type="hidden" name="id" value="" th:field="*{id}"/>
+		<input type="hidden" name="id" th:value="${detail.id}" th:field="*{id}"/>
+	<div class="row cl">
+		<label for="reason" class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>填写拒绝理由</label>
+		<textarea id="reason" name="reason" style="width: 250px; height: 100px; margin-left:-20px;" required></textarea>
+		<span id="error" style="font-size:14px;color:red;position:relative;top:-85px;"></span>
+	</div>
+	<div class="row cl">
+		<div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-3" style="float:left">
+			<input class="btn btn-primary radius" type="submit" style="margin-right:15px; margin-left:-12px; font-size:14px;" value="&nbsp;&nbsp;确认拒绝&nbsp;&nbsp;"/>
+			<input class="btn radius" type="button" id="cancel" style="font-size:14px;" value="&nbsp;&nbsp;取消拒绝&nbsp;&nbsp;"/>
+		</div>
+	</div>
+	</form>
+</article>
+
+<!--_footer 作为公共模版分离出去--> 
+<div th:replace="_footer :: footerjs">
+</div>
+ <!--/_footer 作为公共模版分离出去-->
+
+<!--请在下方写此页面业务相关的脚本-->
+<script type="text/javascript" th:src="@{/lib/jquery.validation/1.14.0/jquery.validate.js}" src="lib/jquery.validation/1.14.0/jquery.validate.js"></script> 
+<script type="text/javascript" th:src="@{/lib/jquery.validation/1.14.0/validate-methods.js}" src="lib/jquery.validation/1.14.0/validate-methods.js"></script> 
+<script type="text/javascript" th:src="@{/lib/jquery.validation/1.14.0/messages_zh.js}"  src="lib/jquery.validation/1.14.0/messages_zh.js"></script> 
+<script type="text/javascript">
+$(function(){
+/*	var element = $("textarea[name='reason']");*/
+	$('.skin-minimal input').iCheck({
+		checkboxClass: 'icheckbox-blue',
+		radioClass: 'iradio-blue',
+		increaseArea: '20%'
+	});
+	$("#form-admin-add").validate({
+		errorPlacement: function(error, element) {
+			//替换错误显示位置，error表示错误信息
+			$( element )
+				.closest( "form" )
+				.find( "span[id='error']" )
+				.append( error );
+		},
+		errorElement: "span",
+		//错误提示消息
+		messages:{
+			reason:{
+				required:"请输入拒绝审核的理由",
+			},
+		},
+		onkeyup:false,
+		success:"valid",
+		submitHandler:function(form){
+			$(form).ajaxSubmit({
+				type: 'post',
+				url: "/admin/projectexamine/rejectapplication" ,
+				success: function(data){
+					if(data == "1"){
+						layer.msg('拒绝审核成功!',{icon:1,time:1000},function(){
+							var index = parent.layer.getFrameIndex(window.name);
+							parent.location.reload();
+							parent.layer.close(index); 
+						});
+					}else{
+						layer.msg('拒绝审核发生异常，请重试!',{icon:1,time:1000});
+					}
+				},
+                error: function(XmlHttpRequest, textStatus, errorThrown){
+					layer.msg('拒绝审核发生异常!',{icon:1,time:1000});
+				}
+			});
+		
+		}
+	});
+});
+$("#cancel").on('click',function(){
+	var index = parent.layer.getFrameIndex(window.name);
+	parent.location.reload();
+	parent.layer.close(index);
+})
+</script> 
+<!--/请在上方写此页面业务相关的脚本-->
+</body>
+</html>

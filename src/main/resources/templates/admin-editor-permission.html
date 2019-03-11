@@ -1,0 +1,123 @@
+<!DOCTYPE HTML>
+<html  xmlns:th="http://www.thymeleaf.org">
+<head th:include="_meta :: header">
+<title>添加权限节点</title>
+</head>
+<body>
+<article class="page-container">
+<form action="#" id="form-admin-add" th:action="@{/resource/editor-permission}" th:object="${resource}" method="post">
+    <input type="hidden" class="input-text" value="" placeholder="" th:field="*{id}"/>
+    <input type="hidden" name="update" value="true"/>
+	<div class="row cl">
+		<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>名称：</label>
+		<div class="formControls col-xs-8 col-sm-9">
+			<input type="text" class="input-text" value="" placeholder="" th:field="*{name}"/>
+		</div>
+	</div>
+	<div class="row cl">
+		<label class="form-label col-xs-4 col-sm-3">父级名称：</label>
+		<div class="formControls col-xs-8 col-sm-9"> <span class="select-box" style="width:150px;">
+			<select class="select"  size="1" th:field="*{parentId}">
+			  <option th:each="resource : ${resourceList}" th:if="${resource.parentId == 1 or resource.parentId == 0}"
+			          th:value="${resource.id}" 
+			          th:text="${resource.name}">顶级栏目</option>
+			</select>
+			</span> 
+		</div>
+	</div>
+	<div class="row cl">
+		<label class="form-label col-xs-4 col-sm-3">资源类型：</label>
+		<div class="formControls col-xs-8 col-sm-9"> <span class="select-box" style="width:150px;">
+			<select class="select" size="1" th:field="*{type}">
+			  <option th:each="type : ${types}" 
+			          th:value="${type.toString() eq 'menu'} ? '0' : '1'" 
+			          th:text="${type.toString() eq 'menu'} ? '菜单' : '按钮'"></option>
+			</select>
+			</span> </div>
+	</div>
+	<div class="row cl">
+		<label class="form-label col-xs-4 col-sm-3"><span class="c-red"></span>路由：</label>
+		<div class="formControls col-xs-8 col-sm-9">
+			<input type="text" class="input-text" autocomplete="off"  th:field="*{url}"/>
+		</div>
+	</div>
+	<div class="row cl">
+		<label class="form-label col-xs-4 col-sm-3"><span class="c-red"></span>权限：</label>
+		<div class="formControls col-xs-8 col-sm-9">
+			<input type="text" class="input-text" th:field="*{permission}"/>
+		</div>
+	</div>
+	<div class="row cl">
+		<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>排序：</label>
+		<div class="formControls col-xs-8 col-sm-9">
+			<input type="text" class="input-text"  th:field="*{orderNum}"/>
+		</div>
+	</div>
+	
+	<div class="row cl">
+		<div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-3">
+			<input class="btn btn-primary radius" type="submit" value="&nbsp;&nbsp;提交&nbsp;&nbsp;"/>
+		</div>
+	</div>
+	</form>
+</article>
+
+<!--_footer 作为公共模版分离出去--> 
+<div th:replace="_footer :: footerjs">
+</div>
+ <!--/_footer 作为公共模版分离出去-->
+
+<!--请在下方写此页面业务相关的脚本-->
+<script type="text/javascript" th:src="@{/lib/jquery.validation/1.14.0/jquery.validate.js}" src="lib/jquery.validation/1.14.0/jquery.validate.js"></script> 
+<script type="text/javascript" th:src="@{/lib/jquery.validation/1.14.0/validate-methods.js}" src="lib/jquery.validation/1.14.0/validate-methods.js"></script> 
+<script type="text/javascript" th:src="@{/lib/jquery.validation/1.14.0/messages_zh.js}"  src="lib/jquery.validation/1.14.0/messages_zh.js"></script> 
+<script type="text/javascript">
+$(function(){
+	$('.skin-minimal input').iCheck({
+		checkboxClass: 'icheckbox-blue',
+		radioClass: 'iradio-blue',
+		increaseArea: '20%'
+	});
+	
+	$("#form-admin-add").validate({
+		rules:{
+			name: "required", 
+			orderNum:{
+				required:true,
+				digits:true
+			},
+		
+		},
+		 messages: {  
+			   name: "资源名称不能为空",  
+			   orderNum: {  
+			    required: "排序字段不能为空",  
+			    digits: "请输入整数"  
+			   }, 
+		 },
+		onkeyup:false,
+		//focusCleanup:true,
+		success:"valid",
+		submitHandler:function(form){
+			$(form).ajaxSubmit({
+				type: 'post',
+				url: "/resource/editor-permission" ,
+				success: function(data){
+					layer.msg('添加成功!',{icon:1,time:1000},function(){
+						var index = parent.layer.getFrameIndex(window.name);
+						parent.location.reload();
+						parent.layer.close(index); 
+					});
+				},
+                error: function(XmlHttpRequest, textStatus, errorThrown){
+					layer.msg('error!',{icon:1,time:1000});
+				}
+			});
+		
+		}
+	});
+});
+</script> 
+<!--/请在上方写此页面业务相关的脚本-->
+</body>
+</html>

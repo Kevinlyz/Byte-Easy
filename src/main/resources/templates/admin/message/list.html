@@ -1,0 +1,193 @@
+<!DOCTYPE HTML>
+<html  xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head th:include="_meta :: header">
+<title>通知列表</title>
+</head>
+<body>
+	<div class="page-container">
+	<form action="#" th:action="@{/admin/message}"  method="post">
+		<div class="layui-body">
+			<!-- 内容主体区域 -->
+			<fieldset class="layui-elem-field">
+				<legend>通知列表</legend>
+				<div class="layui-field-box">
+					<div class="search_condition">
+						<div class="layui-form-item ">
+
+							<div class="row">
+								<div class="col-xs-12 col-sm-3">
+									<select id="notifyType" name="notifyType"  
+									class="input-text mySelect"  th:field="${message.notifyType}">
+										<option value="">通知类型待选择</option>
+										 <option  text='系统通知' value='系统通知'>系统通知</option>
+										 <option  text='服务通知' value='服务通知'>服务通知</option>
+										 <option  text='交易通知' value='交易通知'>交易通知</option>
+									</select>
+								</div>
+								<div class="col-xs-12 col-sm-3">
+									<input type="text" class="input-text" 
+									placeholder="发布人" id="sender" name="sender" th:value="${message.sender}"/>
+								</div>
+								<div class="col-xs-12 col-sm-3">
+										<input type="text" class="input-text" 
+									placeholder="标题" id="acceptUser" name="title" th:value="${message.title}"/>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-xs-12 col-sm-2">
+								<button class="layui-btn layui-btn-success radius" id="subbtn" type="submit" value="&nbsp;&nbsp;提交&nbsp;&nbsp;"><i class="Hui-iconfont">&#xe665;</i> 查询</button>
+ 								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<hr style="margin: 0">
+						<div class="cl pd-5 bg-1 bk-gray">
+							<span class="l">
+								<a  href="javascript:;"
+									th:onclick="'javascript:deleteAll(\''+@{/admin/message/deleteMessage}+'\')'" 
+									class="layui-btn layui-btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i>
+									批量删除
+								</a>
+								<a  href="javascript:;"
+									onclick="message_add('发布通告','/admin/message/addMessageHtml',1000,600)"
+									class="layui-btn layui-btn-danger radius"><i class="Hui-iconfont">&#xe600;</i>
+									发布通告
+								</a>
+							</span>
+							<span class="r wei-height">共有数据：<strong th:text="${pageInfo.total}"></strong> 条</span>
+						</div>
+				<hr>
+		<table class="layui-table text-c">
+			<thead>			
+			<tr class="text-c">
+				<th width="25"><input type="checkbox" name="" value=""/></th>
+				<th width="30">序号</th>
+				<th width="40">通知类型</th>
+				<th width="30">发布人</th>
+				<th width="30">接收人</th>
+				<th width="60">标题</th>
+				<th width="150">消息内容</th>
+				<th width="80">推送时间</th>
+				<th width="80">操作</th>
+			</tr>
+		</thead>
+ 		<tbody>
+			<tr class="text-c" th:if="${pageInfo.getSize() == 0}"><td colspan="15"><strong>暂无数据</strong></td></tr>
+			<tr class="text-c" th:each="message:${pageInfo.list}">
+				<td><input type="checkbox" value="1" th:value="${message.id}" name="id"/></td>
+				<td th:text="${message.id}"></td>
+				<td th:text="${message.notifyType}"></td>
+				<td th:text="${message.sender}"></td>
+				<td>
+				<span th:if="${message.acceptUser}==null or ${message.acceptUser}==''" th:text="全部用户"></span>
+				<span th:if="${message.acceptUser}!=null" th:text="${message.acceptUser}"></span>
+				</td>
+				<td th:text="${message.title}"></td>
+				<td th:text="${message.message}"></td>
+				<td th:text="${#calendars.format(message.creatTime,'yyyy-MM-dd HH:mm:ss')}"></td>
+				<td class="td-manage" th:id="${message.id}">
+				<a title="编辑信息" sec:authorize="hasAuthority('/user/edit-user')"  href="javascript:;" th:onclick="'javascript:message_edit(\'编辑通告信息\',\''+@{/admin/message/editMessageHtml}+'/'+${message.id}+'\',1000,600)'" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6df;</i></a>
+				<a title="删除"    sec:authorize="hasAuthority('/user/delete-user')"  href="javascript:;" th:onclick="'javascript:message_del(this,\''+@{/admin/message/deleteMessage}+'\')'" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6e2;</i></a> 
+				</td>
+			</tr>
+			
+		</tbody> 
+	</table>
+	<div th:include="_pagination :: page"></div>
+	</form>
+</div>
+<!--_footer 作为公共模版分离出去-->
+<div th:replace="_footer :: footerjs">
+</div>
+<!--/_footer 作为公共模版分离出去-->
+
+<!--请在下方写此页面业务相关的脚本-->
+<script type="text/javascript" th:src="@{/lib/My97DatePicker/4.8/WdatePicker.js}" src="lib/My97DatePicker/4.8/WdatePicker.js"></script> 
+<script type="text/javascript" th:src="@{/lib/datatables/1.10.0/jquery.dataTables.min.js}" src="lib/datatables/1.10.0/jquery.dataTables.min.js"></script> 
+<script type="text/javascript" th:src="@{/lib/laypage/1.2/laypage.js}" src="lib/laypage/1.2/laypage.js"></script>
+<script type="text/javascript">
+/*
+	参数解释：
+	title	标题
+	url		请求的url
+	id		需要操作的数据id
+	w		弹出层宽度（缺省调默认值）
+	h		弹出层高度（缺省调默认值）
+*/
+/*通告-增加*/
+function message_add(title,url,w,h){
+	layer_show(title,url,w,h);
+}
+
+/*通告-编辑*/
+function message_edit(title,url,w,h){
+	layer_show(title,url,w,h);
+}
+
+/*商品-单个删除*/
+function message_del(obj,url){
+	var id=$(obj).parent().attr('id');
+	var listid = new Array();
+	listid[0]=id;
+	layer.confirm('确认要删除吗？',function(){
+		$.ajax({
+			type: 'POST',
+			url: url,
+			data:JSON.stringify(listid),
+			contentType:"application/json",
+			dataType: 'json',
+			success: function(data){
+				if(data.code == "000000"){
+					layer.msg('删除成功!',{icon:1,time:1000});
+					window.location.reload();
+				}else{
+					layer.msg('删除失败!',{icon:5,time:1000});
+				}
+			},
+			error:function(data) {
+				console.log(data.msg);
+			},
+		});		
+	});
+}
+//批量删除
+function deleteAll(url){
+	var listid = new Array();
+	$('input[name="id"]:checked').each(
+          function (i) {
+          	listid[i] = $(this).val();
+          });
+	if(listid.length == 0){
+		layer.msg("请选择删除的通知！");
+		return false;
+	}
+  layer.confirm('确定要删除选中的全部数据吗？', {
+		btn : [ '确定', '取消' ]
+	// 按钮
+	}, function () {
+		 $.ajax({  
+	   	     url:url,// 跳转到 action  
+	   	     data:JSON.stringify(listid),  
+	   	     type:'post',  
+	   	     cache:false,  
+	   	     dataType:'json', 
+	   	     contentType:"application/json",  //发送信息至服务器时内容编码类型。    
+	   	     success:function(data) {  
+	   	         if(data.code == "000000"){  
+	   	        	layer.msg('删除成功!',{icon:1,time:1000});
+	   	            window.location.reload();  
+	   	         }else{  
+	   	        	layer.msg('删除失败!',{icon:5,time:1000});
+	   	         }  
+	   	      },  
+	   	      error : function() {  
+	   	    	  layer.msg("异常！");  
+	   	      }  
+	        });
+	}, function() {
+
+	});
+}
+</script>
+</body>

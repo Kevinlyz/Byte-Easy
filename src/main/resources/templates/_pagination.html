@@ -1,0 +1,142 @@
+<div th:fragment="page">
+<style>
+body {
+	font: 14px Helvetica Neue, Helvetica, PingFang SC, 微软雅黑, Tahoma, Arial,
+		sans-serif;
+}
+
+.layui-laypage {
+	display: inline-block;
+	vertical-align: middle;
+	margin: 10px 0px;
+	font-size: 0px;
+}
+
+.layui-laypage span, .layui-laypage a {
+	display: inline-block;
+	vertical-align: middle;
+	padding: 0px 15px;
+	border: 1px solid rgb(226, 226, 226);
+	height: 28px;
+	line-height: 28px;
+	margin: 0px -1px 5px 0px;
+	background-color: rgb(255, 255, 255);
+	color: rgb(51, 51, 51);
+	font-size: 12px;
+}
+
+.layui-laypage em {
+	font-style: normal;
+}
+
+.layui-laypage span {
+	color: rgb(153, 153, 153);
+	font-weight: 700;
+}
+
+.layui-laypage a {
+	text-decoration: none;
+}
+
+.layui-laypage .layui-laypage-curr {
+	position: relative;
+}
+
+.layui-laypage .layui-laypage-curr em {
+	position: relative;
+	color: rgb(255, 255, 255);
+	font-weight: 400;
+}
+
+.layui-laypage .layui-laypage-curr .layui-laypage-em {
+	position: absolute;
+	left: -1px;
+	top: -1px;
+	padding: 1px;
+	width: 100%;
+	height: 100%;
+	background-color: #2D6DCC;
+}
+
+.layui-laypage-em {
+	border-radius: 2px;
+}
+
+.layui-laypage .layui-laypage-total {
+	height: 30px;
+	line-height: 30px;
+	margin-left: 1px;
+	border: medium none;
+	font-weight: 400;
+}
+
+.layui-laypage input, .layui-laypage button , .layui-laypage select{
+	height: 30px;
+	line-height: 30px;
+	border: 1px solid rgb(226, 226, 226);
+	border-radius: 2px;
+	vertical-align: top;
+	background-color: rgb(255, 255, 255);
+	box-sizing: border-box ! important;
+}
+
+.layui-laypage input {
+	width: 50px;
+	margin: 0px 5px;
+	text-align: center;
+}
+
+.layui-laypage button {
+	margin-left: 5px;
+	padding: 0px 15px;
+	cursor: pointer;
+}
+</style>
+<!-- 分页  -->
+<div id="demo7" style="float: right;">
+	<div class="layui-box layui-laypage layui-laypage-default"><input type="hidden" th:value = "*{pageSize}"/>
+		<select id="pageSize" name="pageSize"  class="text-input" style="height: 30px;witgh:100px;margin-right: -1px;" onchange="javscript:toPage(1);" >
+			<option value="2" th:selected="${pageInfo.pageSize == 2}">2</option>
+			<option value="5" th:selected="${pageInfo.pageSize == 5}">5</option>
+			<option value="10" th:selected="${pageInfo.pageSize == 10}">10</option>
+			<option value="15" th:selected="${pageInfo.pageSize == 15}">15</option>
+			<option value="20" th:selected="${pageInfo.pageSize == 20}">20</option>
+			<option value="25" th:selected="${pageInfo.pageSize == 25}">25</option>
+			<option value="50" th:selected="${pageInfo.pageSize == 50}">50</option>
+			<option value="100" th:selected="${pageInfo.pageSize == 100}">100</option>
+			<option value="200" th:selected="${pageInfo.pageSize == 200}">200</option>
+		</select>	  
+	
+		<a  th:if="${pageInfo.isFirstPage}" href="javascript:return false;" 
+			class="layui-laypage-next">首页</a> 
+		<a  th:unless="${pageInfo.isFirstPage}" href="javascript:return false;" onclick="toPage(1)"
+			class="layui-laypage-next">首页</a> 
+			
+		<a th:if="${pageInfo.isFirstPage}" class="layui-laypage-next">上一页</a> 
+		<a th:unless="${pageInfo.isFirstPage}" th:onclick="'javascript:toPage(\''+${pageInfo.prePage}+'\')'"
+			class="layui-laypage-next">上一页</a> 
+			
+		<span class="layui-laypage-curr">
+			<em class="layui-laypage-em"></em>
+			<em th:text="${pageInfo.pageNum} + '/' + ${pageInfo.pages}"></em>
+		</span>
+		
+		<a  th:if="${pageInfo.isLastPage}" class="layui-laypage-next">下一页</a> 
+		<a  th:unless="${pageInfo.isLastPage}" th:onclick="'javascript:toPage(\''+${pageInfo.nextPage}+'\')'"
+			class="layui-laypage-next">下一页</a> 
+		
+		<a  th:if="${pageInfo.isLastPage}" href="javascript:return false;" class="layui-laypage-last" title="尾页">末页</a> 
+		<a  th:unless="${pageInfo.isLastPage}" href="javascript:return false;" th:onclick="'javascript:toPage(\''+${pageInfo.pages}+'\')'"
+			class="layui-laypage-last" title="尾页">末页</a> 
+			
+		<span class="layui-laypage-total"> 到第 
+			<input id="goPage" th:value="${pageInfo.pageNum}" value=""/> 页 
+			<a th:onclick="'javascript:goPage()'" class="layui-laypage-next">确定</a>
+		</span>
+		
+	</div>
+</div>
+<input type="hidden" name="pageNo" id="pageNo" th:value="${pageInfo.pageNum}" value="" />
+<input type="hidden" id="total" name="total" th:value="${pageInfo.total}"  />
+
+</div>

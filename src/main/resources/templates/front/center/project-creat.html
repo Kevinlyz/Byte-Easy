@@ -1,0 +1,845 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:include="_meta :: header"/>
+<head>
+    <link data-n-head="true" rel="icon" type="image/x-icon" th:href="@{/favicon.ico.css}"href="favicon.ico.css" />
+    <script data-n-head="true" th:src="@{/font/js/jquery.min.js}"src="font/js/jquery.min.js"></script>
+    <script data-n-head="true" th:src="@{/font/js/index.js}"src="js/index.js"></script>
+	<link rel="stylesheet" type="text/css" th:href="@{/font/css/information.css}"href="font/css/information.css"/>
+	<link rel="stylesheet" type="text/css" th:href="@{/font/css/el.css}"href="font/css/el.css"/>
+	<link rel="stylesheet" type="text/css" th:href="@{/font/css/project.css}" href="css/project.css"/>
+	<style>
+		label.error {
+			position: unset;
+			right: 18px;
+			top: 5px;
+			color: #ef392b;
+			font-size: 12px;
+		}
+		.el-form-item__content{
+			line-height: 20px;
+		}
+	</style>
+</head>
+<body>
+  <div id="__nuxt"> 
+   <div class="nuxt-progress" style="width:0%;height:2px;background-color:#3B8070;opacity:0;"></div> 
+   <div id="__layout"> 
+  	 <div>
+   		<div>
+       		 <!-- 公共顶部header -->
+           	 <header th:include="front/common/_header :: header" class="header" data-v-8e52717c></header>
+       		<!-- 公共导航 -->
+          	 <nav th:include="front/common/_nav :: nav" class="nav_index" data-v-bdccf15a></nav>
+      <div class="membar" data-v-24a6dbce="" th:include="front/center/_nav :: nav">
+       <ul data-v-24a6dbce=""> 
+		<li data-v-24a6dbce=""> <a href="project.htm" data-v-24a6dbce=""> 我的项目 </a> </li>
+		<li class="check" data-v-24a6dbce=""> <a href="information.htm" data-v-24a6dbce=""> 个人信息 </a> </li>
+		<li data-v-24a6dbce=""> <a href="auth.htm" data-v-24a6dbce=""> 实名认证 </a> </li>
+		<li data-v-24a6dbce=""> <a href="wallet.htm" data-v-24a6dbce=""> 我的账户 </a> </li>
+		<li data-v-24a6dbce=""> <a href="myNew.htm" data-v-24a6dbce=""> 我的消息 </a> </li>
+       </ul> 
+      </div> 
+      <div id="MyPersonalBasicNews" > 
+       <div class="container" style="padding-left: 0px;padding-right: 0px;"> 
+        <h2>新建项目</h2>
+         <!-- 修改基本信息 -->
+         
+		<div class="changeBasic" style="padding-bottom:40px;border:0;">
+		   <form class=" el-form demo-ruleForm " id="form" enctype="multipart/form-data"  style="width: 100%;" method="post">
+			<div class="containerBox" data-v-d0b3a19c>
+			 <div class="headerPic">
+			  <div class="el-form-item">
+			   <div class="el-form-item__content" style="margin-left: 125px;">
+			   </div>
+			  </div>
+			 </div>
+			 
+			 <div class="content" style="width: 100%;">
+			  
+			 
+			  <div class="NameAndEmail clearfix">
+			   <div class="Name">
+				<div class="el-form-item is-required">
+				 <label for="name" class="el-form-item__label" style="width: 125px;">项目名称：</label>
+				 <div class="el-form-item__content" style="margin-left: 125px;">
+				  <div class="changeWidth el-input">
+				   <input type="text" autocomplete="off" class="el-input__inner" name="name" placeholder="请输入项目名称"/>
+				  </div>
+				 </div>
+				</div>
+			   </div>
+			  </div>
+
+
+
+			  <div class="Name">
+				<div class="el-form-item is-required">
+				 <label for="email" class="el-form-item__label" style="width: 125px;">项目类型：</label>
+				   <div class="el-col el-col-6" style="width: 320px;">
+					  <div class="el-input el-input--suffix">
+						  <select name="typeCode"class=" el-input__inner">
+							<option value="" disabled selected style='display:none;'>请选择类型</option>
+							<option th:each="type:${types}" th:text="${type.description}" th:value="${type.code}">空</option> 
+							</select>
+					  </div>
+					</div>
+				</div>
+			  </div>
+
+
+
+				 <div class="NameAndEmail clearfix">
+					 <div class="Name">
+						 <div class="el-form-item is-required">
+							 <label for="name" class="el-form-item__label" style="width: 125px;">设计要求：</label>
+							 <div class="el-form-item__content" style="margin-left: 125px;">
+								 <div class="changeWidth el-input">
+									 <textarea type="text" autocomplete="off" style="height:150px;" class="el-input__inner" id="" name="requirements" placeholder="请输入项目的设计要求"></textarea>
+								 </div>
+							 </div>
+						 </div>
+					 </div>
+				 </div>
+
+			  
+			  <div class="Name">
+				<div class="el-form-item is-required">
+				 <label for="email" class="el-form-item__label" style="width: 125px;">设计师类别：</label>
+				   <div class="el-col el-col-6" style="width: 320px;">
+					  <div class="el-input el-input--suffix">
+						 <input type="checkbox" id="designerTypes" name="designerTypes" value="" th:each="type : ${designerType}" th:value="${type.code}" th:text="${type.description}+'     '"></input>
+					  </div>
+					</div>
+				</div>
+			  </div>
+			  
+			  
+			  <div class="Name">
+				<div class="el-form-item is-required">
+				 <label for="email" class="el-form-item__label" style="width: 125px;">文件展示方式：</label>
+				   <div class="el-col el-col-6" style="width: 320px;">
+					  <div class="el-input el-input--suffix">
+						  <select name="allowView" class=" el-input__inner">
+							<option value="" disabled selected style='display:none;'>请选择方式</option>
+							<option value="1">允许所有人查看</option>
+							<option value="0">只允许选中设计师查看</option>
+						  </select>
+							<span class="el-input__suffix">
+								<span class="el-input__suffix-inner">
+									<i class="el-select__caret el-input__icon el-icon-arrow-down"></i>
+								</span>
+							</span>
+					  </div>
+					</div>
+				</div>
+			  </div>
+			  
+			  
+			  <div class="el-form-item is-required">
+			   <label for="province" class="el-form-item__label" style="width: 125px;">所在城市：</label>
+			   <div class="el-form-item__content" style="margin-left: 125px;">
+				<div class="el-row">
+				 <div class="el-col el-col-6">
+				  <div class="el-input el-input--suffix">
+					  <select id="province" name="provinceId" class=" el-input__inner" >
+						<option value="" disabled selected style='display:none;'>请选择省</option>
+						<option th:each="pro:${province}" th:text="${pro.getName()}"th:value="${pro.getProvinceId()}">空</option> 
+					  </select>
+					  <span class="el-input__suffix">
+						<span class="el-input__suffix-inner">
+							<i class="el-select__caret el-input__icon el-icon-arrow-down"></i>
+						</span>
+					  </span> 
+				  </div>
+				 </div>
+				 <div class="el-col el-col-6" id="cityDiv">
+				   <div class="el-input el-input--suffix" style="margin-left:10px;">
+					  <select class=" el-input__inner" name="cityId" id="city">
+						<option value='' disabled selected style='display:none;'>请选择市</option>
+					  </select> 
+					<span id="cityRecord" style="display:none"></span>
+					  <span class="el-input__suffix">
+						<span class="el-input__suffix-inner">
+							<i class="el-select__caret el-input__icon el-icon-arrow-down"></i>
+						</span>
+					  </span> 
+				  </div>
+				 </div>
+				 <div class="el-col el-col-6" id="areaDiv">
+				  <div class="el-input el-input--suffix" style="margin-left:20px;">
+					  <select class=" el-input__inner" id="areaId" name="areaId">
+						<option value='' disabled selected style='display:none;'>请选择县</option>
+					  </select> 
+					<span id="areaRecord" style="display:none"></span>
+					  <span class="el-input__suffix">
+						<span class="el-input__suffix-inner">
+							<i class="el-select__caret el-input__icon el-icon-arrow-down"></i>
+						</span>
+					  </span> 
+				  </div>
+				 </div>
+				</div>
+			   </div>
+			  </div>
+			  
+			  
+			  <div class="Name">
+				<div class="el-form-item is-required">
+				 <label for="email" class="el-form-item__label" style="width: 125px;">项目规模：</label>
+				   <div class="el-col el-col-6" style="width: 320px;">
+					  <div class="el-input el-input--suffix">
+						  <select name="modelCode" class=" el-input__inner">
+							<option value="" disabled selected style='display:none;'>请选择规模</option>
+							<option th:each="model:${models}" th:text="${model.description}" th:value="${model.code}">空</option>
+
+							<span class="el-input__suffix">
+								<span class="el-input__suffix-inner">
+									<i class="el-select__caret el-input__icon el-icon-arrow-down"></i>
+								</span>
+							</span>
+						  </select>
+					  </div>
+					</div>
+				</div>
+			   </div>
+			   
+			  <div class="NameAndEmail clearfix">
+			   <div class="Name">
+				<div class="el-form-item is-required">
+				 <label for="name" class="el-form-item__label" style="width: 125px;">预计启动日期：</label>
+				 <div class="el-form-item__content" style="margin-left: 125px;">
+				  <div class="changeWidth el-input">
+				   <input type="text" class="el-input__inner Wdate" onfocus="WdatePicker({el:$dp.$('startupDate'),dateFmt:'yyyy-MM-dd'})" readonly="readonly"
+				   autocomplete="off" value="" id="startPlanDate" name="startupDate" placeholder="请选择预计启动日期"/>
+				  </div>
+				 </div>
+				</div>
+			   </div>
+			  </div>
+			  
+			  
+			  <div class="NameAndEmail clearfix">
+			   <div class="Name">
+				<div class="el-form-item is-required">
+				 <label for="name" class="el-form-item__label" style="width: 125px;">预计截止日期：</label>
+				 <div class="el-form-item__content" style="margin-left: 125px;">
+				  <div class="changeWidth el-input">
+				   <input type="text" class="el-input__inner Wdate" onfocus="WdatePicker({el:$dp.$('startupDate'),dateFmt:'yyyy-MM-dd'})" readonly="readonly"
+				   autocomplete="off" value="" id="endPlanDate" name="deadline" placeholder="请选择预计截止日期"/>
+				  </div>
+				 </div>
+				</div>
+			   </div>
+			  </div>
+			  
+			  
+			  
+			  <div class="NameAndEmail clearfix">
+			   <div class="Name">
+				<div class="el-form-item is-required">
+				 <label for="name" class="el-form-item__label" style="width: 125px;">报名截止日期：</label>
+				 <div class="el-form-item__content" style="margin-left: 125px;">
+				  <div class="changeWidth el-input">
+				   <input type="text" class="el-input__inner Wdate" onfocus="WdatePicker({el:$dp.$('startupDate'),dateFmt:'yyyy-MM-dd'})" readonly="readonly"
+				   autocomplete="off" value="" id="endDate" name="registrationDeadline" placeholder="请选择报名截止日期"/>
+				  </div>
+				 </div>
+				</div>
+			   </div>
+			  </div>
+			  
+			  
+				 <div class="NameAndEmail clearfix">
+					 <div class="Name">
+						 <div class="el-form-item is-required">
+							 <label for="name" class="el-form-item__label" style="width: 125px;">总工程费用：</label>
+							 <div class="el-form-item__content" style="margin-left: 125px;">
+								 <div class="changeWidth el-input">
+									 <input type="text" autocomplete="off" onchange="fill()" class="el-input__inner" id="allBudget" name="constructionBudget" placeholder="请输入总工程费用"/>&nbsp;&nbsp;&nbsp;
+								 	 <span class="yuan_after">元</span>
+								 </div>
+							 </div>
+						 </div>
+					 </div>
+				 </div>
+
+
+				 <div class="NameAndEmail clearfix">
+				 <div class="Name">
+					 <div class="el-form-item is-required">
+						 <label for="name" class="el-form-item__label" style="width: 125px;">方案阶段费用:</label>
+						 <div class="el-form-item__content" style="margin-left: 125px;">
+							 <div class="changeWidth el-input">
+								 <input type="text" id="designBudget" onchange="fill()" autocomplete="off" class="el-input__inner" name="designBudget" placeholder="请输入设计预算费用"/>&nbsp;&nbsp;&nbsp;
+							 	 <span class="yuan_after">元</span>
+							 </div>
+						 </div>
+					 </div>
+				 </div>
+			 </div>
+
+			 <div class="NameAndEmail clearfix">
+				 <div class="Name">
+					 <div class="el-form-item is-required">
+						 <label for="name" class="el-form-item__label" style="width: 125px;">费用分配：</label>
+						 <div class="el-form-item__content" style="margin-left: 125px;">
+							 <div class="changeWidth el-input">
+								 <input type="text" autocomplete="off" id="fee0" class="el-input__inner" name="buildingMoney" style="width: 120px;" placeholder="建筑"/>
+								 <input type="text" autocomplete="off" id="fee1" class="el-input__inner" name="structureMoney" style="width: 120px;" placeholder="结构"/>
+								 <input type="text" autocomplete="off" id="fee2" class="el-input__inner" name="waterMoney" style="width: 120px;" placeholder="水"/>
+                                 <input type="text" autocomplete="off" id="fee4" class="el-input__inner" name="warmMoney" style="width: 120px;" placeholder="暖"/>
+								 <input type="text" autocomplete="off" id="fee3" class="el-input__inner" name="electricityMoney" style="width: 120px;" placeholder="电"/>
+							 	 <span class="yuan_after">元</span>
+							 </div>
+						 </div>
+					 </div>
+				 </div>
+			 </div>
+
+
+
+				 <div class="NameAndEmail clearfix">
+					 <div class="Name">
+						 <div class="el-form-item is-required">
+							 <label for="name" class="el-form-item__label" style="width: 125px;">施工图阶段费用:</label>
+							 <div class="el-form-item__content" style="margin-left: 125px;">
+								 <div class="changeWidth el-input">
+									 <input type="text" autocomplete="off" onchange="fill()" class="el-input__inner" id="planBudget" name="planBudget" placeholder="请输入施工预算费用"/>
+								 	 <span class="yuan_after">元</span>
+								 </div>
+							 </div>
+						 </div>
+					 </div>
+				 </div>
+			  
+			  <div class="NameAndEmail clearfix">
+			   <div class="Name">
+				<div class="el-form-item is-required">
+				 <label for="name" class="el-form-item__label" style="width: 125px;">费用分配：</label>
+				 <div class="el-form-item__content" style="margin-left: 125px;">
+				  <div class="changeWidth el-input">
+				   <input type="text" autocomplete="off" id="constructFee0" class="el-input__inner" name="buildingMoney1" style="width: 120px;" placeholder="建筑"/>
+				   <input type="text" autocomplete="off" id="constructFee1" class="el-input__inner" name="structureMoney1" style="width: 120px;" placeholder="结构"/>
+				   <input type="text" autocomplete="off" id="constructFee2" class="el-input__inner" name="waterMoney1" style="width: 120px;" placeholder="水"/>
+                   <input type="text" autocomplete="off" id="constructFee4" class="el-input__inner" name="warmMoney1" style="width: 120px;" placeholder="暖"/>
+				   <input type="text" autocomplete="off" id="constructFee3" class="el-input__inner" name="electricityMoney1" style="width: 120px;" placeholder="电"/>
+				  	<span class="yuan_after">元</span>
+				  </div>
+				 </div>
+				</div>
+			   </div>
+			  </div>
+				  
+				  
+				  
+				  
+			<div class="NameAndEmail clearfix">
+			   <div class="Name">
+					<div class="el-form-item is-required">
+						 <label for="name" class="el-form-item__label" style="width: 125px;">项目简介：</label>
+						 <div class="el-form-item__content" style="margin-left: 125px;">
+							  <!--注：id值不可变为【editorValue】，用于ueditor获取内容填充到富文本编辑器中-->
+							  <input id="editorValue" class="form-label col-xs-16 col-sm-16" type="hidden" />
+							  <script id="editor"  name="introduce" type="text/plain" style="height:500px;width:900px;"> </script>
+						 </div>
+				    </div>
+			   </div>
+			</div>
+
+			 <div class="NameAndEmail clearfix">
+				 <div class="Name">
+					 <div class="el-form-item is-required">
+						 <label for="name" class="el-form-item__label" style="width: 125px;">上传展示图片：</label>
+						 <div class="el-form-item__content" style="margin-left: 125px;">
+							 <div class="changeWidth el-input">
+								 <input type="text" autocomplete="off" id="imgPath" name="imgPath" class="el-input__inner"/>
+								 <a href="javascript:void();" class="btn btn-primary upload-btn" style="line-height: 32px;"><i class="Hui-iconfont"></i> 浏览文件</a>
+								 <input type="file" multiple="" name="image" id="image" class="input-file valid" style="height: 100%;">
+							 </div>
+						 </div>
+					 </div>
+				 </div>
+			 </div>
+
+
+			<div class="NameAndEmail clearfix">
+			   <div class="Name">
+				<div class="el-form-item">
+				 <label for="name" class="el-form-item__label" style="width: 125px;">备注：</label>
+				 <div class="el-form-item__content" style="margin-left: 125px;">
+				  <div class="changeWidth el-input">
+				   <input type="text" autocomplete="off" class="el-input__inner" name="remarks" placeholder="请输入备注"/>
+				  </div>
+				 </div>
+				</div>
+			   </div>
+			  </div>
+			  
+			  
+			  <div class="NameAndEmail clearfix">
+			   <div class="Name">
+				<div class="el-form-item">
+				 <label for="name" class="el-form-item__label" style="width: 125px;">文件资料：</label>
+				 <div class="el-form-item__content" style="margin-left: 125px;">
+				  <div class="changeWidth el-input" id="fileDiv" style="margin-top:10px;">
+						<div>
+								 <div>
+									 <input type="file" class="el-input__inner" style="line-height: 20px"  name="files" value="" placeholder=""/>
+									 <button type="button" class="el-button el-button--primary el-button--mini"   onclick="addFile();" style="margin-left:30px;" data-v-d0b3a19c=""><span>添加</span></button>
+						 		</div>
+						 </div>
+				  	</div>
+				 </div>
+				</div>
+			   </div>
+			  </div>
+
+
+
+			  </div>
+			  <div>
+			   <button type="submit" id="submit" class="el-button el-button--primary el-button--mini"  style="margin-left:125px;" data-v-d0b3a19c="">
+            		<span>提交审核</span></button>
+						 <button type="button" id="draft" class="el-button el-button--primary el-button--mini"  style="margin-left:60px;" data-v-d0b3a19c="">
+								 <span>保存为草稿</span></button>
+                  <button type="button" class="el-button el-button--cancle el-button--mini" onclick="toLocation()"  style="margin-left:60px;" data-v-d0b3a19c="">
+            		取消提交</button>
+			  </div>
+			 </div>
+			 </form>
+			</div>
+		</div>
+	   </div>
+      </div>
+   			<!-- 公共底部 -->
+     	  <div th:include="front/common/_footer :: footer" id="footer" data-v-407369c6 data-v-2a183b29></div>
+       </div> 
+      </div>  
+   </div> 
+  </div>
+ </body>
+ <!--/_footer 作为公共模版分离出去-->
+
+<!--请在下方写此页面业务相关的脚本-->
+<script type="text/javascript" th:src="@{/lib/jquery.validation/1.14.0/jquery.validate.js}" src="lib/jquery.validation/1.14.0/jquery.validate.js"></script>
+<script type="text/javascript" th:src="@{/lib/jquery.validation/1.14.0/validate-methods.js}" src="lib/jquery.validation/1.14.0/validate-methods.js"></script> 
+<script type="text/javascript" th:src="@{/lib/jquery.validation/1.14.0/messages_zh.js}"  src="lib/jquery.validation/1.14.0/messages_zh.js"></script>
+<script type="text/javascript" th:src="@{/lib/My97DatePicker/4.8/WdatePicker.js}"  src="lib/My97DatePicker/4.8/WdatePicker.js"></script>
+<script type="text/javascript" th:src="@{/lib/select/fSelect.js}" src="lib/select/fSelect.js"></script>
+<script type="text/javascript" th:src="@{/lib/layer/2.4/layer.js}" src="lib/layer/2.4/layer.js"></script>
+<script data-n-head="true" th:src="@{/js/common/layer.js}" src="js/common/layer.js"></script>
+					 <script type="text/javascript" th:src="@{/lib/jquery.validation/1.14.0/jquery.form.min.js}" src="lib/jquery.validation/1.14.0/jquery.form.min.js"></script>
+
+<script type="text/javascript" charset="utf-8" th:src="@{/lib/ueditor/1.4.3/ueditor.config.js}" src="lib/ueditor/1.4.3/ueditor.config.js"></script>
+<script type="text/javascript" charset="utf-8" th:src="@{/lib/ueditor/1.4.3/ueditor.all.min.js}" src="lib/ueditor/1.4.3/ueditor.all.min.js"> </script>
+<!--这里加载的语言文件会覆盖你在配置项目里添加的语言类型，比如你在配置项目里配置的是英文，这里加载的中文，那最后就是中文-->
+<script type="text/javascript" charset="utf-8" th:src="@{/lib/ueditor/1.4.3/lang/zh-cn/zh-cn.js}" src="lib/ueditor/1.4.3/lang/zh-cn/zh-cn.js"></script>
+<script type="text/javascript" th:src="@{/lib/ueditor/1.4.3/ueditor.js}" src="lib/ueditor/1.4.3/ueditor.js"> </script>
+ <script>
+	 function toLocation(){
+		 window.location.href = "/center/myProject";
+	 }
+	 var fileDiv ='<div style="margin-top:10px;"><div>'
+			 +'<input type="file" class="el-input__inner" style="line-height: 20px"  name="files" value="" placeholder=""/>'
+			 +'<button type="button" class="el-button el-button--danger el-button--mini"  onclick="delFile(this);"  style="margin-left:30px;" data-v-d0b3a19c="">'
+			 +'<span>删除</span></button>'
+			 +'</div></div>';
+	 function addFile() {
+		 $('#fileDiv').append(fileDiv);
+	 }
+	 function delFile(e) {
+		 $(e).parent().remove();
+	 }
+	 $('.el-input__suffix').click(function(){
+
+	 })
+	$("#draft").click(function(){
+		$("#form").ajaxSubmit({
+			type: 'post',
+			url: "/center/myProject/draft" ,
+			beforeSend:function()
+			{
+				// layer.msg('数据请求中！',{icon:1,time:1000});
+				$('#submit').attr('disabled',true);
+			},
+			success: function(data){
+				if(data == 1){
+					//禁止重复提交
+					layer.msg('提交审核成功!',{icon:1,time:1000},function(){
+						var index = parent.layer.getFrameIndex(window.name);
+						parent.layer.close(index);
+						window.location.href = "/center/myProject";
+					});
+				}else if(data == 2){
+					layer.msg("提交审核失败！");
+					return false;
+				}else{
+					layer.msg('提交审核失败!',{icon:1,time:1000});
+				}
+			},
+			error: function(XmlHttpRequest, textStatus, errorThrown){
+				layer.msg('error!',{icon:1,time:1000});
+			}
+		});
+	});
+
+ $(function() {
+	    $('.demo').fSelect();
+	});
+ 
+ var result = [];
+ //选择省份事件
+$("#province").change(function() {
+	//先清空城市和区
+	$("#city").empty();
+	$("#areaId").empty();
+	$('#city').append("<option value=''>待选择</option>");
+	$('#areaId').append("<option value=''>待选择</option>");
+	if($("#province").val()==""){
+		//啥都不做
+	}else{
+
+		chooseDic("province",$("#province").val());
+		if(result.length != 0){
+			$('#cityDiv').css("display","inline");
+			var flag = false;
+			for (i in result){
+				$('#city').append("<option value='"+result[i].cityId+"'>"+result[i].name+"</option>");
+			}
+		}else{
+			$('#cityDiv').css("display","none");
+			$('#areaDiv').css("display","none");
+		}
+	}
+});
+
+function validate() {
+	var startPlanDate = new Date(Date.parse($("#startPlanDate").val().replace(/-/g,"/"))).getTime();
+	var endPlanDate = new Date(Date.parse($("#endPlanDate").val().replace(/-/g,"/"))).getTime();
+	if (endPlanDate < startPlanDate) {
+		return false;
+	}
+	return true;
+}
+
+function validateAgain() {
+	var startPlanDate = new Date(Date.parse($("#startPlanDate").val().replace(/-/g,"/"))).getTime();
+	var endDate = new Date(Date.parse($("#endDate").val().replace(/-/g,"/"))).getTime();
+	if (endDate > startPlanDate) {
+		return false;
+	}
+	return true;
+}
+
+function fill()
+{
+	if(''!=$("#allBudget").val())
+	{
+		if($("#designBudget").val() == '' && $("#planBudget").val() != '')
+		{
+			$("#designBudget").val($("#allBudget").val() - $("#planBudget").val());
+		}
+		else if($("#designBudget").val() != '' && $("#planBudget").val() == '')
+		{
+			$("#planBudget").val($("#allBudget").val() - $("#designBudget").val())
+		}
+	}
+}
+
+
+
+var validator;
+
+$(document).ready(function () {
+	jQuery.validator.addMethod("gt", function (value, param) {
+		return validate();
+	}, $.validator.format("预计截止日期不能小于预计启动日期"));
+
+	jQuery.validator.addMethod("at", function (value, param) {
+		return validateAgain();
+	}, $.validator.format("报名截止日期不能大于预计启动日期"));
+})
+
+
+//选择城市事件
+$("#city").change(function() {
+	//先清空规格
+	$("#areaId").empty();
+	$('#areaId').append("<option value=''>待选择</option>");
+	if($("#city").val()==""){
+		//啥都不做
+	}else{
+
+		chooseDic("city",$("#city").val());
+		if(result.length != 0){
+			$('#areaDiv').css("display","inline");
+			for (i in result){
+				$('#areaId').append("<option value='"+result[i].areaId+"'>"+result[i].name+"</option>");
+			}
+		}else{
+			$('#areaDiv').css("display","none");
+		}
+	}
+});
+//选择下拉菜单时和后台要字典的交互方法
+function chooseDic(who,code){
+	var toServer={
+		who : who,
+		code : code,
+	}
+	//此处请求后台程序，下方是成功后的前台处理……
+	$.ajax({
+		type: 'POST',
+		url: "/center/myProject/getareadic",
+		dataType: 'json',
+		data:toServer,
+		async:false,
+		success: function(data){
+			//返回服务器返回的字典对象
+			result = data;
+			
+		},
+		error:function(data) {
+			console.log("错误!");
+		},
+	});
+}
+
+//
+// (function ($) {
+// 	$.extend($.validator.messages, {
+// 		required: "",
+// 	});
+// 	}(jQuery));
+//
+// //设置忽略某些元素不设置
+// $.validator.setDefaults({
+//     ignore: ':hidden',
+// });
+
+$("#form").validate({
+	rules:{
+		name:{
+			required:true,
+			minlength:4,
+			maxlength:16
+		},
+		typeCode:{
+			required:true,
+		},
+		province:{
+			required:true,
+		},
+		city:{
+			required:true,
+		},
+		areaId:{
+			required:true,
+		},
+		modelCode:{
+			required:true,
+		},
+		requirements:{
+			required:true,
+		},
+		startupDate:{
+			required:true,
+		},
+		deadline:{
+			required:true,
+			gt:true
+		},
+		registrationDeadline:{
+			required:true,
+			at:true
+		},
+		designerTypes:{
+			required:true,
+		},
+		allowView:{
+			required:true,
+		},
+		constructionBudget:{
+			required:true,
+			allBudget:true,
+			number:true
+		},
+		designBudget:{
+			required:true,
+			number:true
+		},
+		planBudget:{
+			required:true,
+			number:true
+		},
+		introduce:{
+			required:true,
+		},
+		imgPath:{
+			required:true,
+		},
+		buildingMoney:{
+			required:true,
+			feeEqualStage1:true,
+			number:true
+		},
+		structureMoney:{
+			required:true,
+			feeEqualStage1:true,
+			number:true
+		},
+		waterMoney:{
+			required:true,
+			feeEqualStage1:true,
+			number:true
+		},
+		warmMoney:{
+			required:true,
+			feeEqualStage1:true,
+			number:true
+		},
+		electricityMoney:{
+			required:true,
+			feeEqualStage1:true,
+			number:true
+		},
+		buildingMoney1:{
+			required:true,
+			feeEqualStage2:true,
+			number:true
+		},
+		structureMoney1:{
+			required:true,
+			feeEqualStage2:true,
+			number:true
+		},
+		waterMoney1:{
+			required:true,
+			feeEqualStage2:true,
+			number:true
+		},
+		warmMoney1:{
+			required:true,
+			feeEqualStage2:true,
+			number:true
+		},
+		electricityMoney1:{
+			required:true,
+			feeEqualStage2:true,
+			number:true
+		},
+	},
+	onkeyup:false,
+	success:"valid",
+	submitHandler:function(form){
+		$(form).ajaxSubmit({
+			type: 'post',
+			url: "/center/myProject/creatProject" ,
+			beforeSend:function()
+			{
+				// layer.msg('数据请求中！',{icon:1,time:1000});
+				$('#submit').attr('disabled',true);
+			},
+			success: function(data){
+				if(data == 1){
+					//禁止重复提交
+					layer.msg('提交审核成功!',{icon:1,time:1000},function(){
+						var index = parent.layer.getFrameIndex(window.name);
+						parent.layer.close(index);
+						window.location.href = "/center/myProject";
+					});
+				}else if(data == 2){
+					layer.msg("提交审核失败！");
+					return false;
+				}else{
+					layer.msg('提交审核失败!',{icon:1,time:1000});
+				}
+			},
+			error: function(XmlHttpRequest, textStatus, errorThrown){
+				layer.msg('error!',{icon:1,time:1000});
+			}
+		});
+
+	}
+});
+
+
+var file = $('#files'),
+aim1 = $('#path');
+file.on('change', function( e ){
+	var i;
+    //e.currentTarget.files 是一个数组，如果支持多个文件，则需要遍历
+    for (i = 0;i < e.currentTarget.files.length; i++){
+	    var name = e.currentTarget.files[i].name;
+
+		$("#div_parent").parent().append('<div class="div_file" style="margin-top:10px;"><input type="text" class="el-input__inner" value="'+name+'" id="uploaderInput" name="files"><button onclick="$(this).parent().remove()" type="button" class="el-button el-button--danger el-button--mini"  style="margin-left:30px;"><span>删除</span></button></div>');
+		$("#uploaderInput").bind("change", function(e){
+			//onFileUploaded(e);预览等操作
+			$(this).removeAttr("id");
+		});
+		$("#uploaderInput").click();
+
+	    // if($.trim(aim1.val()) == ''){
+	    // 	aim1.val( aim1.val()+name );
+	    // }
+	    // else if($.trim(aim1.val()) != ''){
+	    // 	aim1.val( aim1.val()+","+name );
+	    // }
+    }
+});
+
+var image = $('#image'),
+		aim = $('#imgPath');
+image.on('change', function( e ){
+	var i;
+	//e.currentTarget.files 是一个数组，如果支持多个文件，则需要遍历
+	if(e.currentTarget.files.length > 1){
+		layer.msg('只能上传一个图片!',{icon:1,time:1000});
+		image.val('');
+	}else{
+		for (i = 0;i < e.currentTarget.files.length; i++){
+			var name = e.currentTarget.files[i].name;
+			if($.trim(aim.val()) == ''){
+				aim.val( aim.val()+name );
+			}
+			else if($.trim(aim.val()) != ''){
+				aim.val( aim.val()+","+name );
+			}
+		}
+	}
+});
+
+
+$("input[type='checkbox']").change(function(){
+    var boxes = document.getElementsByName("designerTypes");
+    for(i=0;i<boxes.length;i++){
+         if(!boxes[i].checked){
+        	 $("#fee"+i).css("display","none");
+			 $("#constructFee"+i).css("display","none");
+         }
+         if(boxes[i].checked){
+        	 $("#fee"+i).css("display","inline");
+			 $("#constructFee"+i).css("display","inline");
+         }
+    }
+});
+
+
+// var file = $('#files'),
+// aim = $('#path');
+// file.on('change', function( e ){
+// 	var i;
+//     //e.currentTarget.files 是一个数组，如果支持多个文件，则需要遍历
+//     for (i = 0;i < e.currentTarget.files.length; i++){
+// 	    var name = e.currentTarget.files[i].name;
+// 	    var div = '<div">'+
+// 	  	'<input type="text" name="files" id="file'+i+'" autocomplete="off" class="el-input__inner" value="'+name+'" />'+
+// 	  	'<button type="button" class="el-button el-button--danger el-button--mini"  onclick="del()" style="margin-left:30px;" data-v-d0b3a19c="">'+
+// 		'<span>删除</span></button>
+// 	'</div>';
+// 	$("#upload").append(div);
+//     }
+// });
+ </script>
+</html>
