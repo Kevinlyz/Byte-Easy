@@ -47,7 +47,6 @@ public class TestController extends BaseController {
         return prefix+"test-list";
 
     }
-
     /**
      * 添加跳转页面
      * @return
@@ -106,6 +105,5 @@ public class TestController extends BaseController {
     public AjaxResult deleteAll(@RequestBody List<Long> ids){
         return toAjax(testService.removeByIds(ids));
     }
-
 }
 
