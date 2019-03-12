@@ -17,14 +17,14 @@
         <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>创建时间：</label>
         <div class="formControls col-xs-5 col-sm-5">
                      <input type="input-text" class="input-text Wdate" onfocus="WdatePicker({el:$dp.$('startupDate'),dateFmt:'yyyy-MM-dd HH:mm:ss'})" readonly="readonly"
-                            autocomplete="off" th:value="${#dates.format(test.createTime, 'yyyy-MM-dd HH:mm:ss')}" name="createTime" placeholder="请选择创建时间"/>
+                            autocomplete="off" th:value="${#temporals.format(test.createTime, 'yyyy-MM-dd HH:mm:ss')}" name="createTime" placeholder="请选择创建时间"/>
         </div>
     </div>
     <div class="row cl">
         <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>更新时间：</label>
         <div class="formControls col-xs-5 col-sm-5">
                      <input type="input-text" class="input-text Wdate" onfocus="WdatePicker({el:$dp.$('startupDate'),dateFmt:'yyyy-MM-dd HH:mm:ss'})" readonly="readonly"
-                            autocomplete="off" th:value="${#dates.format(test.updateTime, 'yyyy-MM-dd HH:mm:ss')}" name="updateTime" placeholder="请选择更新时间"/>
+                            autocomplete="off" th:value="${#temporals.format(test.updateTime, 'yyyy-MM-dd HH:mm:ss')}" name="updateTime" placeholder="请选择更新时间"/>
         </div>
     </div>
 	<div class="row cl">

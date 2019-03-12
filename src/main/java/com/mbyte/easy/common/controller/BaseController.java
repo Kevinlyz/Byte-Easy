@@ -1,8 +1,47 @@
 package com.mbyte.easy.common.controller;
 
 import com.mbyte.easy.common.web.AjaxResult;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.time.DateUtils;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
+
+import java.beans.PropertyEditorSupport;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 
 public class BaseController {
+    /**
+     * 将前台传递过来的日期格式的字符串，自动转化为时间类型
+     */
+    @InitBinder
+    public void initBinder(WebDataBinder binder)
+    {
+        // LocalDateTime 类型转换
+        binder.registerCustomEditor(LocalDateTime.class, new PropertyEditorSupport()
+        {
+            @Override
+            public void setAsText(String text)
+            {
+                if(StringUtils.isNoneBlank(text)){
+                    setValue(LocalDateTime.parse(text, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
+                }
+            }
+        });
+        // LocalDate 类型转换
+        binder.registerCustomEditor(LocalDate.class, new PropertyEditorSupport()
+        {
+            @Override
+            public void setAsText(String text)
+            {
+                if(StringUtils.isNoneBlank(text)){
+                    setValue(LocalDateTime.parse(text, DateTimeFormatter.ofPattern("yyyy-MM-dd")));
+                }
+            }
+        });
+    }
     /**
      * 响应返回结果
      *
