@@ -78,11 +78,19 @@ public class CodeGenerator {
         };
 
         List<FileOutConfig> focList = new ArrayList<>();
+//        focList.add(new FileOutConfig("/templates/mapper.xml.ftl") {
+//            @Override
+//            public String outputFile(TableInfo tableInfo) {
+//                // 自定义Mapper.xml文件存放的路径
+//                return projectPath + "/src/main/resources/mybatis/mapper/"
+//                        + tableInfo.getEntityName() + "Mapper" + StringPool.DOT_XML;
+//            }
+//        });
 
         focList.add(new FileOutConfig("/generator/java/controller/controller.java.vm") {
             @Override
             public String outputFile(TableInfo tableInfo) {
-                String expand = gc.getOutputDir() + File.separator + pc.get+ File.separator +  pc.getModuleName() + File.separator +  "controller";
+                String expand = projectPath + "/" + "expand";
                 String entityFile = String.format((expand + File.separator + "%s" + ".java"), tableInfo.getControllerName());
                 return entityFile;
             }
@@ -92,7 +100,7 @@ public class CodeGenerator {
             @Override
             public String outputFile(TableInfo tableInfo) {
                 String expand = projectPath + "/" + "expand";
-                String entityFile = String.format((expand + File.separator + "%s" + ".html"), tableInfo.getControllerName());
+                String entityFile = String.format((expand + File.separator + "%s" + ".html"), pc.getModuleName() + "-list");
                 return entityFile;
             }
         });
