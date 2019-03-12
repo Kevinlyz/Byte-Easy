@@ -26,7 +26,7 @@ public class PageInfo<T> {
         this.pageSize = page.getSize();
         this.pageNum = page.getCurrent();
         this.total = page.getTotal();
-        this.pages = this.getPages();
+        this.pages = page.getPages();
         if (this.pageNum > 1) {
             this.prePage = this.pageNum - 1;
         }
