@@ -78,21 +78,31 @@ public class CodeGenerator {
         };
 
         List<FileOutConfig> focList = new ArrayList<>();
+//        focList.add(new FileOutConfig("/templates/mapper.xml.ftl") {
+//            @Override
+//            public String outputFile(TableInfo tableInfo) {
+//                // 自定义Mapper.xml文件存放的路径
+//                return projectPath + "/src/main/resources/mybatis/mapper/"
+//                        + tableInfo.getEntityName() + "Mapper" + StringPool.DOT_XML;
+//            }
+//        });
 
-        focList.add(new FileOutConfig("/generator/java.controller/controller.java.vm") {
+        focList.add(new FileOutConfig("/generator/java/controller/controller.java.ftl") {
             @Override
             public String outputFile(TableInfo tableInfo) {
+                System.out.println("tableInfo-1:"+tableInfo);
                 String expand = projectPath + "/" + "expand";
                 String entityFile = String.format((expand + File.separator + "%s" + ".java"), tableInfo.getControllerName());
                 return entityFile;
             }
         });
 
-        focList.add(new FileOutConfig("/generator/template/test-list.html.mv") {
+        focList.add(new FileOutConfig("/generator/template/test-list.html.ftl") {
             @Override
             public String outputFile(TableInfo tableInfo) {
+                System.out.println("tableInfo-2:"+tableInfo);
                 String expand = projectPath + "/" + "expand";
-                String entityFile = String.format((expand + File.separator + "%s" + ".html"), tableInfo.getControllerName());
+                String entityFile = String.format((expand + File.separator + "%s" + ".html"), pc.getModuleName() + "-list");
                 return entityFile;
             }
         });
