@@ -14,8 +14,8 @@ import com.mbyte.easy.common.controller.BaseController;
  * @author 黄润宣
  * @since 2019-03-12
  */
-@Controller
-@RequestMapping("/sys/user")
+//@Controller
+//@RequestMapping("/sys/user")
 public class UserController extends BaseController {
 
 }
