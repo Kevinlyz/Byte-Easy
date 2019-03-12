@@ -1,14 +1,20 @@
 package ${package.Controller};
+
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.mbyte.easy.admin.entity.Test;
-import com.mbyte.easy.admin.service.ITestService;
-import com.mbyte.easy.common.controller.BaseController;
+import ${package.Entity}.${entity};
+import ${package.Service}.${table.serviceName};
+import ${cfg.superController};
 import com.mbyte.easy.common.web.AjaxResult;
 import com.mbyte.easy.util.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
+<#if restControllerStyle>
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
+<#else>
 import org.springframework.stereotype.Controller;
+</#if>
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,17 +25,18 @@ import java.util.List;
  * 前端控制器
  * </p>
  *
- * @author 王震
+ * @author ${author}
  * @since 2019-03-11
  */
 @Controller
-@RequestMapping("/admin/test")
-public class TestController extends BaseController {
+<#--@RequestMapping("<#if package.ModuleName??>/${package.ModuleName}</#if><#if controllerMappingHyphenStyle>/${controllerMappingHyphen}<#else>/${table.entityPath}</#if>")-->
+@RequestMapping("<#if package.ModuleName??>/${package.ModuleName}</#if>/${table.controllerName ?uncap_first}")
+public class ${table.controllerName} extends ${superControllerClass}  {
 
-    private String prefix = "admin/test/";
+    private String prefix = "<#if package.ModuleName??>/${package.ModuleName}</#if>/${entity?uncap_first}/";
 
     @Autowired
-    private ITestService testService;
+    private ${table.serviceName} ${entity?uncap_first}Service;
 
     /**
      * 查询列表
@@ -37,21 +44,21 @@ public class TestController extends BaseController {
      * @param model
      * @param pageNo
      * @param pageSize
-     * @param test
+     * @param ${entity?uncap_first}
      * @return
      */
     @RequestMapping
     public String index(Model model, @RequestParam(value = "pageNo", required = false, defaultValue = "1") Integer pageNo,
-                        @RequestParam(value = "pageSize", required = false, defaultValue = "20") Integer pageSize, Test test) {
+                        @RequestParam(value = "pageSize", required = false, defaultValue = "20") Integer pageSize, ${entity} ${entity?uncap_first}) {
 
-        Page<Test> page = new Page<Test>(pageNo, pageSize);
-        QueryWrapper<Test> queryWrapper = new QueryWrapper<Test>();
+        Page<${entity}> page = new Page<${entity}>(pageNo, pageSize);
+        QueryWrapper<${entity}> queryWrapper = new QueryWrapper<${entity}>();
 //        queryWrapper.lambda()
 //                .eq(Test::getName, "1");
-        IPage<Test> pageInfo = testService.page(page, queryWrapper);
+        IPage<${entity}> pageInfo = ${entity?uncap_first}Service.page(page, queryWrapper);
 
         model.addAttribute("pageInfo", new PageInfo(pageInfo));
-        return prefix+"test-list";
+        return prefix+"${entity?uncap_first}-list";
 
     }
     /**
@@ -69,8 +76,8 @@ public class TestController extends BaseController {
      */
     @PostMapping("add")
     @ResponseBody
-    public AjaxResult add(Test test){
-        return toAjax(testService.save(test));
+    public AjaxResult add(${entity} ${entity?uncap_first}){
+        return toAjax(${entity?uncap_first}Service.save(${entity?uncap_first}));
     }
     /**
      * 添加跳转页面
@@ -78,7 +85,7 @@ public class TestController extends BaseController {
      */
     @GetMapping("editBefore/{id}")
     public String editBefore(Model model,@PathVariable("id")Long id){
-        model.addAttribute("test",testService.getById(id));
+        model.addAttribute("${entity?uncap_first}",${entity?uncap_first}Service.getById(id));
         return prefix+"edit";
     }
     /**
@@ -88,8 +95,8 @@ public class TestController extends BaseController {
      */
     @PostMapping("edit")
     @ResponseBody
-    public AjaxResult edit(Test test){
-        return toAjax(testService.updateById(test));
+    public AjaxResult edit(${entity} ${entity?uncap_first}){
+        return toAjax(${entity?uncap_first}Service.updateById(${entity?uncap_first}));
     }
     /**
      * 删除
@@ -99,7 +106,7 @@ public class TestController extends BaseController {
     @GetMapping("delete/{id}")
     @ResponseBody
     public AjaxResult delete(@PathVariable("id") Long id){
-        return toAjax(testService.removeById(id));
+        return toAjax(${entity?uncap_first}Service.removeById(id));
     }
     /**
      * 批量删除
@@ -109,7 +116,7 @@ public class TestController extends BaseController {
     @PostMapping("deleteAll")
     @ResponseBody
     public AjaxResult deleteAll(@RequestBody List<Long> ids){
-        return toAjax(testService.removeByIds(ids));
+        return toAjax(${entity?uncap_first}Service.removeByIds(ids));
     }
 
 }

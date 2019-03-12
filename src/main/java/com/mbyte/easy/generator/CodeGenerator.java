@@ -10,9 +10,8 @@ import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy;
 import com.baomidou.mybatisplus.generator.engine.FreemarkerTemplateEngine;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
+
 /**
  * <p>
  *  自动生成工具类
@@ -74,9 +73,11 @@ public class CodeGenerator {
             @Override
             public void initMap() {
                 // to do nothing
+                Map<String, Object> map = new HashMap<>();
+                map.put("superController", "com.mbyte.easy.common.controller.BaseController");
+                this.setMap(map);
             }
         };
-
         List<FileOutConfig> focList = new ArrayList<>();
 //        focList.add(new FileOutConfig("/templates/mapper.xml.ftl") {
 //            @Override
