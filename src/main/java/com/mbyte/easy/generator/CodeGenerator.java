@@ -87,7 +87,7 @@ public class CodeGenerator {
 //            }
 //        });
 
-        focList.add(new FileOutConfig("/generator/java/controller/controller.java.flt") {
+        focList.add(new FileOutConfig("/generator/java/controller/controller.java.ftl") {
             @Override
             public String outputFile(TableInfo tableInfo) {
                 System.out.println("tableInfo-1:"+tableInfo);
@@ -97,7 +97,7 @@ public class CodeGenerator {
             }
         });
 
-        focList.add(new FileOutConfig("/generator/template/test-list.html.flt") {
+        focList.add(new FileOutConfig("/generator/template/test-list.html.ftl") {
             @Override
             public String outputFile(TableInfo tableInfo) {
                 System.out.println("tableInfo-2:"+tableInfo);
