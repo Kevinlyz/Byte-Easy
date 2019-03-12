@@ -10,7 +10,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @EnableTransactionManagement
 @Configuration
-@MapperScan("com.mbyte.easy.**.mapper")
+@MapperScan(value = {"com.mbyte.easy.**.mapper"})
 public class MybatisPlusConfig {
     /**
      * SQL执行效率插件

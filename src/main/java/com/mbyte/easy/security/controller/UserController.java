@@ -7,8 +7,6 @@ import com.mbyte.easy.mapper.SysRoleMapper;
 import com.mbyte.easy.mapper.SysUserMapper;
 import com.mbyte.easy.mapper.SysUserRolesMapper;
 import com.mbyte.easy.util.Utility;
-import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -62,29 +60,29 @@ public class UserController {
 			user.setUsername(name);
 			model.addAttribute("name", name.trim());
 		}
-		PageHelper.startPage(pageNo, pageSize);
-		List<SysUser> list = userMapper.selectByUser(user);
-		for(int i = 0; i < list.size(); i++) {
-			SysUser u = list.get(i);
-			List<SysRole> roles = roleMapper.selectRolesByUserID(u.getId());
-			u.setRoles(roles);
-			list.set(i, u);
-		}
-		PageInfo<SysUser> pageInfo = new PageInfo<SysUser>(list);
-		if (pageNo > pageInfo.getPages()) {
-			pageNo = pageInfo.getPages();
-			PageHelper.startPage(pageNo, pageSize);
-			list =  userMapper.selectByUser(user);
-			for(int i = 0; i < list.size(); i++) {
-				SysUser u = list.get(i);
-				List<SysRole> roles = roleMapper.selectRolesByUserID(u.getId());
-				u.setRoles(roles);
-				list.set(i, u);
-			}
-			pageInfo = new PageInfo<SysUser>(list);
-		}
-		
-		model.addAttribute("pageInfo", pageInfo);
+//		PageHelper.startPage(pageNo, pageSize);
+//		List<SysUser> list = userMapper.selectByUser(user);
+//		for(int i = 0; i < list.size(); i++) {
+//			SysUser u = list.get(i);
+//			List<SysRole> roles = roleMapper.selectRolesByUserID(u.getId());
+//			u.setRoles(roles);
+//			list.set(i, u);
+//		}
+//		PageInfo<SysUser> pageInfo = new PageInfo<SysUser>(list);
+//		if (pageNo > pageInfo.getPages()) {
+//			pageNo = pageInfo.getPages();
+//			PageHelper.startPage(pageNo, pageSize);
+//			list =  userMapper.selectByUser(user);
+//			for(int i = 0; i < list.size(); i++) {
+//				SysUser u = list.get(i);
+//				List<SysRole> roles = roleMapper.selectRolesByUserID(u.getId());
+//				u.setRoles(roles);
+//				list.set(i, u);
+//			}
+//			pageInfo = new PageInfo<SysUser>(list);
+//		}
+//
+//		model.addAttribute("pageInfo", pageInfo);
 		return "admin-list";
 	}
 

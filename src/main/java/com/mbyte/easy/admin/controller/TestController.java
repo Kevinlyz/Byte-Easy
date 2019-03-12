@@ -34,8 +34,10 @@ public class TestController extends BaseController {
                         @RequestParam(value = "pageSize", required = false, defaultValue = "20") Integer pageSize, Test test) {
 
         Page<Test> page = new Page<Test>(pageNo, pageSize);
-        QueryWrapper<Test> diseaseQueryWrapperw = new QueryWrapper<Test>(test);
-        IPage<Test> pageInfo = testService.page(page, diseaseQueryWrapperw);
+        QueryWrapper<Test> queryWrapper = new QueryWrapper<Test>();
+        queryWrapper.lambda()
+                .eq(Test::getName, "1");
+        IPage<Test> pageInfo = testService.page(page, queryWrapper);
 
         model.addAttribute("pageInfo", new PageInfo(pageInfo));
         return "admin/test/test-list";

@@ -1,7 +1,7 @@
 package com.mbyte.easy.security.controller;
 
-import java.util.List;
-
+import com.mbyte.easy.entity.SysResource;
+import com.mbyte.easy.mapper.SysResourceMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,17 +9,9 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
-import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
-import com.mbyte.easy.entity.SysResource;
-import com.mbyte.easy.mapper.SysResourceMapper;
+import java.util.List;
 
 /**
  * 项目权限资源控制类
@@ -65,33 +57,33 @@ public class ResourceController {
 			resource.setName(name.trim());
 			model.addAttribute("name", name.trim());
 		}
-		PageHelper.startPage(pageNo, pageSize);
-		List<SysResource> list = resourceMapper.selectByResource(resource);
-		for(int i = 0; i < list.size(); i++) {
-			SysResource r = (SysResource)list.get(i);
-			SysResource  parentResource = resourceMapper.selectByPrimaryKey(r.getParentId());
-			r.setParentResource(parentResource);
-			list.set(i, r);
-		}
-		PageInfo<SysResource> pageInfo = new PageInfo<SysResource>(list);
-		System.out.println(pageInfo.getPages());
-		if (pageNo > pageInfo.getPages()) {
-			pageNo = pageInfo.getPages();
-			PageHelper.startPage(pageNo, pageSize);
-			list = resourceMapper.selectByResource(resource);
-			for(int i = 0; i < list.size(); i++) {
-				SysResource r = (SysResource)list.get(i);
-				SysResource  parentResource = resourceMapper.selectByPrimaryKey(r.getParentId());
-				r.setParentResource(parentResource);
-				list.set(i, r);
-			}
-			pageInfo = new PageInfo<>(list);
-		}
-		
-//		System.out.println(list.size()+"::::"+realList.size());
-//		pageInfo = new PageInfo<>(realList);
-		System.out.println(pageInfo.getPages());
-		model.addAttribute("pageInfo", pageInfo);
+//		PageHelper.startPage(pageNo, pageSize);
+//		List<SysResource> list = resourceMapper.selectByResource(resource);
+//		for(int i = 0; i < list.size(); i++) {
+//			SysResource r = (SysResource)list.get(i);
+//			SysResource  parentResource = resourceMapper.selectByPrimaryKey(r.getParentId());
+//			r.setParentResource(parentResource);
+//			list.set(i, r);
+//		}
+//		PageInfo<SysResource> pageInfo = new PageInfo<SysResource>(list);
+//		System.out.println(pageInfo.getPages());
+//		if (pageNo > pageInfo.getPages()) {
+//			pageNo = pageInfo.getPages();
+//			PageHelper.startPage(pageNo, pageSize);
+//			list = resourceMapper.selectByResource(resource);
+//			for(int i = 0; i < list.size(); i++) {
+//				SysResource r = (SysResource)list.get(i);
+//				SysResource  parentResource = resourceMapper.selectByPrimaryKey(r.getParentId());
+//				r.setParentResource(parentResource);
+//				list.set(i, r);
+//			}
+//			pageInfo = new PageInfo<>(list);
+//		}
+//
+////		System.out.println(list.size()+"::::"+realList.size());
+////		pageInfo = new PageInfo<>(realList);
+//		System.out.println(pageInfo.getPages());
+//		model.addAttribute("pageInfo", pageInfo);
 		return "admin-permission";
 	}
 
