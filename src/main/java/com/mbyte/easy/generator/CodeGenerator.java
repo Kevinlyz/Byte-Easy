@@ -87,18 +87,20 @@ public class CodeGenerator {
 //            }
 //        });
 
-        focList.add(new FileOutConfig("/generator/java/controller/controller.java.vm") {
+        focList.add(new FileOutConfig("/generator/java/controller/controller.java.flt") {
             @Override
             public String outputFile(TableInfo tableInfo) {
+                System.out.println("tableInfo-1:"+tableInfo);
                 String expand = projectPath + "/" + "expand";
                 String entityFile = String.format((expand + File.separator + "%s" + ".java"), tableInfo.getControllerName());
                 return entityFile;
             }
         });
 
-        focList.add(new FileOutConfig("/generator/template/test-list.html.mv") {
+        focList.add(new FileOutConfig("/generator/template/test-list.html.flt") {
             @Override
             public String outputFile(TableInfo tableInfo) {
+                System.out.println("tableInfo-2:"+tableInfo);
                 String expand = projectPath + "/" + "expand";
                 String entityFile = String.format((expand + File.separator + "%s" + ".html"), pc.getModuleName() + "-list");
                 return entityFile;
