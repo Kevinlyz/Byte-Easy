@@ -1,5 +1,4 @@
 package com.mbyte.easy.admin.controller;
-
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -20,14 +19,14 @@ import java.util.List;
  * 前端控制器
  * </p>
  *
- * @author 黄润宣
+ * @author 王震
  * @since 2019-03-11
  */
-@Controller
-@RequestMapping("/admin/test")
-public class TestController extends BaseController  {
+//@Controller
+//@RequestMapping("/admin/test")
+public class TestControllerBak extends BaseController {
 
-    private String prefix = "/admin/test/";
+    private String prefix = "admin/test/";
 
     @Autowired
     private ITestService testService;

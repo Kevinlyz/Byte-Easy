@@ -5,28 +5,21 @@
 </head>
 <body>
 <article class="page-container">
-	<form class="form form-horizontal"  id="form-test-edit" action="#" th:action="@{/admin/test/edit}" th:object="${test}">
-    <input type="hidden" name="id" th:value="${test.id}"/>
+	<form class="form form-horizontal"  id="form-${table.name}-edit" action="#" th:action="@{/admin/test/edit}" th:object="${r"$"}{${table.name}}">
+    <input type="hidden" name="id" th:value="${r"$"}{${table.name}.id}"/>
+    <#list table.fields as field >
     <div class="row cl">
-        <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>名字：</label>
+        <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>${field.comment}：</label>
         <div class="formControls col-xs-5 col-sm-5">
-                    <input type="text" class="input-text"  th:field="*{name}" name="name" id="name"/>
-        </div>
-    </div>
-    <div class="row cl">
-        <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>创建时间：</label>
-        <div class="formControls col-xs-5 col-sm-5">
+            <#if field.type == 'datetime'>
                      <input type="input-text" class="input-text Wdate" onfocus="WdatePicker({el:$dp.$('startupDate'),dateFmt:'yyyy-MM-dd HH:mm:ss'})" readonly="readonly"
-                            autocomplete="off" th:value="${#dates.format(test.createTime, 'yyyy-MM-dd HH:mm:ss')}" name="createTime" placeholder="请选择创建时间"/>
+                            autocomplete="off" th:value="${r"$"}{#dates.format(${table.name}.${field.propertyName}, 'yyyy-MM-dd HH:mm:ss')}" name="${field.propertyName}" placeholder="请选择${field.comment}"/>
+            <#else>
+                    <input type="text" class="input-text"  th:field="*{${field.propertyName}}" name="${field.propertyName}" id="${field.propertyName}"/>
+            </#if>
         </div>
     </div>
-    <div class="row cl">
-        <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>更新时间：</label>
-        <div class="formControls col-xs-5 col-sm-5">
-                     <input type="input-text" class="input-text Wdate" onfocus="WdatePicker({el:$dp.$('startupDate'),dateFmt:'yyyy-MM-dd HH:mm:ss'})" readonly="readonly"
-                            autocomplete="off" th:value="${#dates.format(test.updateTime, 'yyyy-MM-dd HH:mm:ss')}" name="updateTime" placeholder="请选择更新时间"/>
-        </div>
-    </div>
+    </#list>
 	<div class="row cl">
 	<div class="col-xs-3 col-sm-3 col-xs-offset-4 col-sm-offset-3">
 		<input class="btn btn-primary radius" id="subbtn" type="submit" value="&nbsp;&nbsp;提交&nbsp;&nbsp;"/>
@@ -43,17 +36,13 @@
 <!--请在下方写此页面业务相关的脚本-->
 <script>
  $(function(){
-	$("#form-test-edit").validate({
+	$("#form-${table.name}-edit").validate({
 		rules:{
-                 name:{
+			 <#list table.fields as field >
+                 ${field.propertyName}:{
                  required:true,
              },
-                 createTime:{
-                 required:true,
-             },
-                 updateTime:{
-                 required:true,
-             },
+             </#list>
 		},
 		onkeyup:false,
 		debug: true,
@@ -61,7 +50,7 @@
 		submitHandler:function(form){
 				$(form).ajaxSubmit({
 				type: 'POST',
-				url: "/admin/test/edit" ,
+				url: "/admin/${table.name}/edit" ,
 				success: function(data){
 					if(data.code == "0"){
 						layer.designMsg('编辑成功!',1,function(){

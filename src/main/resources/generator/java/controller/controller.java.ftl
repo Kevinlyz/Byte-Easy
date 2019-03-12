@@ -30,7 +30,7 @@ import java.util.List;
  */
 @Controller
 <#--@RequestMapping("<#if package.ModuleName??>/${package.ModuleName}</#if><#if controllerMappingHyphenStyle>/${controllerMappingHyphen}<#else>/${table.entityPath}</#if>")-->
-@RequestMapping("<#if package.ModuleName??>/${package.ModuleName}</#if>/${table.controllerName ?uncap_first}")
+@RequestMapping("<#if package.ModuleName??>/${package.ModuleName}</#if>/${entity ?uncap_first}")
 public class ${table.controllerName} extends ${superControllerClass}  {
 
     private String prefix = "<#if package.ModuleName??>/${package.ModuleName}</#if>/${entity?uncap_first}/";

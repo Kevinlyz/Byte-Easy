@@ -36,10 +36,14 @@
 						<tbody>
 						<tr class="text-c" th:if="${r"${pageInfo.list.size()"} == 0}"><td colspan="15"><strong>暂无数据</strong></td></tr>
 						<tr class="text-c" th:each="${table.name},count:${r"${pageInfo.list}"}">
-							<td><input type="checkbox" value="1" th:value="${r"${"}${table.name}${r".id}"}" name="id"/></td>
+							<td><input type="checkbox" value="1" th:value="${r"${"}${table.name}.id}" name="id"/></td>
 							<td th:text="${r"${count.count}"}"></td>
 							<#list table.fields as field >
-							<td th:text="${r"${"}${table.name}${r"."}${field.propertyName}}"></td>
+                                <#if field.type == 'datetime'>
+                                    <td th:text="${r"$"}{#dates.format(${table.name}.${field.propertyName}, 'yyyy-MM-dd HH:mm:ss')}"></td>
+                                <#else>
+                                    <td th:text="${r"$"}{${table.name}.${field.propertyName}}"></td>
+                                </#if>
 							</#list>
 							<td class="td-manage">
 								<a title="编辑" href="javascript:;" th:onclick="'javascript:layer_show(\'编辑\',\'/admin/'+'${table.name}'+'/editBefore/'+${r"${"}test${r".id}"}+'\',800,300)'" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6df;</i></a>

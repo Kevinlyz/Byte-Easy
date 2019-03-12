@@ -6,26 +6,12 @@
 <body>
 <article class="page-container">
 	<form class="form form-horizontal"  id="form-test-add" action="#" th:action="@{/admin/test/add}">
-        <div class="row cl">
-            <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>名字：</label>
-            <div class="formControls col-xs-5 col-sm-5">
-                    <input type="text" class="input-text"   name="name" id="name"/>
-            </div>
-        </div>
-        <div class="row cl">
-            <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>创建时间：</label>
-            <div class="formControls col-xs-5 col-sm-5">
-                     <input type="input-text" class="input-text Wdate" onfocus="WdatePicker({el:$dp.$('startupDate'),dateFmt:'yyyy-MM-dd HH:mm:ss'})" readonly="readonly"
-                            autocomplete="off" value="" name="createTime" placeholder="请选择创建时间"/>
-            </div>
-        </div>
-        <div class="row cl">
-            <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>更新时间：</label>
-            <div class="formControls col-xs-5 col-sm-5">
-                     <input type="input-text" class="input-text Wdate" onfocus="WdatePicker({el:$dp.$('startupDate'),dateFmt:'yyyy-MM-dd HH:mm:ss'})" readonly="readonly"
-                            autocomplete="off" value="" name="updateTime" placeholder="请选择更新时间"/>
-            </div>
-        </div>
+	<div class="row cl">
+		<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>名字：</label>
+		<div class="formControls col-xs-5 col-sm-5">
+			<input type="text" class="input-text"   name="name" id="name"/>
+		</div>
+	</div>
 	<div class="row cl">
 	<div class="col-xs-3 col-sm-3 col-xs-offset-4 col-sm-offset-3">
 		<input class="btn btn-primary radius" id="subbtn" type="submit" value="&nbsp;&nbsp;提交&nbsp;&nbsp;"/>
@@ -44,15 +30,9 @@
  $(function(){
 	$("#form-test-add").validate({
 		rules:{
-            name:{
+			name:{
 				required:true,
-			},
-            createTime:{
-				required:true,
-			},
-            updateTime:{
-				required:true,
-			},
+			}
 		},
 		onkeyup:false,
 		debug: true,
