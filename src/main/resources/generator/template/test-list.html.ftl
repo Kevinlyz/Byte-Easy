@@ -40,7 +40,7 @@
 							<td th:text="${r"${count.count}"}"></td>
 							<#list table.fields as field >
                                 <#if field.type == 'datetime'>
-                                    <td th:text="${r"$"}{#dates.format(${table.name}.${field.propertyName}, 'yyyy-MM-dd HH:mm:ss')}"></td>
+                                    <td th:text="${r"$"}{#temporals.format(${table.name}.${field.propertyName}, 'yyyy-MM-dd HH:mm:ss')}"></td>
                                 <#else>
                                     <td th:text="${r"$"}{${table.name}.${field.propertyName}}"></td>
                                 </#if>

@@ -13,7 +13,7 @@
         <div class="formControls col-xs-5 col-sm-5">
             <#if field.type == 'datetime'>
                      <input type="input-text" class="input-text Wdate" onfocus="WdatePicker({el:$dp.$('startupDate'),dateFmt:'yyyy-MM-dd HH:mm:ss'})" readonly="readonly"
-                            autocomplete="off" th:value="${r"$"}{#dates.format(${table.name}.${field.propertyName}, 'yyyy-MM-dd HH:mm:ss')}" name="${field.propertyName}" placeholder="请选择${field.comment}"/>
+                            autocomplete="off" th:value="${r"$"}{#temporals.format(${table.name}.${field.propertyName}, 'yyyy-MM-dd HH:mm:ss')}" name="${field.propertyName}" placeholder="请选择${field.comment}"/>
             <#else>
                     <input type="text" class="input-text"  th:field="*{${field.propertyName}}" name="${field.propertyName}" id="${field.propertyName}"/>
             </#if>

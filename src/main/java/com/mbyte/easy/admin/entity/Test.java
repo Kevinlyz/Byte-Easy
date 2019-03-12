@@ -2,20 +2,17 @@ package com.mbyte.easy.admin.entity;
 
 import com.mbyte.easy.common.entity.BaseEntity;
 import java.time.LocalDateTime;
-import java.util.Date;
-
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
-import org.springframework.format.annotation.DateTimeFormat;
 
 /**
  * <p>
  * 
  * </p>
  *
- * @author 王震
- * @since 2019-03-11
+ * @author 黄润宣
+ * @since 2019-03-12
  */
 @Data
 @EqualsAndHashCode(callSuper = true)
@@ -24,11 +21,20 @@ public class Test extends BaseEntity {
 
     private static final long serialVersionUID = 1L;
 
+    /**
+     * 名字
+     */
     private String name;
-    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
-    private Date createTime;
-    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
-    private Date updateTime;
+
+    /**
+     * 创建时间
+     */
+    private LocalDateTime createTime;
+
+    /**
+     * 更新时间
+     */
+    private LocalDateTime updateTime;
 
 
 }
