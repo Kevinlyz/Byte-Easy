@@ -110,6 +110,7 @@ public class CodeGenerator {
         focList.add(new FileOutConfig("/generator/java/controller/controller.java.ftl") {
             @Override
             public String outputFile(TableInfo tableInfo) {
+                String expand = projectPath + File.separator + "expand" + File.separator + pc.getModuleName();
                 String entityFile = String.format((expand + File.separator + "%s" + ".java"), tableInfo.getControllerName());
                 return entityFile;
             }
@@ -118,7 +119,7 @@ public class CodeGenerator {
         focList.add(new FileOutConfig("/generator/template/test-list.html.ftl") {
             @Override
             public String outputFile(TableInfo tableInfo) {
-                String entityFile = String.format((expand + File.separator + "%s" + ".html"), pc.getModuleName() + "-list");
+                String entityFile = String.format((expand + File.separator + "%s" + ".html"), tableName + "-list");
                 return entityFile;
             }
         });
