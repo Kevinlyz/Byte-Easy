@@ -1,11 +1,14 @@
 package com.mbyte.easy.security.controller;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.mbyte.easy.entity.SysRole;
 import com.mbyte.easy.entity.SysUser;
 import com.mbyte.easy.entity.SysUserRoles;
 import com.mbyte.easy.mapper.SysRoleMapper;
 import com.mbyte.easy.mapper.SysUserMapper;
 import com.mbyte.easy.mapper.SysUserRolesMapper;
+import com.mbyte.easy.util.PageInfo;
 import com.mbyte.easy.util.Utility;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -60,29 +63,11 @@ public class UserController {
 			user.setUsername(name);
 			model.addAttribute("name", name.trim());
 		}
-//		PageHelper.startPage(pageNo, pageSize);
-//		List<SysUser> list = userMapper.selectByUser(user);
-//		for(int i = 0; i < list.size(); i++) {
-//			SysUser u = list.get(i);
-//			List<SysRole> roles = roleMapper.selectRolesByUserID(u.getId());
-//			u.setRoles(roles);
-//			list.set(i, u);
-//		}
-//		PageInfo<SysUser> pageInfo = new PageInfo<SysUser>(list);
-//		if (pageNo > pageInfo.getPages()) {
-//			pageNo = pageInfo.getPages();
-//			PageHelper.startPage(pageNo, pageSize);
-//			list =  userMapper.selectByUser(user);
-//			for(int i = 0; i < list.size(); i++) {
-//				SysUser u = list.get(i);
-//				List<SysRole> roles = roleMapper.selectRolesByUserID(u.getId());
-//				u.setRoles(roles);
-//				list.set(i, u);
-//			}
-//			pageInfo = new PageInfo<SysUser>(list);
-//		}
-//
-//		model.addAttribute("pageInfo", pageInfo);
+
+		Page<SysUser> page = new Page<SysUser>(pageNo, pageSize);
+		IPage<SysUser> pageInfo = userMapper.selectByUserForPage(page, name);
+
+		model.addAttribute("pageInfo", new PageInfo<SysUser>(pageInfo));
 		return "admin-list";
 	}
 
