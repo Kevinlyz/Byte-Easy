@@ -106,7 +106,7 @@ public class CodeGenerator {
         strategy.setColumnNaming(NamingStrategy.underline_to_camel);
         strategy.setSuperEntityClass("com.mbyte.easy.common.entity.BaseEntity");
         strategy.setEntityLombokModel(true);
-        strategy.setRestControllerStyle(true);
+        strategy.setRestControllerStyle(false);
         strategy.setSuperControllerClass("com.mbyte.easy.common.controller.BaseController");
         strategy.setInclude(scanner("表名"));
         strategy.setSuperEntityColumns("id");
