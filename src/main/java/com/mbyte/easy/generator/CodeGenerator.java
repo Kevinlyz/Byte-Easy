@@ -79,7 +79,25 @@ public class CodeGenerator {
                 this.setMap(map);
             }
         };
+
+        // 策略配置
+        StrategyConfig strategy = new StrategyConfig();
+        strategy.setNaming(NamingStrategy.underline_to_camel);
+        strategy.setColumnNaming(NamingStrategy.underline_to_camel);
+        strategy.setSuperEntityClass("com.mbyte.easy.common.entity.BaseEntity");
+        strategy.setEntityLombokModel(true);
+        strategy.setRestControllerStyle(false);
+        strategy.setSuperControllerClass("com.mbyte.easy.common.controller.BaseController");
+        String tableName = scanner("表名");
+        strategy.setInclude(tableName);
+        strategy.setSuperEntityColumns("id");
+        strategy.setControllerMappingHyphenStyle(true);
+        strategy.setTablePrefix(pc.getModuleName() + "_");
+
         List<FileOutConfig> focList = new ArrayList<>();
+
+        String expand = projectPath + File.separator + "expand" + File.separator + pc.getModuleName()+File.separator+tableName;
+
         focList.add(new FileOutConfig("/templates/mapper.xml.ftl") {
             @Override
             public String outputFile(TableInfo tableInfo) {
@@ -92,7 +110,6 @@ public class CodeGenerator {
         focList.add(new FileOutConfig("/generator/java/controller/controller.java.ftl") {
             @Override
             public String outputFile(TableInfo tableInfo) {
-                String expand = projectPath + "/" + "expand";
                 String entityFile = String.format((expand + File.separator + "%s" + ".java"), tableInfo.getControllerName());
                 return entityFile;
             }
@@ -101,7 +118,6 @@ public class CodeGenerator {
         focList.add(new FileOutConfig("/generator/template/test-list.html.ftl") {
             @Override
             public String outputFile(TableInfo tableInfo) {
-                String expand = projectPath + "/" + "expand";
                 String entityFile = String.format((expand + File.separator + "%s" + ".html"), pc.getModuleName() + "-list");
                 return entityFile;
             }
@@ -109,7 +125,6 @@ public class CodeGenerator {
         focList.add(new FileOutConfig("/generator/template/add.html.ftl") {
             @Override
             public String outputFile(TableInfo tableInfo) {
-                String expand = projectPath + "/" + "expand";
                 String entityFile = String.format((expand + File.separator + "%s" + ".html"), "add");
                 return entityFile;
             }
@@ -117,7 +132,6 @@ public class CodeGenerator {
         focList.add(new FileOutConfig("/generator/template/edit.html.ftl") {
             @Override
             public String outputFile(TableInfo tableInfo) {
-                String expand = projectPath + "/" + "expand";
                 String entityFile = String.format((expand + File.separator + "%s" + ".html"), "edit");
                 return entityFile;
             }
@@ -128,18 +142,7 @@ public class CodeGenerator {
         mpg.setCfg(cfg);
         mpg.setTemplate(new TemplateConfig().setXml(null));
 
-        // 策略配置
-        StrategyConfig strategy = new StrategyConfig();
-        strategy.setNaming(NamingStrategy.underline_to_camel);
-        strategy.setColumnNaming(NamingStrategy.underline_to_camel);
-        strategy.setSuperEntityClass("com.mbyte.easy.common.entity.BaseEntity");
-        strategy.setEntityLombokModel(true);
-        strategy.setRestControllerStyle(false);
-        strategy.setSuperControllerClass("com.mbyte.easy.common.controller.BaseController");
-        strategy.setInclude(scanner("表名"));
-        strategy.setSuperEntityColumns("id");
-        strategy.setControllerMappingHyphenStyle(true);
-        strategy.setTablePrefix(pc.getModuleName() + "_");
+
         mpg.setStrategy(strategy);
         mpg.setTemplateEngine(new FreemarkerTemplateEngine());
         mpg.execute();
