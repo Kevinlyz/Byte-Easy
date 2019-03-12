@@ -6,7 +6,7 @@
     <result column="available" jdbcType="BIT" property="available" />
     <result column="description" jdbcType="VARCHAR" property="description" />
     <result column="name" jdbcType="VARCHAR" property="name" />
-    <!--<collection property="resources"  column="id"   select="selectResourceByRoleId" />-->
+    <collection property="resources"  column="id"   select="selectResourceByRoleId" />
   </resultMap>
   <sql id="Base_Column_List">
     id, available, description, name
@@ -135,5 +135,16 @@
     from sys_role
     where  name = #{name} limit 1
   </select>
-  
+  <select id="selectByRoleForPage" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from sys_role
+    where 1 = 1
+    <if test="name != null and name != ''">
+      and name like "%"#{name}"%"
+    </if>
+
+
+  </select>
+
 </mapper>

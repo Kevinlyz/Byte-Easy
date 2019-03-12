@@ -76,8 +76,27 @@
         and parent_id = #{parentId}
     </if>
   </select>
-  
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    <select id="selectBySysResourceForPage" parameterType="com.mbyte.easy.entity.SysResource"  resultMap="BaseResultMap">
+      select
+      <include refid="Base_Column_List" />
+      from sys_resource
+      where  1=1
+      <if test="resource.available != null and resource.available != ''">
+        and available = #{resource.available}
+      </if>
+      <if test="resource.name != null and resource.name != ''">
+        and name like '%${resource.name}%'
+      </if>
+      <if test="resource.type != null ">
+        and type = #{resource.type}
+      </if>
+      <if test="resource.parentId != null ">
+        and parent_id = #{resource.parentId}
+      </if>
+
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     delete from sys_resource
     where id = #{id,jdbcType=BIGINT}
   </delete>

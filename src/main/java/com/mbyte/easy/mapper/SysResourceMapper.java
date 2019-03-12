@@ -1,6 +1,10 @@
 package com.mbyte.easy.mapper;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.mbyte.easy.entity.SysResource;
+import com.mbyte.easy.entity.SysRole;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -37,4 +41,12 @@ public interface SysResourceMapper {
     int updateByPrimaryKeySelective(SysResource record);
 
     int updateByPrimaryKey(SysResource record);
+
+    /**
+     * 分页查询数据
+     * @param page
+     * @param name
+     * @return
+     */
+    IPage<SysResource> selectBySysResourceForPage(Page page,  @Param("resource") SysResource resource);
 }

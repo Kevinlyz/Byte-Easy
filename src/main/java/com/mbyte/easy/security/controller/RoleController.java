@@ -1,5 +1,8 @@
 package com.mbyte.easy.security.controller;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.mbyte.easy.admin.entity.Test;
 import com.mbyte.easy.entity.SysResource;
 import com.mbyte.easy.entity.SysRole;
 import com.mbyte.easy.entity.SysRoleResources;
@@ -7,6 +10,7 @@ import com.mbyte.easy.mapper.SysResourceMapper;
 import com.mbyte.easy.mapper.SysRoleMapper;
 import com.mbyte.easy.mapper.SysRoleResourcesMapper;
 import com.mbyte.easy.mapper.SysUserRolesMapper;
+import com.mbyte.easy.util.PageInfo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,29 +64,11 @@ public class RoleController {
 			role.setName(name.trim());
 			model.addAttribute("name", name.trim());
 		}
-//		PageHelper.startPage(pageNo, pageSize);
-//		List<SysRole> list = roleMapper.selectByRole(role);
-//		//一个一个将角色资源列表加入
-//		for(int i = 0; i < list.size(); i++) {
-//			SysRole r = list.get(i);
-//			List<SysResource> resources = resourceMapper.selectResourceByRoleId(r.getId());
-//			r.setResources(resources);
-//			list.set(i, r);
-//		}
-//		PageInfo<SysRole> pageInfo = new PageInfo<SysRole>(list);
-//		if (pageNo > pageInfo.getPages()) {
-//			pageNo = pageInfo.getPages();
-//			PageHelper.startPage(pageNo, pageSize);
-//			list = roleMapper.selectByRole(role);
-//			for(int i = 0; i < list.size(); i++) {
-//				SysRole r = list.get(i);
-//				List<SysResource> resources = resourceMapper.selectResourceByRoleId(r.getId());
-//				r.setResources(resources);
-//				list.set(i, r);
-//			}
-//			pageInfo = new PageInfo<SysRole>(list);
-//		}
-//		model.addAttribute("pageInfo", pageInfo);
+		Page<SysRole> page = new Page<SysRole>(pageNo, pageSize);
+		IPage<SysRole> pageInfo = roleMapper.selectByRoleForPage(page, name);
+
+
+		model.addAttribute("pageInfo", new PageInfo<SysRole>(pageInfo));
 		return "admin-role";
 	}
 
