@@ -57,3 +57,73 @@ layer.designMsg = function(msg,icon,e,time) {
         // skin:'white_bg'
     },e);
 }
+
+/**
+ * 根据id删除
+ * @param url
+ */
+function deleteById(url){
+    layer.confirm('确认要删除吗？',function(index){
+        $.ajax({
+            type: 'GET',
+            url: url,
+            dataType: 'json',
+            success: function(data){
+                if(data.code == "0"){
+                    layer.designMsg('删除成功!',1,function(){
+                        window.location.reload();
+                    });
+                }else{
+                    layer.designMsg('删除失败!');
+                }
+            },
+            error:function() {
+                layer.designMsg('删除异常!',5);
+            },
+        });
+    });
+}
+
+/**
+ * 批量删除
+ * @param url
+ * @returns {boolean}
+ */
+function deleteAll(url){
+    var _list = new Array();
+    $('input[name="id"]:checked').each(
+        function (i) {
+            _list[i] = $(this).val();
+        });
+    if(_list.length == 0){
+        layer.msg("请选择删除的数据");
+        return false;
+    }
+    layer.confirm('确定要删除选中的全部数据吗？', {
+        btn : [ '确定', '取消' ]
+        // 按钮
+    }, function() {
+        $.ajax({
+            url:url,// 跳转到 action
+            data:JSON.stringify(_list),
+            type:'post',
+            cache:false,
+            dataType:'json',
+            contentType:"application/json",  //发送信息至服务器时内容编码类型。
+            success:function(data) {
+                if(data.code == "0"){
+                    layer.designMsg('删除成功!',1,function(){
+                        window.location.reload();
+                    });
+                }else{
+                    layer.designMsg('删除失败!');
+                }
+            },
+            error:function() {
+                layer.designMsg('删除异常!',5);
+            },
+        });
+    }, function() {
+
+    });
+}
