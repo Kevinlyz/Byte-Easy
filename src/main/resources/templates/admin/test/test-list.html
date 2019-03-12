@@ -1,35 +1,23 @@
 <!DOCTYPE HTML>
 <html  xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head th:include="_meta :: header">
-<title>类型列表</title>
+<title>列表</title>
 </head>
 <body>
-<!--<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 字典管理 <span class="c-gray en">&gt;</span>工程类型 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>-->
+<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span>XX管理 <span class="c-gray en">&gt;</span>XX模块<a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
 <div class="page-container">
 <form action="#" th:action="@{/admin/test}"  method="post">
-
 	<div class="layui-body">
 		<!-- 内容主体区域 -->
 			<fieldset class="layui-elem-field">
-				<legend>工程类型列表</legend>
+				<legend>XXX列表</legend>
 				<div class="layui-field-box">
-						<div class="search_condition">
-							<div class="layui-form-item ">
-								<div class="row">
-									<div class="col-xs-12 col-sm-3">
-										<input type="text" class="input-text wei-input"  placeholder="输入工程类型描述" id="" th:value="${description}" name="description"/>
-									</div>
-									<div class="col-xs-12 col-sm-2">
-										<button type="submit" class="layui-btn layui-btn-success radius " id="" name=""><i class="Hui-iconfont">&#xe665;</i> 搜工程类型</button>
-									</div>
-								</div>
-							</div>
-						</div>
+
 					<hr style="margin: 0">
 					<div class="cl pd-5 bg-1 bk-gray">
 						<span class="l">
-						<a href="javascript:;" th:onclick="'javascript:deleteAll(\''+@{/admin/test/deleteAll}+'\')'"  class="layui-btn  layui-btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i> 批量删除</a>
-						<a href="javascript:;" onclick="layer_show('添加','/admin/test/addBefore',800,300)" class="layui-btn  layui-btn-normal radius"><i class="Hui-iconfont">&#xe600;</i> 添加类型</a>
+						<a href="javascript:;" onclick="deleteAll('/admin/test/deleteAll')"  class="layui-btn  layui-btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i> 批量删除</a>
+						<a href="javascript:;" onclick="layer_show('添加','/admin/test/addBefore',800,300)" class="layui-btn  layui-btn-normal radius"><i class="Hui-iconfont">&#xe600;</i> 添加</a>
 						</span>
 						<span class="r wei-height">共有数据：<strong th:text="${pageInfo.total}"></strong> 条</span>
 					</div>
@@ -38,8 +26,10 @@
 						<thead>
 						<tr class="text-c">
 							<th width="25"><input type="checkbox" name="" value=""/></th>
-							<th width="40">编号</th>
-							<th width="150">名字</th>
+							<th width="25">序号</th>
+                            <th width="40">名字</th>
+                            <th width="40">创建时间</th>
+                            <th width="40">更新时间</th>
 							<th width="100">操作</th>
 						</tr>
 						</thead>
@@ -49,9 +39,11 @@
 							<td><input type="checkbox" value="1" th:value="${test.id}" name="id"/></td>
 							<td th:text="${count.count}"></td>
 							<td th:text="${test.name}"></td>
+							<td th:text="${test.createTime}"></td>
+							<td th:text="${test.updateTime}"></td>
 							<td class="td-manage">
-								<a title="编辑" href="javascript:;" th:onclick="'javascript:layer_show(\'编辑\',\'/admin/test/editBefore/'+${test.id}+'\',800,300)'" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6df;</i></a>
-								<a title="删除"    href="javascript:;" th:onclick="'javascript:deleteById(\'/admin/test/delete/'+${test.id}+'\')'" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6e2;</i></a>
+								<a title="编辑" href="javascript:;" th:onclick="'javascript:layer_show(\'编辑\',\'/admin/'+'test'+'/editBefore/'+${test.id}+'\',800,300)'" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6df;</i></a>
+								<a title="删除"    href="javascript:;" th:onclick="'javascript:deleteById(\'/admin/'+'test'+'/delete/'+${test.id}+'\')'" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6e2;</i></a>
 							</td>
 						</tr>
 						</tbody>
@@ -66,8 +58,5 @@
 <div th:replace="_footer :: footerjs">
 </div>
 <!--/_footer 作为公共模版分离出去-->
-<!--请在下方写此页面业务相关的脚本-->
-<script type="text/javascript">
- </script>
 </body>
 </html>
