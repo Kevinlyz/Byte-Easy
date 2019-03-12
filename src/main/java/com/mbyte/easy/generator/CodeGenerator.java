@@ -7,6 +7,7 @@ import com.baomidou.mybatisplus.generator.InjectionConfig;
 import com.baomidou.mybatisplus.generator.config.*;
 import com.baomidou.mybatisplus.generator.config.po.TableInfo;
 import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy;
+import com.baomidou.mybatisplus.generator.engine.FreemarkerTemplateEngine;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -77,20 +78,21 @@ public class CodeGenerator {
         };
 
         List<FileOutConfig> focList = new ArrayList<>();
-//        focList.add(new FileOutConfig("/templates/mapper.xml.ftl") {
-//            @Override
-//            public String outputFile(TableInfo tableInfo) {
-//                // 自定义Mapper.xml文件存放的路径
-//                return projectPath + "/src/main/resources/mybatis/mapper/"
-//                        + tableInfo.getEntityName() + "Mapper" + StringPool.DOT_XML;
-//            }
-//        });
 
         focList.add(new FileOutConfig("/generator/java.controller/controller.java.vm") {
             @Override
             public String outputFile(TableInfo tableInfo) {
                 String expand = projectPath + "/" + "expand";
                 String entityFile = String.format((expand + File.separator + "%s" + ".java"), tableInfo.getControllerName());
+                return entityFile;
+            }
+        });
+
+        focList.add(new FileOutConfig("/generator/template/test-list.html.mv") {
+            @Override
+            public String outputFile(TableInfo tableInfo) {
+                String expand = projectPath + "/" + "expand";
+                String entityFile = String.format((expand + File.separator + "%s" + ".html"), tableInfo.getControllerName());
                 return entityFile;
             }
         });
@@ -113,7 +115,7 @@ public class CodeGenerator {
         strategy.setControllerMappingHyphenStyle(true);
         strategy.setTablePrefix(pc.getModuleName() + "_");
         mpg.setStrategy(strategy);
-//        mpg.setTemplateEngine(new FreemarkerTemplateEngine());
+        mpg.setTemplateEngine(new FreemarkerTemplateEngine());
         mpg.execute();
     }
 

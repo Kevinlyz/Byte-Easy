@@ -1,0 +1,114 @@
+<!DOCTYPE HTML>
+<html  xmlns:th="http://www.thymeleaf.org">
+<head th:include="_meta :: header">
+<title>编辑通告 </title>
+</head>
+<body>
+<style>
+	#remarks{
+		height:5em;
+	}
+	select{
+		height:2.6em;
+		width:24.3em;
+		border: solid 1px #ddd;
+	}
+	#reset{
+		margin-left:10px;
+	}
+</style>
+<article class="page-container">
+	<form class="form form-horizontal" id="form-purchase-updateOrder" action="#" th:action="@{/admin/advertLocation/addMessage}">
+	<div class="row cl">
+		<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>位置编号：</label>
+		<div class="formControls col-xs-5 col-sm-5">
+			<input type="text" class="input-text"   name="code" id="code"/>
+		</div>
+	</div>
+	<div class="row cl">
+		<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>广告位置：</label>
+		<div class="formControls col-xs-5 col-sm-5">
+			<input type="text" class="input-text"   name="description" id="description"/>
+		</div>
+	</div>
+		<div class="row cl">
+		<div class="col-xs-3 col-sm-3 col-xs-offset-4 col-sm-offset-3">
+			<input class="btn btn-primary radius" id="subbtn" type="submit" value="&nbsp;&nbsp;提交&nbsp;&nbsp;"/>
+			<input class="btn radius" id="reset" type="button" value="&nbsp;&nbsp;重置&nbsp;&nbsp;"/>
+		</div> 
+	</div>
+	</form>
+</article>
+
+<!--_footer 作为公共模版分离出去--> 
+<div th:replace="_footer :: footerjs"></div>
+ <!--/_footer 作为公共模版分离出去-->
+
+<!--请在下方写此页面业务相关的脚本-->
+<script type="text/javascript" th:src="@{/lib/jquery.validation/1.14.0/jquery.validate.js}" src="lib/jquery.validation/1.14.0/jquery.validate.js"></script> 
+<script type="text/javascript" th:src="@{/lib/jquery.validation/1.14.0/validate-methods.js}" src="lib/jquery.validation/1.14.0/validate-methods.js"></script> 
+<script type="text/javascript" th:src="@{/lib/jquery.validation/1.14.0/messages_zh.js}"  src="lib/jquery.validation/1.14.0/messages_zh.js"></script> 
+<script type="text/javascript" th:src="@{/lib/My97DatePicker/4.8/WdatePicker.js}"  src="lib/My97DatePicker/4.8/WdatePicker.js"></script>
+
+
+<script>
+ $(function(){
+	 
+	$("#form-purchase-updateOrder").validate({
+		rules:{
+			code:{
+				required:true,
+				digits:true,
+			},
+			description:{
+				required:true,
+			}
+		},
+		onkeyup:false,
+		debug: true,
+		success:"valid",
+		submitHandler:function(form){
+				$(form).ajaxSubmit({
+				type: 'POST',
+				url: "/admin/advertLocation/addAdvert" ,
+				success: function(data){
+					if(data.code == "000000"){
+						//禁止重复提交
+						$('#subbtn').attr("type","button");
+						layer.msg('发布成功!',{icon:1,time:1000},function(){
+							var index = parent.layer.getFrameIndex(window.name);
+							parent.location.reload();
+							parent.layer.close(index); 
+						});
+					}else{
+						layer.msg('发布失败!请重试',{icon:5,time:1000});
+					}
+				},
+                error: function(XmlHttpRequest, textStatus, errorThrown){
+					layer.msg('error!',{icon:5,time:1000});
+				}
+			});
+		}
+	});
+}); 
+
+
+
+//重置按钮
+$('#reset').on('click',function(){
+	$('.input-text').val("");
+	$('.text-input').prop('selectedIndex', 0);
+	$("#send").css('display','none');
+
+	$("#isallTrue").prop('checked',true);
+	$("#isallTrue").prop('checked',true);
+	var editorBox = UE.getEditor('editor');
+	editorBox.setContent('');
+});
+
+
+
+</script> 
+<!--/请在上方写此页面业务相关的脚本-->
+</body>
+</html>

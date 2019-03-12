@@ -11,6 +11,7 @@ import com.mbyte.easy.util.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -29,6 +30,15 @@ public class TestController extends BaseController {
     @Autowired
     private ITestService testService;
 
+    /**
+     * 查询列表
+     *
+     * @param model
+     * @param pageNo
+     * @param pageSize
+     * @param test
+     * @return
+     */
     @RequestMapping
     public String index(Model model, @RequestParam(value = "pageNo", required = false, defaultValue = "1") Integer pageNo,
                         @RequestParam(value = "pageSize", required = false, defaultValue = "20") Integer pageSize, Test test) {
@@ -43,5 +53,22 @@ public class TestController extends BaseController {
         return "admin/test/test-list";
 
     }
+
+
+    /**
+     * 添加
+     * @param model
+     * @param test
+     * @return
+     */
+    @RequestMapping(value = "/addTest")
+    public String addTestBefore(Model model, @ModelAttribute Test test) {
+
+
+
+        return "admin/test/test-add";
+    }
+
+
 }
 
