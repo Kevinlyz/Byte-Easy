@@ -26,37 +26,38 @@
 					<table class="layui-table text-c">
 						<thead>
 						<tr class="text-c">
-FreeMarker template error (DEBUG mode; use RETHROW in production!):
-The following has evaluated to null or missing:
-==> $table  [in template "generator/template/test-list.html.mv" at line 29, column 35]
+                            <th width="40"></th>
+                            <th width="40"></th>
+                            <th width="40"></th>
+                            <th width="40"></th>
+                            <th width="40"></th>
+                            <th width="40"></th>
+                            <th width="40"></th>
+                            <th width="40">性别(0.男,1.女)</th>
+							<th width="100">操作</th>
+						</tr>
+						</thead>
+						<tbody>
 
-----
-Tip: Variable references must not start with "$", unless the "$" is really part of the variable name.
-----
-Tip: If the failing expression is known to legally refer to something that's sometimes null or missing, either specify a default value like myOptionalVar!myDefault, or use <#if myOptionalVar??>when-present<#else>when-missing</#if>. (These only cover the last step of the expression; to cover the whole expression, use parenthesis: (myOptionalVar.foo)!myDefault, (myOptionalVar.foo)??
-----
+						<tr class="text-c" th:if="${pageInfo.list.size()} == 0}"><td colspan="15"><strong>暂无数据</strong></td></tr>
 
-----
-FTL stack trace ("~" means nesting-related):
-	- Failed at: #list $table.fields as $field  [in template "generator/template/test-list.html.mv" at line 29, column 28]
-----
+						</tbody>
+					</table>
+				</div>
+			</fieldset>
+		</div>
+	<div th:include="_pagination :: page"></div>
+	</form>
+</div>
+<!--_footer 作为公共模版分离出去-->
+<div th:replace="_footer :: footerjs">
+</div>
+<!--/_footer 作为公共模版分离出去-->
 
-Java stack trace (for programmers):
-----
-freemarker.core.InvalidReferenceException: [... Exception message was already printed; see it above ...]
-	at freemarker.core.InvalidReferenceException.getInstance(InvalidReferenceException.java:134)
-	at freemarker.core.UnexpectedTypeException.newDesciptionBuilder(UnexpectedTypeException.java:85)
-	at freemarker.core.UnexpectedTypeException.<init>(UnexpectedTypeException.java:48)
-	at freemarker.core.NonHashException.<init>(NonHashException.java:49)
-	at freemarker.core.Dot._eval(Dot.java:48)
-	at freemarker.core.Expression.eval(Expression.java:83)
-	at freemarker.core.IteratorBlock.acceptWithResult(IteratorBlock.java:98)
-	at freemarker.core.IteratorBlock.accept(IteratorBlock.java:93)
-	at freemarker.core.Environment.visit(Environment.java:330)
-	at freemarker.core.Environment.visit(Environment.java:336)
-	at freemarker.core.Environment.process(Environment.java:309)
-	at freemarker.template.Template.process(Template.java:384)
-	at com.baomidou.mybatisplus.generator.engine.FreemarkerTemplateEngine.writer(FreemarkerTemplateEngine.java:52)
-	at com.baomidou.mybatisplus.generator.engine.AbstractTemplateEngine.batchOutput(AbstractTemplateEngine.java:86)
-	at com.baomidou.mybatisplus.generator.AutoGenerator.execute(AutoGenerator.java:102)
-	at com.mbyte.easy.generator.CodeGenerator.main(CodeGenerator.java:119)
+<!--请在下方写此页面业务相关的脚本-->
+<script type="text/javascript" th:src="@{/lib/My97DatePicker/4.8/WdatePicker.js}" src="lib/My97DatePicker/4.8/WdatePicker.js"></script>
+<script type="text/javascript" th:src="@{/lib/datatables/1.10.0/jquery.dataTables.min.js}" src="lib/datatables/1.10.0/jquery.dataTables.min.js"></script>
+<script type="text/javascript" th:src="@{/lib/laypage/1.2/laypage.js}" src="lib/laypage/1.2/laypage.js"></script>
+
+</body>
+</html>

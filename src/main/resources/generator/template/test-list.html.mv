@@ -26,8 +26,8 @@
 					<table class="layui-table text-c">
 						<thead>
 						<tr class="text-c">
-                           <#list $table.fields as $field >
-                            <th width="40">${field.name}</th>
+                           <#list table.fields as field >
+                            <th width="40">${field.comment}</th>
                            </#list>
 							<th width="100">操作</th>
 						</tr>

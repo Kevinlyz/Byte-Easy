@@ -79,10 +79,10 @@ public class CodeGenerator {
 
         List<FileOutConfig> focList = new ArrayList<>();
 
-        focList.add(new FileOutConfig("/generator/java.controller/controller.java.vm") {
+        focList.add(new FileOutConfig("/generator/java/controller/controller.java.vm") {
             @Override
             public String outputFile(TableInfo tableInfo) {
-                String expand = projectPath + "/" + "expand";
+                String expand = gc.getOutputDir() + File.separator + pc.get+ File.separator +  pc.getModuleName() + File.separator +  "controller";
                 String entityFile = String.format((expand + File.separator + "%s" + ".java"), tableInfo.getControllerName());
                 return entityFile;
             }
