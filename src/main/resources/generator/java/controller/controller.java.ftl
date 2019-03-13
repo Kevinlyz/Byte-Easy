@@ -33,7 +33,7 @@ import java.util.List;
 @RequestMapping("<#if package.ModuleName??>/${package.ModuleName}</#if>/${entity ?uncap_first}")
 public class ${table.controllerName} extends ${superControllerClass}  {
 
-    private String prefix = "<#if package.ModuleName??>/${package.ModuleName}</#if>/${entity?uncap_first}/";
+    private String prefix = "<#if package.ModuleName??>${package.ModuleName}</#if>/${entity?uncap_first}/";
 
     @Autowired
     private ${table.serviceName} ${entity?uncap_first}Service;
@@ -71,7 +71,7 @@ public class ${table.controllerName} extends ${superControllerClass}  {
     }
     /**
      * 添加
-     * @param test
+     * @param ${entity?uncap_first}
      * @return
      */
     @PostMapping("add")
@@ -90,7 +90,7 @@ public class ${table.controllerName} extends ${superControllerClass}  {
     }
     /**
      * 添加
-     * @param test
+     * @param ${entity?uncap_first}
      * @return
      */
     @PostMapping("edit")

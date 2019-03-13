@@ -5,32 +5,43 @@
 </head>
 <body>
 <article class="page-container">
-	<form class="form form-horizontal"  id="form-test-edit" action="#" th:action="@{/admin/test/edit}" th:object="${test}">
-    <input type="hidden" name="id" th:value="${test.id}"/>
+	<form class="form form-horizontal"  id="form-person-edit" action="#" th:action="@{/admin/person/edit}" th:object="${person}">
+    <input type="hidden" name="id" th:value="${person.id}"/>
     <div class="row cl">
-        <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>名字：</label>
+        <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>姓名：</label>
         <div class="formControls col-xs-5 col-sm-5">
                     <input type="text" class="input-text"  th:field="*{name}" name="name" id="name"/>
+        </div>
+    </div>
+    <div class="row cl">
+        <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>身份证号：</label>
+        <div class="formControls col-xs-5 col-sm-5">
+                    <input type="text" class="input-text"  th:field="*{idCard}" name="idCard" id="idCard"/>
+        </div>
+    </div>
+    <div class="row cl">
+        <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>编号：</label>
+        <div class="formControls col-xs-5 col-sm-5">
+                    <input type="text" class="input-text"  th:field="*{code}" name="code" id="code"/>
         </div>
     </div>
     <div class="row cl">
         <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>创建时间：</label>
         <div class="formControls col-xs-5 col-sm-5">
                      <input type="input-text" class="input-text Wdate" onfocus="WdatePicker({el:$dp.$('startupDate'),dateFmt:'yyyy-MM-dd HH:mm:ss'})" readonly="readonly"
-                            autocomplete="off" th:value="${#temporals.format(test.createTime, 'yyyy-MM-dd HH:mm:ss')}" name="createTime" placeholder="请选择创建时间"/>
+                            autocomplete="off" th:value="${#temporals.format(person.createTime, 'yyyy-MM-dd HH:mm:ss')}" name="createTime" placeholder="请选择创建时间"/>
         </div>
     </div>
     <div class="row cl">
         <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>更新时间：</label>
         <div class="formControls col-xs-5 col-sm-5">
                      <input type="input-text" class="input-text Wdate" onfocus="WdatePicker({el:$dp.$('startupDate'),dateFmt:'yyyy-MM-dd HH:mm:ss'})" readonly="readonly"
-                            autocomplete="off" th:value="${#temporals.format(test.updateTime, 'yyyy-MM-dd HH:mm:ss')}" name="updateTime" placeholder="请选择更新时间"/>
+                            autocomplete="off" th:value="${#temporals.format(person.updateTime, 'yyyy-MM-dd HH:mm:ss')}" name="updateTime" placeholder="请选择更新时间"/>
         </div>
     </div>
 	<div class="row cl">
 	<div class="col-xs-3 col-sm-3 col-xs-offset-4 col-sm-offset-3">
 		<input class="btn btn-primary radius" id="subbtn" type="submit" value="&nbsp;&nbsp;提交&nbsp;&nbsp;"/>
-		&nbsp;&nbsp;&nbsp;&nbsp;
 		<input class="btn radius" id="reset" type="reset" value="&nbsp;&nbsp;重置&nbsp;&nbsp;"/>
 	</div>
 	</div>
@@ -43,9 +54,15 @@
 <!--请在下方写此页面业务相关的脚本-->
 <script>
  $(function(){
-	$("#form-test-edit").validate({
+	$("#form-person-edit").validate({
 		rules:{
                  name:{
+                 required:true,
+             },
+                 idCard:{
+                 required:true,
+             },
+                 code:{
                  required:true,
              },
                  createTime:{
@@ -61,7 +78,7 @@
 		submitHandler:function(form){
 				$(form).ajaxSubmit({
 				type: 'POST',
-				url: "/admin/test/edit" ,
+				url: "/admin/person/edit" ,
 				success: function(data){
 					if(data.code == "0"){
 						layer.designMsg('编辑成功!',1,function(){

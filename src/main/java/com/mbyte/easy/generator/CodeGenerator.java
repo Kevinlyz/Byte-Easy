@@ -50,7 +50,7 @@ public class CodeGenerator {
         GlobalConfig gc = new GlobalConfig();
         String projectPath = System.getProperty("user.dir");
         gc.setOutputDir(projectPath + "/src/main/java");
-        gc.setAuthor("黄润宣");
+        gc.setAuthor("");
         gc.setOpen(false);
         mpg.setGlobalConfig(gc);
 
@@ -72,7 +72,12 @@ public class CodeGenerator {
         *                             t_
          * 忽略前缀配置 eg： t_test  ====> test
          */
-        String ignorePrefix = scanner("忽略前缀:");
+        String ignoreFlag = scanner("是否忽略指定前缀(1为是其它为否)");
+        String ignorePrefix = null;
+        if("1".equals(ignoreFlag.trim())){
+            ignorePrefix = scanner("前缀");
+        }
+
 
 
         // 包配置
@@ -103,14 +108,16 @@ public class CodeGenerator {
         strategy.setInclude(tableName);
         strategy.setSuperEntityColumns("id");
         strategy.setControllerMappingHyphenStyle(true);
-        strategy.setTablePrefix(pc.getModuleName() + "_");
+//        strategy.setTablePrefix(pc.getModuleName() + "_");
 
         List<FileOutConfig> focList = new ArrayList<>();
 
         //去除前缀
-        String tableNameNew = tableName.indexOf(ignorePrefix) != -1 ? tableName.substring(ignorePrefix.length()) : tableName;
+        if(StringUtils.isNotEmpty(ignorePrefix)){
+            strategy.setTablePrefix(ignorePrefix);
+        }
 
-        String expand = projectPath + File.separator + "expand" + File.separator + pc.getModuleName()+File.separator+tableNameNew;
+        String expand = projectPath + File.separator + "expand" + File.separator + pc.getModuleName()+File.separator;
 
         focList.add(new FileOutConfig("/templates/mapper.xml.ftl") {
             @Override
@@ -124,30 +131,31 @@ public class CodeGenerator {
         focList.add(new FileOutConfig("/generator/java/controller/controller.java.ftl") {
             @Override
             public String outputFile(TableInfo tableInfo) {
+                System.out.println("tableInfo:"+tableInfo);
                 String expand = projectPath + File.separator + "expand" + File.separator + pc.getModuleName();
                 String entityFile = String.format((expand + File.separator + "%s" + ".java"), tableInfo.getControllerName());
                 return entityFile;
             }
         });
 //
-        focList.add(new FileOutConfig("/generator/template/test-list.html.ftl") {
+        focList.add(new FileOutConfig("/generator/template/list.html.ftl") {
             @Override
             public String outputFile(TableInfo tableInfo) {
-                String entityFile = String.format((expand + File.separator + "%s" + ".html"), tableNameNew + "-list");
+                String entityFile = String.format((expand+File.separator+tableInfo.getEntityName().toLowerCase() + File.separator + "%s" + ".html"), tableInfo.getEntityName().toLowerCase() + "-list");
                 return entityFile;
             }
         });
         focList.add(new FileOutConfig("/generator/template/add.html.ftl") {
             @Override
             public String outputFile(TableInfo tableInfo) {
-                String entityFile = String.format((expand + File.separator + "%s" + ".html"), "add");
+                String entityFile = String.format((expand +File.separator+tableInfo.getEntityName().toLowerCase()+ File.separator + "%s" + ".html"), "add");
                 return entityFile;
             }
         });
         focList.add(new FileOutConfig("/generator/template/edit.html.ftl") {
             @Override
             public String outputFile(TableInfo tableInfo) {
-                String entityFile = String.format((expand + File.separator + "%s" + ".html"), "edit");
+                String entityFile = String.format((expand +File.separator+tableInfo.getEntityName().toLowerCase()+ File.separator + "%s" + ".html"), "edit");
                 return entityFile;
             }
         });

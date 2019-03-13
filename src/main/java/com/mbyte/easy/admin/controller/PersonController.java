@@ -1,10 +1,10 @@
-package com.mbyte.easy.sys.controller;
+package com.mbyte.easy.admin.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.mbyte.easy.sys.entity.User;
-import com.mbyte.easy.sys.service.IUserService;
+import com.mbyte.easy.admin.entity.Person;
+import com.mbyte.easy.admin.service.IPersonService;
 import com.mbyte.easy.common.controller.BaseController;
 import com.mbyte.easy.common.web.AjaxResult;
 import com.mbyte.easy.util.PageInfo;
@@ -24,13 +24,13 @@ import java.util.List;
  * @since 2019-03-11
  */
 @Controller
-@RequestMapping("/sys/user")
-public class UserController extends BaseController  {
+@RequestMapping("/admin/person")
+public class PersonController extends BaseController  {
 
-    private String prefix = "/sys/user/";
+    private String prefix = "admin/person/";
 
     @Autowired
-    private IUserService userService;
+    private IPersonService personService;
 
     /**
      * 查询列表
@@ -38,21 +38,21 @@ public class UserController extends BaseController  {
      * @param model
      * @param pageNo
      * @param pageSize
-     * @param user
+     * @param person
      * @return
      */
     @RequestMapping
     public String index(Model model, @RequestParam(value = "pageNo", required = false, defaultValue = "1") Integer pageNo,
-                        @RequestParam(value = "pageSize", required = false, defaultValue = "20") Integer pageSize, User user) {
+                        @RequestParam(value = "pageSize", required = false, defaultValue = "20") Integer pageSize, Person person) {
 
-        Page<User> page = new Page<User>(pageNo, pageSize);
-        QueryWrapper<User> queryWrapper = new QueryWrapper<User>();
+        Page<Person> page = new Page<Person>(pageNo, pageSize);
+        QueryWrapper<Person> queryWrapper = new QueryWrapper<Person>();
 //        queryWrapper.lambda()
 //                .eq(Test::getName, "1");
-        IPage<User> pageInfo = userService.page(page, queryWrapper);
+        IPage<Person> pageInfo = personService.page(page, queryWrapper);
 
         model.addAttribute("pageInfo", new PageInfo(pageInfo));
-        return prefix+"user-list";
+        return prefix+"person-list";
 
     }
     /**
@@ -65,13 +65,13 @@ public class UserController extends BaseController  {
     }
     /**
      * 添加
-     * @param test
+     * @param person
      * @return
      */
     @PostMapping("add")
     @ResponseBody
-    public AjaxResult add(User user){
-        return toAjax(userService.save(user));
+    public AjaxResult add(Person person){
+        return toAjax(personService.save(person));
     }
     /**
      * 添加跳转页面
@@ -79,18 +79,18 @@ public class UserController extends BaseController  {
      */
     @GetMapping("editBefore/{id}")
     public String editBefore(Model model,@PathVariable("id")Long id){
-        model.addAttribute("user",userService.getById(id));
+        model.addAttribute("person",personService.getById(id));
         return prefix+"edit";
     }
     /**
      * 添加
-     * @param test
+     * @param person
      * @return
      */
     @PostMapping("edit")
     @ResponseBody
-    public AjaxResult edit(User user){
-        return toAjax(userService.updateById(user));
+    public AjaxResult edit(Person person){
+        return toAjax(personService.updateById(person));
     }
     /**
      * 删除
@@ -100,7 +100,7 @@ public class UserController extends BaseController  {
     @GetMapping("delete/{id}")
     @ResponseBody
     public AjaxResult delete(@PathVariable("id") Long id){
-        return toAjax(userService.removeById(id));
+        return toAjax(personService.removeById(id));
     }
     /**
      * 批量删除
@@ -110,7 +110,7 @@ public class UserController extends BaseController  {
     @PostMapping("deleteAll")
     @ResponseBody
     public AjaxResult deleteAll(@RequestBody List<Long> ids){
-        return toAjax(userService.removeByIds(ids));
+        return toAjax(personService.removeByIds(ids));
     }
 
 }

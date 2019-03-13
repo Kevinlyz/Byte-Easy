@@ -5,7 +5,7 @@
 </head>
 <body>
 <article class="page-container">
-	<form class="form form-horizontal"  id="form-${table.name}-add" action="#" th:action="@{/${package.ModuleName}/${table.name}/add}">
+	<form class="form form-horizontal"  id="form-${entity?uncap_first}-add" action="#" th:action="@{/${package.ModuleName}/${entity?uncap_first}/add}">
     <#list table.fields as field >
         <div class="row cl">
             <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>${field.comment}：</label>
@@ -22,7 +22,6 @@
 	<div class="row cl">
 	<div class="col-xs-3 col-sm-3 col-xs-offset-4 col-sm-offset-3">
 		<input class="btn btn-primary radius" id="subbtn" type="submit" value="&nbsp;&nbsp;提交&nbsp;&nbsp;"/>
-		&nbsp;&nbsp;&nbsp;&nbsp;
 		<input class="btn radius" id="reset" type="reset" value="&nbsp;&nbsp;重置&nbsp;&nbsp;"/>
 	</div>
 	</div>
@@ -35,7 +34,7 @@
 <!--请在下方写此页面业务相关的脚本-->
 <script>
  $(function(){
-	$("#form-${table.name}-add").validate({
+	$("#form-${entity?uncap_first}-add").validate({
 		rules:{
 		    <#list table.fields as field >
             ${field.propertyName}:{
@@ -49,7 +48,7 @@
 		submitHandler:function(form){
 				$(form).ajaxSubmit({
 				type: 'POST',
-				url: "/${package.ModuleName}/${table.name}/add" ,
+				url: "/${package.ModuleName}/${entity?uncap_first}/add" ,
 				success: function(data){
 					if(data.code == "0"){
 						layer.designMsg('添加成功!',1,function(){
