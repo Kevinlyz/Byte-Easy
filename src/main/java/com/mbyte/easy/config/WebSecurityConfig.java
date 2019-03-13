@@ -59,8 +59,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {//.defaultSuccessUrl("/welcome")
 		http.authorizeRequests()
                 .antMatchers("/kaptcha/getKaptchaImage", "/druid/**").permitAll()
-                .antMatchers("/admin/**").authenticated().and()
-				.formLogin().loginPage("/admin/login").failureUrl("/admin/login?error").defaultSuccessUrl("/admin").permitAll()
+                .anyRequest().authenticated().and()
+				.formLogin().loginPage("/login").failureUrl("/login?error").defaultSuccessUrl("/").permitAll()
                 .authenticationDetailsSource(authenticationDetailsSource)
 				.and().headers().frameOptions().sameOrigin().contentTypeOptions().disable()
                 .and().rememberMe().rememberMeParameter("remember-me").tokenRepository(persistentTokenRepository()).tokenValiditySeconds(86400)
@@ -92,19 +92,19 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	 * 注册前台校验过滤器配置
 	 * @return
 	 */
-	@Bean
-	public FilterRegistrationBean filterRegistration() {
-		//注册过滤器
-		FilterRegistrationBean registration = new FilterRegistrationBean();
-		registration.setFilter(new FrontAuthFilter());
-		//添加过滤url-
-		List<String> urlList = new ArrayList<String>();
-		urlList.add("/center/*");
-		urlList.add("/myAccount/*");
-		registration.setUrlPatterns(urlList);
-		//配置参数
-		registration.setName("FrontAuthFilter");
-		registration.setOrder(2);
-		return registration;
-	}
+//	@Bean
+//	public FilterRegistrationBean filterRegistration() {
+//		//注册过滤器
+//		FilterRegistrationBean registration = new FilterRegistrationBean();
+////		registration.setFilter(new FrontAuthFilter());
+////		//添加过滤url-
+////		List<String> urlList = new ArrayList<String>();
+////		urlList.add("/center/*");
+////		urlList.add("/myAccount/*");
+////		registration.setUrlPatterns(urlList);
+////		//配置参数
+////		registration.setName("FrontAuthFilter");
+////		registration.setOrder(2);
+//		return registration;
+//	}
 }
