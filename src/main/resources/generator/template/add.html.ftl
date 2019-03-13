@@ -9,7 +9,7 @@
     <#list table.fields as field >
         <div class="row cl">
             <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>${field.comment}：</label>
-            <div class="formControls col-xs-5 col-sm-5">
+            <div class="formControls col-xs-7 col-sm-7">
                 <#if field.type == 'datetime'>
                      <input type="input-text" class="input-text Wdate" onfocus="WdatePicker({el:$dp.$('startupDate'),dateFmt:'yyyy-MM-dd HH:mm:ss'})" readonly="readonly"
                             autocomplete="off" value="" name="${field.propertyName}" placeholder="请选择${field.comment}"/>

@@ -141,21 +141,24 @@ public class CodeGenerator {
         focList.add(new FileOutConfig("/generator/template/list.html.ftl") {
             @Override
             public String outputFile(TableInfo tableInfo) {
-                String entityFile = String.format((expand+File.separator+tableInfo.getEntityName().toLowerCase() + File.separator + "%s" + ".html"), tableInfo.getEntityName().toLowerCase() + "-list");
+                String tableName = tableInfo.getEntityName().substring(0,1).toLowerCase()+ tableInfo.getEntityName().substring(1);
+                String entityFile = String.format((expand+File.separator+tableName + File.separator + "%s" + ".html"), tableName+ "-list");
                 return entityFile;
             }
         });
         focList.add(new FileOutConfig("/generator/template/add.html.ftl") {
             @Override
             public String outputFile(TableInfo tableInfo) {
-                String entityFile = String.format((expand +File.separator+tableInfo.getEntityName().toLowerCase()+ File.separator + "%s" + ".html"), "add");
+                String tableName = tableInfo.getEntityName().substring(0,1).toLowerCase()+ tableInfo.getEntityName().substring(1);
+                String entityFile = String.format((expand +File.separator+tableName+ File.separator + "%s" + ".html"), "add");
                 return entityFile;
             }
         });
         focList.add(new FileOutConfig("/generator/template/edit.html.ftl") {
             @Override
             public String outputFile(TableInfo tableInfo) {
-                String entityFile = String.format((expand +File.separator+tableInfo.getEntityName().toLowerCase()+ File.separator + "%s" + ".html"), "edit");
+                String tableName = tableInfo.getEntityName().substring(0,1).toLowerCase()+ tableInfo.getEntityName().substring(1);
+                String entityFile = String.format((expand +File.separator+tableName+ File.separator + "%s" + ".html"), "edit");
                 return entityFile;
             }
         });
