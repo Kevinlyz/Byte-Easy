@@ -62,10 +62,22 @@ public class CodeGenerator {
         dsc.setUsername("root");
         dsc.setPassword("itenscen2015");
         mpg.setDataSource(dsc);
+        /**
+         * 输入表名和模块名
+         */
+        String moduleName = scanner("模块名");
+        String tableName = scanner("表名");
+
+        /**
+        *                             t_
+         * 忽略前缀配置 eg： t_test  ====> test
+         */
+        String ignorePrefix = scanner("忽略前缀:");
+
 
         // 包配置
         PackageConfig pc = new PackageConfig();
-        pc.setModuleName(scanner("模块名"));
+        pc.setModuleName(moduleName);
         pc.setParent("com.mbyte.easy");
         mpg.setPackageInfo(pc);
 
@@ -88,7 +100,6 @@ public class CodeGenerator {
         strategy.setEntityLombokModel(true);
         strategy.setRestControllerStyle(false);
         strategy.setSuperControllerClass("com.mbyte.easy.common.controller.BaseController");
-        String tableName = scanner("表名");
         strategy.setInclude(tableName);
         strategy.setSuperEntityColumns("id");
         strategy.setControllerMappingHyphenStyle(true);
@@ -96,7 +107,10 @@ public class CodeGenerator {
 
         List<FileOutConfig> focList = new ArrayList<>();
 
-        String expand = projectPath + File.separator + "expand" + File.separator + pc.getModuleName()+File.separator+tableName;
+        //去除前缀
+        String tableNameNew = tableName.indexOf(ignorePrefix) != -1 ? tableName.substring(ignorePrefix.length()) : tableName;
+
+        String expand = projectPath + File.separator + "expand" + File.separator + pc.getModuleName()+File.separator+tableNameNew;
 
         focList.add(new FileOutConfig("/templates/mapper.xml.ftl") {
             @Override
@@ -119,7 +133,7 @@ public class CodeGenerator {
         focList.add(new FileOutConfig("/generator/template/test-list.html.ftl") {
             @Override
             public String outputFile(TableInfo tableInfo) {
-                String entityFile = String.format((expand + File.separator + "%s" + ".html"), tableName + "-list");
+                String entityFile = String.format((expand + File.separator + "%s" + ".html"), tableNameNew + "-list");
                 return entityFile;
             }
         });
@@ -133,7 +147,6 @@ public class CodeGenerator {
         focList.add(new FileOutConfig("/generator/template/edit.html.ftl") {
             @Override
             public String outputFile(TableInfo tableInfo) {
-                System.out.println("=============>tableINfo:"+tableInfo);
                 String entityFile = String.format((expand + File.separator + "%s" + ".html"), "edit");
                 return entityFile;
             }
@@ -149,5 +162,7 @@ public class CodeGenerator {
         mpg.setTemplateEngine(new FreemarkerTemplateEngine());
         mpg.execute();
     }
+
+
 
 }
