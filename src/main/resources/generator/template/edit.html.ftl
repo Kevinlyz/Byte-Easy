@@ -5,7 +5,7 @@
 </head>
 <body>
 <article class="page-container">
-	<form class="form form-horizontal"  id="form-${table.name}-edit" action="#" th:action="@{/admin/test/edit}" th:object="${r"$"}{${table.name}}">
+	<form class="form form-horizontal"  id="form-${table.name}-edit" action="#" th:action="@{/${package.ModuleName}/${table.name}/edit}" th:object="${r"$"}{${table.name}}">
     <input type="hidden" name="id" th:value="${r"$"}{${table.name}.id}"/>
     <#list table.fields as field >
     <div class="row cl">
@@ -50,7 +50,7 @@
 		submitHandler:function(form){
 				$(form).ajaxSubmit({
 				type: 'POST',
-				url: "/admin/${table.name}/edit" ,
+				url: "/${package.ModuleName}/${table.name}/edit" ,
 				success: function(data){
 					if(data.code == "0"){
 						layer.designMsg('编辑成功!',1,function(){

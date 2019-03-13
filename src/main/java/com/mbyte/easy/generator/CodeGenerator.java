@@ -133,6 +133,7 @@ public class CodeGenerator {
         focList.add(new FileOutConfig("/generator/template/edit.html.ftl") {
             @Override
             public String outputFile(TableInfo tableInfo) {
+                System.out.println("=============>tableINfo:"+tableInfo);
                 String entityFile = String.format((expand + File.separator + "%s" + ".html"), "edit");
                 return entityFile;
             }

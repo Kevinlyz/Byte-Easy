@@ -5,7 +5,7 @@
 </head>
 <body>
 <article class="page-container">
-	<form class="form form-horizontal"  id="form-${table.name}-add" action="#" th:action="@{/admin/${table.name}/add}">
+	<form class="form form-horizontal"  id="form-${table.name}-add" action="#" th:action="@{/${package.ModuleName}/${table.name}/add}">
     <#list table.fields as field >
         <div class="row cl">
             <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>${field.comment}：</label>
@@ -49,7 +49,7 @@
 		submitHandler:function(form){
 				$(form).ajaxSubmit({
 				type: 'POST',
-				url: "/admin/${table.name}/add" ,
+				url: "/${package.ModuleName}/${table.name}/add" ,
 				success: function(data){
 					if(data.code == "0"){
 						layer.designMsg('添加成功!',1,function(){
