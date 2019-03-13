@@ -9,14 +9,21 @@
     <#list table.fields as field >
         <div class="row cl">
             <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>${field.comment}：</label>
-            <div class="formControls col-xs-7 col-sm-7">
                 <#if field.type == 'datetime'>
-                     <input type="input-text" class="input-text Wdate" onfocus="WdatePicker({el:$dp.$('startupDate'),dateFmt:'yyyy-MM-dd HH:mm:ss'})" readonly="readonly"
-                            autocomplete="off" value="" name="${field.propertyName}" placeholder="请选择${field.comment}"/>
+                     <div class="formControls col-xs-7 col-sm-7">
+                         <input type="input-text" class="input-text Wdate" onfocus="WdatePicker({el:$dp.$('startupDate'),dateFmt:'yyyy-MM-dd HH:mm:ss'})" readonly="readonly"
+                                autocomplete="off" value="" name="${field.propertyName}" placeholder="请选择${field.comment}"/>
+                     </div>
+				<#elseif field.type == 'text'>
+                    <div class="formControls col-xs-7 col-sm-7" style="height: 600px;border: 0;    margin-left: -10px;">
+                        <script id="editor" name="${field.propertyName}"  autofocus type="text/plain" class="input-text"  style="height:500px;border:0;">
+                        </script>
+                    </div>
                 <#else>
-                    <input type="text" class="input-text"   name="${field.propertyName}" id="${field.propertyName}"/>
+                    <div class="formControls col-xs-7 col-sm-7">
+                        <input type="text" class="input-text"   name="${field.propertyName}" id="${field.propertyName}"/>
+                    </div>
                 </#if>
-            </div>
         </div>
     </#list>
 	<div class="row cl">
@@ -27,6 +34,8 @@
 	</div>
 	</form>
 </article>
+
+<div th:replace="_ueditor :: ueditor"></div>
 
 <!--_footer 作为公共模版分离出去--> 
 <div th:replace="_footer :: footerjs"></div>

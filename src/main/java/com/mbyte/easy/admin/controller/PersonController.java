@@ -113,5 +113,11 @@ public class PersonController extends BaseController  {
         return toAjax(personService.removeByIds(ids));
     }
 
+
+    @RequestMapping("/test111")
+    public String tototo(){
+        return prefix+"add1";
+    }
+
 }
 
