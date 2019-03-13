@@ -21,7 +21,7 @@ import java.util.*;
  * @author 王震
  * @since 2019-03-11
  */
-public class CodeGenerator {
+public class    CodeGenerator {
 
     /**
      * <p>

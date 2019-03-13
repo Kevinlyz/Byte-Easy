@@ -1,0 +1,120 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head th:include="_meta :: header">
+    <title>列表</title>
+    <style>
+        .searchByField {
+            display: flex;
+        }
+    </style>
+</head>
+<body>
+<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span>XX管理 <span
+            class="c-gray en">&gt;</span>XX模块<a class="btn btn-success radius r"
+                                                style="line-height:1.6em;margin-top:3px"
+                                                href="javascript:location.replace(location.href);" title="刷新"><i
+                class="Hui-iconfont">&#xe68f;</i></a></nav>
+<div class="page-container">
+    <form action="#" th:action="@{/admin/fu}" method="post">
+        <div class="layui-body">
+            <!-- 内容主体区域 -->
+            <fieldset class="layui-elem-field">
+                <legend>XXX列表</legend>
+                <div class="layui-field-box">
+
+                    <hr style="margin: 0">
+                    <div class="cl pd-5 bg-1 bk-gray">
+						<span class="l">
+						<a href="javascript:;"
+                           onclick="deleteAll('/admin/fu/deleteAll')"
+                           class="layui-btn  layui-btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i> 批量删除</a>
+						<a href="javascript:;"
+                           onclick="layer_show('添加','/admin/fu/addBefore',800,400)"
+                           class="layui-btn  layui-btn-normal radius"><i class="Hui-iconfont">&#xe600;</i> 添加</a>
+						</span>
+                        <span class="r wei-height">共有数据：<strong th:text="${pageInfo.total}"></strong> 条</span>
+                    </div>
+                    <hr>
+
+                    <div class="cl pd-5 bg-1 bk-gray searchByField">
+                        <form action="/admin/fu">
+
+                                    <span width="40">
+                                <label>搜索名字</label>
+                                        <input type="text" class="input-text"
+                                               name="name" placeholder="搜索名字" id="name"/>
+                                </span>
+
+
+
+                                    <span width="40">
+                                <label>搜索密码</label>
+                                        <input type="text" class="input-text"
+                                               name="password" placeholder="搜索密码" id="password"/>
+                                </span>
+
+                                    <span width="40">
+                                <label>搜索最终登录时间</label>
+                     <input type="input-text" class="input-text Wdate"
+                            onfocus="WdatePicker({el:$dp.$('startupDate'),dateFmt:'yyyy-MM-dd HH:mm:ss'})"
+                            readonly="readonly"
+                            autocomplete="off"
+                            th:value="${#temporals.format(fu.loginTime, 'yyyy-MM-dd HH:mm:ss')}"
+                            name="login_time" placeholder="请选择最终登录时间"/>
+                                </span>
+                            <button type="submit"
+                                    class="layui-btn  layui-btn-normal radius"><i
+                                        class="Hui-iconfont">&#xe665;</i> 搜索
+                            </button>
+                        </form>
+                    </div>
+
+                    <table class="layui-table text-c">
+                        <thead>
+                        <tr class="text-c">
+                            <th width="25"><input type="checkbox" name="" value=""/></th>
+                            <th width="25">序号</th>
+                                <th width="40">名字</th>
+                                <th width="40">创建时间</th>
+                                <th width="40">更新时间</th>
+                                <th width="40">密码</th>
+                                <th width="40">最终登录时间</th>
+                            <th width="100">操作</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr class="text-c" th:if="${pageInfo.list.size() == 0}">
+                            <td colspan="15"><strong>暂无数据</strong></td>
+                        </tr>
+                        <tr class="text-c" th:each="fu,count:${pageInfo.list}">
+                            <td><input type="checkbox" value="1" th:value="${fu.id}"
+                                       name="id"/></td>
+                            <td th:text="${count.count}"></td>
+                                    <td th:text="${fu.name}"></td>
+                                    <td th:text="${#temporals.format(fu.createTime, 'yyyy-MM-dd HH:mm:ss')}"></td>
+                                    <td th:text="${#temporals.format(fu.updateTime, 'yyyy-MM-dd HH:mm:ss')}"></td>
+                                    <td th:text="${fu.password}"></td>
+                                    <td th:text="${#temporals.format(fu.loginTime, 'yyyy-MM-dd HH:mm:ss')}"></td>
+                            <td class="td-manage">
+                                <a title="编辑" href="javascript:;"
+                                   th:onclick="'javascript:layer_show(\'编辑\',\'/admin/'+'fu'+'/editBefore/'+${fu.id}+'\',800,400)'"
+                                   class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6df;</i></a>
+                                <a title="删除" href="javascript:;"
+                                   th:onclick="'javascript:deleteById(\'/admin/'+'fu'+'/delete/'+${fu.id}+'\')'"
+                                   class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6e2;</i></a>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </fieldset>
+        </div>
+        <div th:include="_pagination :: page"></div>
+    </form>
+</div>
+<!--_footer 作为公共模版分离出去-->
+<div th:replace="_footer :: footerjs">
+</div>
+<!--/_footer 作为公共模版分离出去-->
+</body>
+</html>

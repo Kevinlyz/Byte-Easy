@@ -127,3 +127,4 @@ function deleteAll(url){
 
     });
 }
+
