@@ -18,9 +18,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 </#if>
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
-
+import java.time.format.DateTimeFormatter;
+import java.time.LocalDateTime;
+<#function dashedToCamel(s)>
+    <#return s
+    ?replace('(^_+)|(_+$)', '', 'r')
+    ?replace('\\_+(\\w)?', ' $1', 'r')
+    ?replace('([A-Z])', ' $1', 'r')
+    ?capitalize
+    ?replace(' ' , '')
+    ?uncap_first
+    >
+</#function>
 /**
 * <p>
     * 前端控制器
@@ -50,7 +60,15 @@ private ${table.serviceName} ${entity?uncap_first}Service;
 */
 @RequestMapping
 public String index(Model model, @RequestParam(value = "pageNo", required = false, defaultValue = "1") Integer pageNo,
-@RequestParam(value = "pageSize", required = false, defaultValue = "20") Integer pageSize, ${entity} ${entity?uncap_first}) {
+@RequestParam(value = "pageSize", required = false, defaultValue = "20") Integer pageSize
+<#list table.fields as field >
+    <#if (field.name != "id" && field.name != "create_time" && field.name != "update_time") >
+        <#if (field.type == "datetime") >
+            , String ${field.name}Space
+        </#if>
+    </#if>
+</#list>, ${entity} ${entity?uncap_first}
+) {
 
 Page<${entity}> page = new Page<${entity}>(pageNo, pageSize);
 QueryWrapper<${entity}> queryWrapper = new QueryWrapper<${entity}>();
@@ -59,9 +77,11 @@ QueryWrapper<${entity}> queryWrapper = new QueryWrapper<${entity}>();
 <#list table.fields as field >
     <#if (field.name != "id" && field.name != "create_time" && field.name != "update_time") >
         <#if (field.type == "datetime") >
-            if(DateUtils.
+            if (!StringUtils.isBlank(${field.name}Space))
+            queryWrapper = queryWrapper.between("${field.name}", LocalDateTime.parse(${field.name}Space.split(" - ")[0],DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")), LocalDateTime.parse(${field.name}Space.split(" - ")[1],DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
+        <#else>
+            if(!StringUtils.isBlank(${entity?uncap_first}.get${field.name?cap_first}())) queryWrapper = queryWrapper.like("${field.name}",${entity?uncap_first}.get${field.name?cap_first}());
         </#if>
-        if(!StringUtils.isBlank(${entity?uncap_first}.get${field.name?cap_first}())) queryWrapper = queryWrapper.like("${field.name}",${entity?uncap_first}.get${field.name?cap_first}());
     </#if>
 </#list>
 

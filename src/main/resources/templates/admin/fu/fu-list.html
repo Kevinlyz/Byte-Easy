@@ -2,11 +2,6 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head th:include="_meta :: header">
     <title>列表</title>
-    <style>
-        .searchByField {
-            display: flex;
-        }
-    </style>
 </head>
 <body>
 <nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span>XX管理 <span
@@ -36,37 +31,20 @@
                     </div>
                     <hr>
 
-                    <div class="cl pd-5 bg-1 bk-gray searchByField">
-                        <form action="/admin/fu">
-
-                                    <span width="40">
-                                <label>搜索名字</label>
-                                        <input type="text" class="input-text"
-                                               name="name" placeholder="搜索名字" id="name"/>
-                                </span>
-
-
-
-                                    <span width="40">
-                                <label>搜索密码</label>
-                                        <input type="text" class="input-text"
-                                               name="password" placeholder="搜索密码" id="password"/>
-                                </span>
-
-                                    <span width="40">
-                                <label>搜索最终登录时间</label>
-                     <input type="input-text" class="input-text Wdate"
-                            onfocus="WdatePicker({el:$dp.$('startupDate'),dateFmt:'yyyy-MM-dd HH:mm:ss'})"
-                            readonly="readonly"
-                            autocomplete="off"
-                            th:value="${#temporals.format(fu.loginTime, 'yyyy-MM-dd HH:mm:ss')}"
-                            name="login_time" placeholder="请选择最终登录时间"/>
-                                </span>
-                            <button type="submit"
-                                    class="layui-btn  layui-btn-normal radius"><i
-                                        class="Hui-iconfont">&#xe665;</i> 搜索
-                            </button>
-                        </form>
+                    <div class="cl pd-5 bg-1 bk-gray ">
+                        <div class="searchByField">
+                                     <input type="input-text" class="input-text"
+                                            name="name" placeholder="搜索名字"
+                                            id="name"/>
+                                     <input type="input-text" class="input-text"
+                                            name="password" placeholder="搜索密码"
+                                            id="password"/>
+                                     <input type="input-text"  placeholder="搜索最终登录时间" name="login_timeSpace" class="input-text  timeSpace"/>
+                        </div>
+                        <button type="submit"
+                                class="layui-btn  layui-btn-normal radius"><i
+                                    class="Hui-iconfont">&#xe665;</i> 搜索
+                        </button>
                     </div>
 
                     <table class="layui-table text-c">
@@ -116,5 +94,14 @@
 <div th:replace="_footer :: footerjs">
 </div>
 <!--/_footer 作为公共模版分离出去-->
+<script>
+    //日期时间范围选择
+    laydate.render({
+        elem: '.timeSpace'
+        ,type: 'datetime'
+        ,range: true //或 range: '~' 来自定义分割字符
+    });
+
+</script>
 </body>
 </html>

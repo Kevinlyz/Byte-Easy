@@ -128,3 +128,12 @@ function deleteAll(url){
     });
 }
 
+/**
+ * 检验输入的值是否为整数
+ * @param inputNode
+ */
+function checkint(inputNode){
+    if(/^\d?$/.test($(inputNode).val())){
+
+    }
+}

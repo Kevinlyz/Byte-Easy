@@ -20,7 +20,6 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 @TableName("t_person")
 public class Person extends BaseEntity {
-
     private static final long serialVersionUID = 1L;
 
     /**

@@ -1,0 +1,12 @@
+
+.searchByField {
+    display: flex;
+    flex-wrap: wrap;
+}
+.searchByField input{
+    width:23%;
+}
+.searchByField input,button{
+    padding: 5px;
+    margin: 5px;
+}
