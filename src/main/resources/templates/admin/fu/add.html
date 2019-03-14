@@ -32,6 +32,19 @@
                         <input type="text" class="input-text"   name="password" id="password"/>
                     </div>
         </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>最终登录时间：</label>
+                     <div class="formControls col-xs-7 col-sm-7">
+                         <input type="input-text" class="input-text Wdate" onfocus="WdatePicker({el:$dp.$('startupDate'),dateFmt:'yyyy-MM-dd HH:mm:ss'})" readonly="readonly"
+                                autocomplete="off" value="" name="loginTime" placeholder="请选择最终登录时间"/>
+                     </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>描述：</label>
+                    <div class="formControls col-xs-7 col-sm-7">
+                        <input type="text" class="input-text"   name="content" id="content"/>
+                    </div>
+        </div>
 	<div class="row cl">
 	<div class="col-xs-3 col-sm-3 col-xs-offset-4 col-sm-offset-3">
 		<input class="btn btn-primary radius" id="subbtn" type="submit" value="&nbsp;&nbsp;提交&nbsp;&nbsp;"/>
@@ -61,6 +74,12 @@
 				required:true,
 			},
             password:{
+				required:true,
+			},
+            loginTime:{
+				required:true,
+			},
+            content:{
 				required:true,
 			},
 		},

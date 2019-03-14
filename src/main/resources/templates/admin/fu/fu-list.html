@@ -33,18 +33,31 @@
 
                     <div class="cl pd-5 bg-1 bk-gray ">
                         <div class="searchByField">
-                                     <input type="input-text" class="input-text"
-                                            name="name" placeholder="搜索名字"
-                                            id="name"/>
-                                     <input type="input-text" class="input-text"
-                                            name="password" placeholder="搜索密码"
-                                            id="password"/>
-                                     <input type="input-text"  placeholder="搜索最终登录时间" name="login_timeSpace" class="input-text  timeSpace"/>
+                                         <input type="input-text" class="input-text"
+                                                th:value="${searchInfo.name}"
+                                                name="name"
+                                                placeholder="搜索名字"
+                                                id="name"/>
+                                         <input type="input-text" class="input-text"
+                                                th:value="${searchInfo.password}"
+                                                name="password"
+                                                placeholder="搜索密码"
+                                                id="password"/>
+                                         <input type="input-text"
+                                               placeholder="搜索最终登录时间"
+                                                name="loginTimeSpace"
+                                                th:value="${loginTimeSpace}"
+                                                class="input-text  timeSpace"/>
+                                         <input type="input-text" class="input-text"
+                                                th:value="${searchInfo.content}"
+                                                name="content"
+                                                placeholder="搜索描述"
+                                                id="content"/>
+                            <button type="submit"
+                                    class="layui-btn  layui-btn-normal radius"><i
+                                        class="Hui-iconfont">&#xe665;</i> 搜索
+                            </button>
                         </div>
-                        <button type="submit"
-                                class="layui-btn  layui-btn-normal radius"><i
-                                    class="Hui-iconfont">&#xe665;</i> 搜索
-                        </button>
                     </div>
 
                     <table class="layui-table text-c">
@@ -57,6 +70,7 @@
                                 <th width="40">更新时间</th>
                                 <th width="40">密码</th>
                                 <th width="40">最终登录时间</th>
+                                <th width="40">描述</th>
                             <th width="100">操作</th>
                         </tr>
                         </thead>
@@ -73,6 +87,7 @@
                                     <td th:text="${#temporals.format(fu.updateTime, 'yyyy-MM-dd HH:mm:ss')}"></td>
                                     <td th:text="${fu.password}"></td>
                                     <td th:text="${#temporals.format(fu.loginTime, 'yyyy-MM-dd HH:mm:ss')}"></td>
+                                    <td th:text="${fu.content}"></td>
                             <td class="td-manage">
                                 <a title="编辑" href="javascript:;"
                                    th:onclick="'javascript:layer_show(\'编辑\',\'/admin/'+'fu'+'/editBefore/'+${fu.id}+'\',800,400)'"

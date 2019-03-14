@@ -13,22 +13,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 import java.time.format.DateTimeFormatter;
 import java.time.LocalDateTime;
 
 /**
- * <p>
- * 前端控制器
- * </p>
- *
- * @author
- * @since 2019-03-11
- */
+* <p>
+* 前端控制器
+* </p>
+* @author 张伟晨
+* @since 2019-03-11
+*/
 @Controller
 @RequestMapping("/admin/fu")
-public class FuController extends BaseController {
+public class FuController extends BaseController  {
 
     private String prefix = "admin/fu/";
 
@@ -36,105 +34,94 @@ public class FuController extends BaseController {
     private IFuService fuService;
 
     /**
-     * 查询列表
-     *
-     * @param model
-     * @param pageNo
-     * @param pageSize
-     * @param fu
-     * @return
-     */
+    * 查询列表
+    *
+    * @param model
+    * @param pageNo
+    * @param pageSize
+    * @param fu
+    * @return
+    */
     @RequestMapping
-    public String index(Model model, @RequestParam(value = "pageNo", required = false, defaultValue = "1") Integer pageNo,
-                        @RequestParam(value = "pageSize", required = false, defaultValue = "20") Integer pageSize
-            , String login_timeSpace
-            , Fu fu
-    ) {
-
+    public String index(Model model,@RequestParam(value = "pageNo", required = false, defaultValue = "1") Integer pageNo,@RequestParam(value = "pageSize", required = false, defaultValue = "20") Integer pageSize, String createTimeSpace, String updateTimeSpace, String loginTimeSpace, Fu fu) {
         Page<Fu> page = new Page<Fu>(pageNo, pageSize);
         QueryWrapper<Fu> queryWrapper = new QueryWrapper<Fu>();
-//        queryWrapper.lambda()
-//                .eq(Test::getName, "1");
-        if (!StringUtils.isBlank(fu.getName())) queryWrapper = queryWrapper.like("name", fu.getName());
-        if (!StringUtils.isBlank(fu.getPassword())) queryWrapper = queryWrapper.like("password", fu.getPassword());
-        if (!StringUtils.isBlank(login_timeSpace))
-            queryWrapper = queryWrapper.between("login_time", LocalDateTime.parse(login_timeSpace.split(" - ")[0], DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")), LocalDateTime.parse(login_timeSpace.split(" - ")[1], DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
-
+    //        queryWrapper.lambda()
+    //                .eq(Test::getName, "1");
+        if(!StringUtils.isBlank(fu.getName())) {
+            queryWrapper = queryWrapper.like("name",fu.getName());
+         }
+        if(!StringUtils.isBlank(fu.getPassword())) {
+            queryWrapper = queryWrapper.like("password",fu.getPassword());
+         }
+        if (!StringUtils.isBlank(loginTimeSpace)){
+            queryWrapper = queryWrapper.between("login_time", LocalDateTime.parse(loginTimeSpace.split(" - ")[0],DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")), LocalDateTime.parse(loginTimeSpace.split(" - ")[1],DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
+         }
+        if(!StringUtils.isBlank(fu.getContent())) {
+            queryWrapper = queryWrapper.like("content",fu.getContent());
+         }
         IPage<Fu> pageInfo = fuService.page(page, queryWrapper);
-
+        model.addAttribute("loginTimeSpace", loginTimeSpace);
+        model.addAttribute("searchInfo", fu);
         model.addAttribute("pageInfo", new PageInfo(pageInfo));
-        return prefix + "fu-list";
-
+        return prefix+"fu-list";
     }
 
-
     /**
-     * 添加跳转页面
-     *
-     * @return
-     */
+    * 添加跳转页面
+    * @return
+    */
     @GetMapping("addBefore")
-    public String addBefore() {
-        return prefix + "add";
+    public String addBefore(){
+        return prefix+"add";
     }
-
     /**
-     * 添加
-     *
-     * @param fu
-     * @return
-     */
+    * 添加
+    * @param fu
+    * @return
+    */
     @PostMapping("add")
     @ResponseBody
-    public AjaxResult add(Fu fu) {
+    public AjaxResult add(Fu fu){
         return toAjax(fuService.save(fu));
     }
-
     /**
-     * 添加跳转页面
-     *
-     * @return
-     */
+    * 添加跳转页面
+    * @return
+    */
     @GetMapping("editBefore/{id}")
-    public String editBefore(Model model, @PathVariable("id") Long id) {
-        model.addAttribute("fu", fuService.getById(id));
-        return prefix + "edit";
+    public String editBefore(Model model,@PathVariable("id")Long id){
+        model.addAttribute("fu",fuService.getById(id));
+        return prefix+"edit";
     }
-
     /**
-     * 添加
-     *
-     * @param fu
-     * @return
-     */
+    * 添加
+    * @param fu
+    * @return
+    */
     @PostMapping("edit")
     @ResponseBody
-    public AjaxResult edit(Fu fu) {
+    public AjaxResult edit(Fu fu){
         return toAjax(fuService.updateById(fu));
     }
-
     /**
-     * 删除
-     *
-     * @param id
-     * @return
-     */
+    * 删除
+    * @param id
+    * @return
+    */
     @GetMapping("delete/{id}")
     @ResponseBody
-    public AjaxResult delete(@PathVariable("id") Long id) {
+    public AjaxResult delete(@PathVariable("id") Long id){
         return toAjax(fuService.removeById(id));
     }
-
     /**
-     * 批量删除
-     *
-     * @param ids
-     * @return
-     */
+    * 批量删除
+    * @param ids
+    * @return
+    */
     @PostMapping("deleteAll")
     @ResponseBody
-    public AjaxResult deleteAll(@RequestBody List
-            <Long> ids) {
+    public AjaxResult deleteAll(@RequestBody List<Long> ids){
         return toAjax(fuService.removeByIds(ids));
     }
 

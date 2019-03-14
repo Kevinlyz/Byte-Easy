@@ -8,22 +8,41 @@
 	<form class="form form-horizontal"  id="form-${entity?uncap_first}-add" action="#" th:action="@{/${package.ModuleName}/${entity?uncap_first}/add}">
     <#list table.fields as field >
         <div class="row cl">
-            <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>${field.comment}：</label>
+            <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>${field.comment?split("#")[0]}：</label>
                 <#if field.type == 'datetime'>
                      <div class="formControls col-xs-7 col-sm-7">
                          <input type="input-text" class="input-text Wdate" onfocus="WdatePicker({el:$dp.$('startupDate'),dateFmt:'yyyy-MM-dd HH:mm:ss'})" readonly="readonly"
-                                autocomplete="off" value="" name="${field.propertyName}" placeholder="请选择${field.comment}"/>
+                                autocomplete="off" value="" name="${field.propertyName}" placeholder="请选择${field.comment?split("#")[0]}"/>
                      </div>
 				<#elseif field.type == 'text'>
                     <div class="formControls col-xs-7 col-sm-7" style="height: 600px;border: 0;    margin-left: -10px;">
-                        <script id="editor" name="${field.propertyName}"  autofocus type="text/plain" class="input-text"  style="height:500px;border:0;">
-                        </script>
+                        <script id="editor" name="${field.propertyName}"  autofocus type="text/plain" class="input-text"  style="height:500px;border:0;"> </script>
                     </div>
-                <#else>
-                    <div class="formControls col-xs-7 col-sm-7">
-                        <input type="text" class="input-text"   name="${field.propertyName}" id="${field.propertyName}"/>
-                    </div>
-                </#if>
+                 <#elseif field.type == 'tinyint' ||field.type == 'smallint' ||field.type == 'mediumint'||field.type == 'int'||field.type == 'bigint'>
+                         <div class="formControls col-xs-7 col-sm-7">
+                        <input type="number" class="input-text"
+                                th:value="${r"$"}{searchInfo.${field.propertyName}}"
+                                name="${field.propertyName}"
+                                placeholder="修改${field.comment?split("#")[0]}"
+                                id="${field.propertyName}"/>
+                        </div>
+                  <#elseif field.type == 'float' ||field.type == 'double'||field.type == 'real'||field.type == 'decimal' >
+                        <div class="formControls col-xs-7 col-sm-7">
+                        <input type="number" step="0.001" class="input-text"
+                                th:value="${r"$"}{searchInfo.${field.propertyName}}"
+                                name="${field.propertyName}"
+                                placeholder="修改${field.comment?split("#")[0]}"
+                                id="${field.propertyName}"/>
+                        </div>
+                   <#else>
+                        <div class="formControls col-xs-7 col-sm-7">
+                        <input type="input-text" class="input-text"
+                                th:value="${r"$"}{searchInfo.${field.propertyName}}"
+                                name="${field.propertyName}"
+                                placeholder="修改${field.comment?split("#")[0]}"
+                                id="${field.propertyName}"/>
+                        </div>
+                    </#if>
         </div>
     </#list>
 	<div class="row cl">
@@ -37,7 +56,7 @@
 
 <div th:replace="_ueditor :: ueditor"></div>
 
-<!--_footer 作为公共模版分离出去--> 
+<!--_footer 作为公共模版分离出去-->
 <div th:replace="_footer :: footerjs"></div>
  <!--/_footer 作为公共模版分离出去-->
 <!--请在下方写此页面业务相关的脚本-->
@@ -47,7 +66,7 @@
 		rules:{
 		    <#list table.fields as field >
             ${field.propertyName}:{
-				required:true,
+                required:${field.comment?index_of("not null")!=-1},
 			},
             </#list>
 		},
@@ -63,7 +82,7 @@
 						layer.designMsg('添加成功!',1,function(){
 							var index = parent.layer.getFrameIndex(window.name);
 							parent.location.reload();
-							parent.layer.close(index); 
+							parent.layer.close(index);
 						});
 					}else{
 						layer.designMsg('添加失败!');
@@ -75,9 +94,9 @@
 			});
 		}
 	});
-}); 
+});
 
-</script> 
+</script>
 <!--/请在上方写此页面业务相关的脚本-->
 </body>
 </html>
