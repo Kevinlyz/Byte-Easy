@@ -62,7 +62,7 @@ public class ${table.controllerName} extends ${superControllerClass}  {
          }
             <#else>
         if(!StringUtils.isBlank(${entity?uncap_first}.get${field.propertyName?cap_first}())) {
-            queryWrapper = queryWrapper.like("${field.name}",${entity?uncap_first}.get${field.propertyName?cap_first}().tirm());
+            queryWrapper = queryWrapper.like("${field.name}",${entity?uncap_first}.get${field.propertyName?cap_first}());
          }
             </#if>
         </#if>
