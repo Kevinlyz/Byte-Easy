@@ -15,7 +15,7 @@
                                 autocomplete="off" value="" name="${field.propertyName}" placeholder="请选择${field.comment?split("#")[0]}"/>
                      </div>
 				<#elseif field.type == 'text'>
-                    <div class="formControls col-xs-7 col-sm-7" style="height: 500px;">
+                    <div class="formControls col-xs-7 col-sm-7" style="height: 600px;">
                         <script id="${field.propertyName}" name="${field.propertyName}" autofocus type="text/plain" class="input-text" style="border:0;padding: 0;">
                         </script>
                     </div>

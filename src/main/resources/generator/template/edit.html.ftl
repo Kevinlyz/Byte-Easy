@@ -13,37 +13,44 @@
                 <div class="row cl">
                     <label class="form-label col-xs-4 col-sm-3"><span
                                 class="c-red">*</span>${field.comment?split("#")[0]}：</label>
-                    <div class="formControls col-xs-7 col-sm-7">
                         <#if field.type == 'datetime'>
-                            <input type="input-text" class="input-text Wdate"
-                                   onfocus="WdatePicker({el:$dp.$('startupDate'),dateFmt:'yyyy-MM-dd HH:mm:ss'})"
-                                   readonly="readonly"
-                                   autocomplete="off"
-                                   th:value="${r"$"}{#temporals.format(${entity?uncap_first}.${field.propertyName}, 'yyyy-MM-dd HH:mm:ss')}"
-                                   name="${field.propertyName}" placeholder="请选择${field.comment?split("#")[0]}"/>
+                            <div class="formControls col-xs-7 col-sm-7">
+                                <input type="input-text" class="input-text Wdate"
+                                       onfocus="WdatePicker({el:$dp.$('startupDate'),dateFmt:'yyyy-MM-dd HH:mm:ss'})"
+                                       readonly="readonly"
+                                       autocomplete="off"
+                                       th:value="${r"$"}{#temporals.format(${entity?uncap_first}.${field.propertyName}, 'yyyy-MM-dd HH:mm:ss')}"
+                                       name="${field.propertyName}" placeholder="请选择${field.comment?split("#")[0]}"/>
+                            </div>
                         <#elseif field.type == 'tinyint' ||field.type == 'smallint' ||field.type == 'mediumint'||field.type == 'int'||field.type == 'bigint'>
-                            <input type="number" class="input-text"
-                                   th:value="${r"$"}{${entity?uncap_first}.${field.propertyName}}"
-                                   name="${field.propertyName}"
-                                   placeholder="修改${field.comment?split("#")[0]}"
-                                   id="${field.propertyName}"/>
+                            <div class="formControls col-xs-7 col-sm-7">
+                                <input type="number" class="input-text"
+                                       th:value="${r"$"}{${entity?uncap_first}.${field.propertyName}}"
+                                       name="${field.propertyName}"
+                                       placeholder="修改${field.comment?split("#")[0]}"
+                                       id="${field.propertyName}"/>
+                            </div>
                         <#elseif field.type == 'float' ||field.type == 'double'||field.type == 'real'||field.type == 'decimal' >
-                            <input type="number" step="0.001" class="input-text"
-                                   th:value="${r"$"}{${entity?uncap_first}.${field.propertyName}}"
-                                   name="${field.propertyName}"
-                                   placeholder="修改${field.comment?split("#")[0]}"
-                                   id="${field.propertyName}"/>
+                            <div class="formControls col-xs-7 col-sm-7">
+                                <input type="number" step="0.001" class="input-text"
+                                       th:value="${r"$"}{${entity?uncap_first}.${field.propertyName}}"
+                                       name="${field.propertyName}"
+                                       placeholder="修改${field.comment?split("#")[0]}"
+                                       id="${field.propertyName}"/>
+                            </div>
                        <#elseif field.type == 'text'>
-                            <div class="formControls col-xs-7 col-sm-7" style="height: 500px;">
+                            <div class="formControls col-xs-7 col-sm-7" style="height: 600px;">
                                 <script id="${field.propertyName}" th:text="${r"$"}{${entity?uncap_first}.${field.propertyName}}" name="${field.propertyName}" autofocus type="text/plain" class="input-text" style="border:0;padding: 0;">
                                 </script>
                             </div>
                         <#else>
-                            <input type="input-text" class="input-text"
-                                   th:value="${r"$"}{${entity?uncap_first}.${field.propertyName}}"
-                                   name="${field.propertyName}"
-                                   placeholder="修改${field.comment?split("#")[0]}"
-                                   id="${field.propertyName}"/>
+                            <div class="formControls col-xs-7 col-sm-7">
+                                <input type="input-text" class="input-text"
+                                       th:value="${r"$"}{${entity?uncap_first}.${field.propertyName}}"
+                                       name="${field.propertyName}"
+                                       placeholder="修改${field.comment?split("#")[0]}"
+                                       id="${field.propertyName}"/>
+                            </div>
                         </#if>
                     </div>
                 </div>
@@ -57,7 +64,7 @@
         </div>
     </form>
 </article>
-
+<div th:replace="_ueditor :: ueditor"></div>
 <!--_footer 作为公共模版分离出去-->
 <div th:replace="_footer :: footerjs"></div>
 <!--/_footer 作为公共模版分离出去-->
