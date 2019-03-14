@@ -46,11 +46,10 @@
                     <label class="form-label col-xs-4 col-sm-3"><span
                                 class="c-red">*</span>描述：</label>
                     <div class="formControls col-xs-7 col-sm-7">
-                            <input type="input-text" class="input-text"
-                                   th:value="${fu.content}"
-                                   name="content"
-                                   placeholder="修改描述"
-                                   id="content"/>
+                            <div class="formControls col-xs-7 col-sm-7" style="height: 500px;">
+                                <script id="content" th:text="${column.content}" name="content" autofocus type="text/plain" class="input-text" style="border:0;padding: 0;">
+                                </script>
+                            </div>
                     </div>
                 </div>
         <div class="row cl">
