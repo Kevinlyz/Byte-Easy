@@ -21,7 +21,7 @@ import java.util.*;
  * @author 王震
  * @since 2019-03-11
  */
-public class CodeGenerator {
+public class    CodeGenerator {
 
     /**
      * <p>
@@ -52,6 +52,7 @@ public class CodeGenerator {
         gc.setOutputDir(projectPath + "/src/main/java");
         gc.setAuthor("");
         gc.setOpen(false);
+        gc.setAuthor("张伟晨");
         mpg.setGlobalConfig(gc);
 
         // 数据源配置
