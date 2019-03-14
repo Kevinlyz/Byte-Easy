@@ -5,23 +5,11 @@
 </head>
 <body>
 <article class="page-container">
-	<form class="form form-horizontal"  id="form-tPerson-add" action="#" th:action="@{/sys/tPerson/add}">
+	<form class="form form-horizontal"  id="form-test-add" action="#" th:action="@{/sys/test/add}">
         <div class="row cl">
-            <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>姓名：</label>
+            <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>名字：</label>
                     <div class="formControls col-xs-7 col-sm-7">
-                        <input type="text" class="input-text"   name="name" id="name" placeholder="请填写姓名"/>
-                    </div>
-        </div>
-        <div class="row cl">
-            <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>身份证号：</label>
-                    <div class="formControls col-xs-7 col-sm-7">
-                        <input type="text" class="input-text"   name="idCard" id="idCard" placeholder="请填写身份证号"/>
-                    </div>
-        </div>
-        <div class="row cl">
-            <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>编号：</label>
-                    <div class="formControls col-xs-7 col-sm-7">
-                        <input type="text" class="input-text"   name="code" id="code" placeholder="请填写编号"/>
+                        <input type="text" class="input-text"   name="name" id="name" placeholder="请填写名字"/>
                     </div>
         </div>
         <div class="row cl">
@@ -40,6 +28,13 @@
         </div>
         <div class="row cl">
             <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>文本：</label>
+                    <div class="formControls col-xs-7 col-sm-7" style="height: 500px;">
+                        <script id="text" name="text" autofocus type="text/plain" class="input-text" style="border:0;padding: 0;">
+                        </script>
+                    </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>文本2：</label>
                     <div class="formControls col-xs-7 col-sm-7" style="height: 500px;">
                         <script id="test" name="test" autofocus type="text/plain" class="input-text" style="border:0;padding: 0;">
                         </script>
@@ -62,21 +57,18 @@
 <!--请在下方写此页面业务相关的脚本-->
 <script>
  $(function(){
-	$("#form-tPerson-add").validate({
+	$("#form-test-add").validate({
 		rules:{
             name:{
-				required:true,
-			},
-            idCard:{
-				required:true,
-			},
-            code:{
 				required:true,
 			},
             createTime:{
 				required:true,
 			},
             updateTime:{
+				required:true,
+			},
+            text:{
 				required:true,
 			},
             test:{
@@ -89,7 +81,7 @@
 		submitHandler:function(form){
 				$(form).ajaxSubmit({
 				type: 'POST',
-				url: "/sys/tPerson/add" ,
+				url: "/sys/test/add" ,
 				success: function(data){
 					if(data.code == "0"){
 						layer.designMsg('添加成功!',1,function(){

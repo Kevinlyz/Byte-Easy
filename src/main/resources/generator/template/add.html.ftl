@@ -15,13 +15,13 @@
                                 autocomplete="off" value="" name="${field.propertyName}" placeholder="请选择${field.comment}"/>
                      </div>
 				<#elseif field.type == 'text'>
-                    <div class="formControls col-xs-7 col-sm-7" style="height: 600px;border: 0;    margin-left: -10px;">
-                        <script id="editor" name="${field.propertyName}"  autofocus type="text/plain" class="input-text"  style="height:500px;border:0;">
+                    <div class="formControls col-xs-7 col-sm-7" style="height: 500px;">
+                        <script id="${field.propertyName}" name="${field.propertyName}" autofocus type="text/plain" class="input-text" style="border:0;padding: 0;">
                         </script>
                     </div>
                 <#else>
                     <div class="formControls col-xs-7 col-sm-7">
-                        <input type="text" class="input-text"   name="${field.propertyName}" id="${field.propertyName}"/>
+                        <input type="text" class="input-text"   name="${field.propertyName}" id="${field.propertyName}" placeholder="请填写${field.comment}"/>
                     </div>
                 </#if>
         </div>

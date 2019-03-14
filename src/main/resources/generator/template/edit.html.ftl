@@ -10,14 +10,21 @@
     <#list table.fields as field >
     <div class="row cl">
         <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>${field.comment}：</label>
-        <div class="formControls col-xs-7 col-sm-7">
             <#if field.type == 'datetime'>
+                <div class="formControls col-xs-7 col-sm-7">
                      <input type="input-text" class="input-text Wdate" onfocus="WdatePicker({el:$dp.$('startupDate'),dateFmt:'yyyy-MM-dd HH:mm:ss'})" readonly="readonly"
                             autocomplete="off" th:value="${r"$"}{#temporals.format(${entity?uncap_first}.${field.propertyName}, 'yyyy-MM-dd HH:mm:ss')}" name="${field.propertyName}" placeholder="请选择${field.comment}"/>
+                </div>
+            <#elseif field.type == 'text'>
+                <div class="formControls col-xs-7 col-sm-7" style="height: 500px;">
+                    <script id="${field.propertyName}" th:text="${r"$"}{column.content}" name="${field.propertyName}" autofocus type="text/plain" class="input-text" style="border:0;padding: 0;">
+                    </script>
+                </div>
             <#else>
+                <div class="formControls col-xs-7 col-sm-7">
                     <input type="text" class="input-text"  th:field="*{${field.propertyName}}" name="${field.propertyName}" id="${field.propertyName}"/>
+                </div>
             </#if>
-        </div>
     </div>
     </#list>
 	<div class="row cl">
