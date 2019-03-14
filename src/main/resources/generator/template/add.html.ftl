@@ -21,7 +21,6 @@
                  <#elseif field.type == 'tinyint' ||field.type == 'smallint' ||field.type == 'mediumint'||field.type == 'int'||field.type == 'bigint'>
                          <div class="formControls col-xs-7 col-sm-7">
                         <input type="number" class="input-text"
-                                th:value="${r"$"}{searchInfo.${field.propertyName}}"
                                 name="${field.propertyName}"
                                 placeholder="修改${field.comment?split("#")[0]}"
                                 id="${field.propertyName}"/>
@@ -29,7 +28,6 @@
                   <#elseif field.type == 'float' ||field.type == 'double'||field.type == 'real'||field.type == 'decimal' >
                         <div class="formControls col-xs-7 col-sm-7">
                         <input type="number" step="0.001" class="input-text"
-                                th:value="${r"$"}{searchInfo.${field.propertyName}}"
                                 name="${field.propertyName}"
                                 placeholder="修改${field.comment?split("#")[0]}"
                                 id="${field.propertyName}"/>
@@ -37,7 +35,6 @@
                    <#else>
                         <div class="formControls col-xs-7 col-sm-7">
                         <input type="input-text" class="input-text"
-                                th:value="${r"$"}{searchInfo.${field.propertyName}}"
                                 name="${field.propertyName}"
                                 placeholder="修改${field.comment?split("#")[0]}"
                                 id="${field.propertyName}"/>
@@ -66,7 +63,7 @@
 		rules:{
 		    <#list table.fields as field >
             ${field.propertyName}:{
-                required:${field.comment?index_of("not null")!=-1},
+                required: true,
 			},
             </#list>
 		},

@@ -63,7 +63,7 @@
                                 </#if>
                             </#list>
                             <button type="submit"
-                                    class="layui-btn  layui-btn-normal radius"><i
+                                    class="layui-btn  layui-btn-success radius"><i
                                         class="Hui-iconfont">&#xe665;</i> 搜索
                             </button>
                         </div>
