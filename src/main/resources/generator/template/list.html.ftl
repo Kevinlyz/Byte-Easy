@@ -34,29 +34,39 @@
                     <div class="cl pd-5 bg-1 bk-gray ">
                         <div class="searchByField">
                             <#list table.fields as field >
-                                <#if (field.name != "id" && field.name != "create_time" && field.name != "update_time") >
-                                 <#if field.type == 'datetime'>
-                                     <input type="input-text"  placeholder="搜索${field.comment}" name="login_timeSpace" class="input-text  timeSpace"/>
-                                <#elseif field.type == 'tinyint' ||field.type == 'smallint' ||field.type == 'mediumint'||field.type == 'int'||field.type == 'bigint'>
-                                     <input type="number" class="input-text"
-                                            name="${field.name}" placeholder="搜索${field.comment}"
-                                            id="${field.propertyName}"/>
-                                 <#elseif field.type == 'float' ||field.type == 'double'||field.type == 'real'||field.type == 'decimal' >
-                                     <input type="number"  step="0.001" class="input-text"
-                                            name="${field.name}" placeholder="搜索${field.comment}"
-                                            id="${field.propertyName}"/>
-                                 <#else>
-                                     <input type="input-text" class="input-text"
-                                            name="${field.name}" placeholder="搜索${field.comment}"
-                                            id="${field.propertyName}"/>
-                                 </#if>
+                                <#if (field.propertyName != "id" && field.propertyName != "createTime" && field.propertyName != "updateTime") >
+                                     <#if field.type == 'datetime'>
+                                         <input type="input-text"
+                                               placeholder="搜索${field.comment?split("#")[0]}"
+                                                name="${field.propertyName}Space"
+                                                th:value="${r"$"}{${field.propertyName}Space}"
+                                                class="input-text  timeSpace"/>
+                                    <#elseif field.type == 'tinyint' ||field.type == 'smallint' ||field.type == 'mediumint'||field.type == 'int'||field.type == 'bigint'>
+                                         <input type="number" class="input-text"
+                                                th:value="${r"$"}{searchInfo.${field.propertyName}}"
+                                                name="${field.propertyName}"
+                                                placeholder="搜索${field.comment?split("#")[0]}"
+                                                id="${field.propertyName}"/>
+                                     <#elseif field.type == 'float' ||field.type == 'double'||field.type == 'real'||field.type == 'decimal' >
+                                         <input type="number"  step="0.001" class="input-text"
+                                                th:value="${r"$"}{searchInfo.${field.propertyName}}"
+                                                name="${field.propertyName}"
+                                                placeholder="搜索${field.comment?split("#")[0]}"
+                                                id="${field.propertyName}"/>
+                                     <#else>
+                                         <input type="input-text" class="input-text"
+                                                th:value="${r"$"}{searchInfo.${field.propertyName}}"
+                                                name="${field.propertyName}"
+                                                placeholder="搜索${field.comment?split("#")[0]}"
+                                                id="${field.propertyName}"/>
+                                     </#if>
                                 </#if>
                             </#list>
+                            <button type="submit"
+                                    class="layui-btn  layui-btn-success radius"><i
+                                        class="Hui-iconfont">&#xe665;</i> 搜索
+                            </button>
                         </div>
-                        <button type="submit"
-                                class="layui-btn  layui-btn-normal radius"><i
-                                    class="Hui-iconfont">&#xe665;</i> 搜索
-                        </button>
                     </div>
 
                     <table class="layui-table text-c">
@@ -65,7 +75,7 @@
                             <th width="25"><input type="checkbox" name="" value=""/></th>
                             <th width="25">序号</th>
                             <#list table.fields as field >
-                                <th width="40">${field.comment}</th>
+                                <th width="40">${field.comment?split("#")[0]}</th>
                             </#list>
                             <th width="100">操作</th>
                         </tr>

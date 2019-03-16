@@ -61,7 +61,7 @@ public class PersonController extends BaseController  {
      */
     @GetMapping("addBefore")
     public String addBefore(){
-        return prefix+"add";
+        return prefix+"add1";
     }
     /**
      * 添加
