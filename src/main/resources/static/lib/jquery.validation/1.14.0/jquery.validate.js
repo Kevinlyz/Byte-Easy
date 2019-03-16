@@ -808,6 +808,7 @@ $.extend( $.validator, {
 					}else{
 						place.insertAfter( element );
 					}
+					place.hide();
 				}
 
 				// Link error back to the element

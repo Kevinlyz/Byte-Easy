@@ -9,27 +9,27 @@
     <input type="hidden" name="id" th:value="${test.id}"/>
     <div class="row cl">
         <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>名字：</label>
-        <div class="formControls col-xs-7 col-sm-7">
+        <div class="formControls col-xs-8 col-sm-8">
                     <input type="text" class="input-text"  th:field="*{name}" name="name" id="name"/>
         </div>
     </div>
     <div class="row cl">
         <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>创建时间：</label>
-        <div class="formControls col-xs-7 col-sm-7">
+        <div class="formControls col-xs-8 col-sm-8">
                      <input type="input-text" class="input-text Wdate" onfocus="WdatePicker({el:$dp.$('startupDate'),dateFmt:'yyyy-MM-dd HH:mm:ss'})" readonly="readonly"
                             autocomplete="off" th:value="${#temporals.format(test.createTime, 'yyyy-MM-dd HH:mm:ss')}" name="createTime" placeholder="请选择创建时间"/>
         </div>
     </div>
     <div class="row cl">
         <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>更新时间：</label>
-        <div class="formControls col-xs-7 col-sm-7">
+        <div class="formControls col-xs-8 col-sm-8">
                      <input type="input-text" class="input-text Wdate" onfocus="WdatePicker({el:$dp.$('startupDate'),dateFmt:'yyyy-MM-dd HH:mm:ss'})" readonly="readonly"
                             autocomplete="off" th:value="${#temporals.format(test.updateTime, 'yyyy-MM-dd HH:mm:ss')}" name="updateTime" placeholder="请选择更新时间"/>
         </div>
     </div>
     <div class="row cl">
         <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>文本：</label>
-        <div class="formControls col-xs-7 col-sm-7">
+        <div class="formControls col-xs-8 col-sm-8">
                     <input type="text" class="input-text"  th:field="*{text}" name="text" id="text"/>
         </div>
     </div>

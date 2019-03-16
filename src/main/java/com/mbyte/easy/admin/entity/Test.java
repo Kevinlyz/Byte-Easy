@@ -11,8 +11,8 @@ import lombok.experimental.Accessors;
  * 
  * </p>
  *
- * @author 
- * @since 2019-03-13
+ * @author 张伟晨
+ * @since 2019-03-16
  */
 @Data
 @EqualsAndHashCode(callSuper = true)
@@ -40,11 +40,6 @@ public class Test extends BaseEntity {
      * 文本
      */
     private String text;
-
-    /**
-     * 文本2
-     */
-    private String eeee;
 
 
 }

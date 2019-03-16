@@ -24,7 +24,7 @@
                            onclick="deleteAll('/${package.ModuleName}/${entity?uncap_first}/deleteAll')"
                            class="layui-btn  layui-btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i> 批量删除</a>
 						<a href="javascript:;"
-                           onclick="layer_show('添加','/${package.ModuleName}/${entity?uncap_first}/addBefore',800,400)"
+                           onclick="layer_show('添加','/${package.ModuleName}/${entity?uncap_first}/addBefore',900,500)"
                            class="layui-btn  layui-btn-normal radius"><i class="Hui-iconfont">&#xe600;</i> 添加</a>
 						</span>
                         <span class="r wei-height">共有数据：<strong th:text="${r'${pageInfo.total}'}"></strong> 条</span>
@@ -81,7 +81,7 @@
                             </#list>
                             <td class="td-manage">
                                 <a title="编辑" href="javascript:;"
-                                   th:onclick="'javascript:layer_show(\'编辑\',\'/${package.ModuleName}/'+'${entity?uncap_first}'+'/editBefore/'+${r"${"}${entity?uncap_first}${r".id}"}+'\',800,400)'"
+                                   th:onclick="'javascript:layer_show(\'编辑\',\'/${package.ModuleName}/'+'${entity?uncap_first}'+'/editBefore/'+${r"${"}${entity?uncap_first}${r".id}"}+'\',900,500)'"
                                    class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6df;</i></a>
                                 <a title="删除" href="javascript:;"
                                    th:onclick="'javascript:deleteById(\'/${package.ModuleName}/'+'${entity?uncap_first}'+'/delete/'+${r"${"}${entity?uncap_first}${r".id}"}+'\')'"

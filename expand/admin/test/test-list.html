@@ -10,7 +10,7 @@
                                                 href="javascript:location.replace(location.href);" title="刷新"><i
                 class="Hui-iconfont">&#xe68f;</i></a></nav>
 <div class="page-container">
-    <form action="#" th:action="@{/admin/fu}" method="post">
+    <form action="#" th:action="@{/admin/test}" method="post">
         <div class="layui-body">
             <!-- 内容主体区域 -->
             <fieldset class="layui-elem-field">
@@ -21,10 +21,10 @@
                     <div class="cl pd-5 bg-1 bk-gray">
 						<span class="l">
 						<a href="javascript:;"
-                           onclick="deleteAll('/admin/fu/deleteAll')"
+                           onclick="deleteAll('/admin/test/deleteAll')"
                            class="layui-btn  layui-btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i> 批量删除</a>
 						<a href="javascript:;"
-                           onclick="layer_show('添加','/admin/fu/addBefore',800,400)"
+                           onclick="layer_show('添加','/admin/test/addBefore',900,500)"
                            class="layui-btn  layui-btn-normal radius"><i class="Hui-iconfont">&#xe600;</i> 添加</a>
 						</span>
                         <span class="r wei-height">共有数据：<strong th:text="${pageInfo.total}"></strong> 条</span>
@@ -33,26 +33,8 @@
 
                     <div class="cl pd-5 bg-1 bk-gray ">
                         <div class="searchByField">
-                                         <input type="input-text" class="input-text"
-                                                th:value="${searchInfo.name}"
-                                                name="name"
-                                                placeholder="搜索名字"
-                                                id="name"/>
-                                         <input type="input-text" class="input-text"
-                                                th:value="${searchInfo.password}"
-                                                name="password"
-                                                placeholder="搜索密码"
-                                                id="password"/>
-                                         <input type="input-text"
-                                               placeholder="搜索最终登录时间"
-                                                name="loginTimeSpace"
-                                                th:value="${loginTimeSpace}"
-                                                class="input-text  timeSpace"/>
-                                         <input type="input-text" class="input-text"
-                                                th:value="${searchInfo.content}"
-                                                name="content"
-                                                placeholder="搜索描述"
-                                                id="content"/>
+                                         <input type="input-text" class="input-text" th:value="${searchInfo.name}" name="name" placeholder="搜索名字" sid="name"/>
+                                         <input type="input-text" class="input-text" th:value="${searchInfo.text}" name="text" placeholder="搜索文本" sid="text"/>
                             <button type="submit"
                                     class="layui-btn  layui-btn-success radius"><i
                                         class="Hui-iconfont">&#xe665;</i> 搜索
@@ -68,9 +50,7 @@
                                 <th width="40">名字</th>
                                 <th width="40">创建时间</th>
                                 <th width="40">更新时间</th>
-                                <th width="40">密码</th>
-                                <th width="40">最终登录时间</th>
-                                <th width="40">描述</th>
+                                <th width="40">文本</th>
                             <th width="100">操作</th>
                         </tr>
                         </thead>
@@ -78,22 +58,20 @@
                         <tr class="text-c" th:if="${pageInfo.list.size() == 0}">
                             <td colspan="15"><strong>暂无数据</strong></td>
                         </tr>
-                        <tr class="text-c" th:each="fu,count:${pageInfo.list}">
-                            <td><input type="checkbox" value="1" th:value="${fu.id}"
+                        <tr class="text-c" th:each="test,count:${pageInfo.list}">
+                            <td><input type="checkbox" value="1" th:value="${test.id}"
                                        name="id"/></td>
                             <td th:text="${count.count}"></td>
-                                    <td th:text="${fu.name}"></td>
-                                    <td th:text="${#temporals.format(fu.createTime, 'yyyy-MM-dd HH:mm:ss')}"></td>
-                                    <td th:text="${#temporals.format(fu.updateTime, 'yyyy-MM-dd HH:mm:ss')}"></td>
-                                    <td th:text="${fu.password}"></td>
-                                    <td th:text="${#temporals.format(fu.loginTime, 'yyyy-MM-dd HH:mm:ss')}"></td>
-                                    <td th:text="${fu.content}"></td>
+                                    <td th:text="${test.name}"></td>
+                                    <td th:text="${#temporals.format(test.createTime, 'yyyy-MM-dd HH:mm:ss')}"></td>
+                                    <td th:text="${#temporals.format(test.updateTime, 'yyyy-MM-dd HH:mm:ss')}"></td>
+                                    <td th:text="${test.text}"></td>
                             <td class="td-manage">
                                 <a title="编辑" href="javascript:;"
-                                   th:onclick="'javascript:layer_show(\'编辑\',\'/admin/'+'fu'+'/editBefore/'+${fu.id}+'\',800,400)'"
+                                   th:onclick="'javascript:layer_show(\'编辑\',\'/admin/'+'test'+'/editBefore/'+${test.id}+'\',900,500)'"
                                    class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6df;</i></a>
                                 <a title="删除" href="javascript:;"
-                                   th:onclick="'javascript:deleteById(\'/admin/'+'fu'+'/delete/'+${fu.id}+'\')'"
+                                   th:onclick="'javascript:deleteById(\'/admin/'+'test'+'/delete/'+${test.id}+'\')'"
                                    class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6e2;</i></a>
                             </td>
                         </tr>

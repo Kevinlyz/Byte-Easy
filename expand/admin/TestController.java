@@ -3,8 +3,8 @@ package com.mbyte.easy.admin.controller;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.mbyte.easy.admin.entity.Fu;
-import com.mbyte.easy.admin.service.IFuService;
+import com.mbyte.easy.admin.entity.Test;
+import com.mbyte.easy.admin.service.ITestService;
 import com.mbyte.easy.common.controller.BaseController;
 import com.mbyte.easy.common.web.AjaxResult;
 import com.mbyte.easy.util.PageInfo;
@@ -25,13 +25,13 @@ import java.time.LocalDateTime;
 * @since 2019-03-11
 */
 @Controller
-@RequestMapping("/admin/fu")
-public class FuController extends BaseController  {
+@RequestMapping("/admin/test")
+public class TestController extends BaseController  {
 
-    private String prefix = "admin/fu/";
+    private String prefix = "admin/test/";
 
     @Autowired
-    private IFuService fuService;
+    private ITestService testService;
 
     /**
     * 查询列表
@@ -39,32 +39,25 @@ public class FuController extends BaseController  {
     * @param model
     * @param pageNo
     * @param pageSize
-    * @param fu
+    * @param test
     * @return
     */
     @RequestMapping
-    public String index(Model model,@RequestParam(value = "pageNo", required = false, defaultValue = "1") Integer pageNo,@RequestParam(value = "pageSize", required = false, defaultValue = "20") Integer pageSize, String createTimeSpace, String updateTimeSpace, String loginTimeSpace, Fu fu) {
-        Page<Fu> page = new Page<Fu>(pageNo, pageSize);
-        QueryWrapper<Fu> queryWrapper = new QueryWrapper<Fu>();
+    public String index(Model model,@RequestParam(value = "pageNo", required = false, defaultValue = "1") Integer pageNo,@RequestParam(value = "pageSize", required = false, defaultValue = "20") Integer pageSize, String createTimeSpace, String updateTimeSpace, Test test) {
+        Page<Test> page = new Page<Test>(pageNo, pageSize);
+        QueryWrapper<Test> queryWrapper = new QueryWrapper<Test>();
     //        queryWrapper.lambda()
     //                .eq(Test::getName, "1");
-        if(!StringUtils.isBlank(fu.getName())) {
-            queryWrapper = queryWrapper.like("name",fu.getName());
+        if(!StringUtils.isBlank(test.getName())) {
+            queryWrapper = queryWrapper.like("name",test.getName());
          }
-        if(!StringUtils.isBlank(fu.getPassword())) {
-            queryWrapper = queryWrapper.like("password",fu.getPassword());
+        if(!StringUtils.isBlank(test.getText())) {
+            queryWrapper = queryWrapper.like("text",test.getText());
          }
-        if (!StringUtils.isBlank(loginTimeSpace)){
-            queryWrapper = queryWrapper.between("login_time", LocalDateTime.parse(loginTimeSpace.split(" - ")[0],DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")), LocalDateTime.parse(loginTimeSpace.split(" - ")[1],DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
-         }
-        if(!StringUtils.isBlank(fu.getContent())) {
-            queryWrapper = queryWrapper.like("content",fu.getContent());
-         }
-        IPage<Fu> pageInfo = fuService.page(page, queryWrapper);
-        model.addAttribute("loginTimeSpace", loginTimeSpace);
-        model.addAttribute("searchInfo", fu);
+        IPage<Test> pageInfo = testService.page(page, queryWrapper);
+        model.addAttribute("searchInfo", test);
         model.addAttribute("pageInfo", new PageInfo(pageInfo));
-        return prefix+"fu-list";
+        return prefix+"test-list";
     }
 
     /**
@@ -77,13 +70,13 @@ public class FuController extends BaseController  {
     }
     /**
     * 添加
-    * @param fu
+    * @param test
     * @return
     */
     @PostMapping("add")
     @ResponseBody
-    public AjaxResult add(Fu fu){
-        return toAjax(fuService.save(fu));
+    public AjaxResult add(Test test){
+        return toAjax(testService.save(test));
     }
     /**
     * 添加跳转页面
@@ -91,18 +84,18 @@ public class FuController extends BaseController  {
     */
     @GetMapping("editBefore/{id}")
     public String editBefore(Model model,@PathVariable("id")Long id){
-        model.addAttribute("fu",fuService.getById(id));
+        model.addAttribute("test",testService.getById(id));
         return prefix+"edit";
     }
     /**
     * 添加
-    * @param fu
+    * @param test
     * @return
     */
     @PostMapping("edit")
     @ResponseBody
-    public AjaxResult edit(Fu fu){
-        return toAjax(fuService.updateById(fu));
+    public AjaxResult edit(Test test){
+        return toAjax(testService.updateById(test));
     }
     /**
     * 删除
@@ -112,7 +105,7 @@ public class FuController extends BaseController  {
     @GetMapping("delete/{id}")
     @ResponseBody
     public AjaxResult delete(@PathVariable("id") Long id){
-        return toAjax(fuService.removeById(id));
+        return toAjax(testService.removeById(id));
     }
     /**
     * 批量删除
@@ -122,7 +115,7 @@ public class FuController extends BaseController  {
     @PostMapping("deleteAll")
     @ResponseBody
     public AjaxResult deleteAll(@RequestBody List<Long> ids){
-        return toAjax(fuService.removeByIds(ids));
+        return toAjax(testService.removeByIds(ids));
     }
 
 }

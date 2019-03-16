@@ -8,27 +8,27 @@
 	<form class="form form-horizontal"  id="form-test-add" action="#" th:action="@{/byte_easy/test/add}">
         <div class="row cl">
             <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>名字：</label>
-                    <div class="formControls col-xs-7 col-sm-7">
+                    <div class="formControls col-xs-8 col-sm-8">
                         <input type="text" class="input-text"   name="name" id="name"/>
                     </div>
         </div>
         <div class="row cl">
             <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>创建时间：</label>
-                     <div class="formControls col-xs-7 col-sm-7">
+                     <div class="formControls col-xs-8 col-sm-8">
                          <input type="input-text" class="input-text Wdate" onfocus="WdatePicker({el:$dp.$('startupDate'),dateFmt:'yyyy-MM-dd HH:mm:ss'})" readonly="readonly"
                                 autocomplete="off" value="" name="createTime" placeholder="请选择创建时间"/>
                      </div>
         </div>
         <div class="row cl">
             <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>更新时间：</label>
-                     <div class="formControls col-xs-7 col-sm-7">
+                     <div class="formControls col-xs-8 col-sm-8">
                          <input type="input-text" class="input-text Wdate" onfocus="WdatePicker({el:$dp.$('startupDate'),dateFmt:'yyyy-MM-dd HH:mm:ss'})" readonly="readonly"
                                 autocomplete="off" value="" name="updateTime" placeholder="请选择更新时间"/>
                      </div>
         </div>
         <div class="row cl">
             <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>文本：</label>
-                    <div class="formControls col-xs-7 col-sm-7" style="height: 600px;border: 0;    margin-left: -10px;">
+                    <div class="formControls col-xs-8 col-sm-8" style="height: 600px;border: 0;    margin-left: -10px;">
                         <script id="editor" name="text"  autofocus type="text/plain" class="input-text"  style="height:500px;border:0;">
                         </script>
                     </div>

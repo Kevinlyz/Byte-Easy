@@ -10,116 +10,113 @@ import com.mbyte.easy.common.web.AjaxResult;
 import com.mbyte.easy.util.PageInfo;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-    import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
+import java.time.format.DateTimeFormatter;
+import java.time.LocalDateTime;
 
 /**
 * <p>
-    * 前端控制器
-    * </p>
-*
-* @author 
+* 前端控制器
+* </p>
+* @author 张伟晨
 * @since 2019-03-11
 */
 @Controller
 @RequestMapping("/admin/test")
 public class TestController extends BaseController  {
 
-private String prefix = "admin/test/";
+    private String prefix = "admin/test/";
 
-@Autowired
-private ITestService testService;
+    @Autowired
+    private ITestService testService;
 
-/**
-* 查询列表
-*
-* @param model
-* @param pageNo
-* @param pageSize
-* @param test
-* @return
-*/
-@RequestMapping
-public String index(Model model, @RequestParam(value = "pageNo", required = false, defaultValue = "1") Integer pageNo,
-@RequestParam(value = "pageSize", required = false, defaultValue = "20") Integer pageSize, Test test) {
-
-Page<Test> page = new Page<Test>(pageNo, pageSize);
-QueryWrapper<Test> queryWrapper = new QueryWrapper<Test>();
-//        queryWrapper.lambda()
-//                .eq(Test::getName, "1");
-        if(!StringUtils.isBlank(test.getName())) queryWrapper = queryWrapper.like("name",test.getName());
-        if(!StringUtils.isBlank(test.getText())) queryWrapper = queryWrapper.like("text",test.getText());
-        if(!StringUtils.isBlank(test.getEeee())) queryWrapper = queryWrapper.like("eeee",test.getEeee());
-
-IPage<Test> pageInfo = testService.page(page, queryWrapper);
-
-model.addAttribute("pageInfo", new PageInfo(pageInfo));
-return prefix+"test-list";
-
-}
-
-
-/**
-* 添加跳转页面
-* @return
-*/
-@GetMapping("addBefore")
-public String addBefore(){
-return prefix+"add";
-}
-/**
-* 添加
-* @param test
-* @return
-*/
-@PostMapping("add")
-@ResponseBody
-public AjaxResult add(Test test){
-return toAjax(testService.save(test));
-}
-/**
-* 添加跳转页面
-* @return
-*/
-@GetMapping("editBefore/{id}")
-public String editBefore(Model model,@PathVariable("id")Long id){
-model.addAttribute("test",testService.getById(id));
-return prefix+"edit";
-}
-/**
-* 添加
-* @param test
-* @return
-*/
-@PostMapping("edit")
-@ResponseBody
-public AjaxResult edit(Test test){
-return toAjax(testService.updateById(test));
-}
-/**
-* 删除
-* @param id
-* @return
-*/
-@GetMapping("delete/{id}")
-@ResponseBody
-public AjaxResult delete(@PathVariable("id") Long id){
-return toAjax(testService.removeById(id));
-}
-/**
-* 批量删除
-* @param ids
-* @return
-*/
-@PostMapping("deleteAll")
-@ResponseBody
-public AjaxResult deleteAll(@RequestBody List
-<Long> ids){
-    return toAjax(testService.removeByIds(ids));
+    /**
+    * 查询列表
+    *
+    * @param model
+    * @param pageNo
+    * @param pageSize
+    * @param test
+    * @return
+    */
+    @RequestMapping
+    public String index(Model model,@RequestParam(value = "pageNo", required = false, defaultValue = "1") Integer pageNo,@RequestParam(value = "pageSize", required = false, defaultValue = "20") Integer pageSize, String createTimeSpace, String updateTimeSpace, Test test) {
+        Page<Test> page = new Page<Test>(pageNo, pageSize);
+        QueryWrapper<Test> queryWrapper = new QueryWrapper<Test>();
+    //        queryWrapper.lambda()
+    //                .eq(Test::getName, "1");
+        if(!StringUtils.isBlank(test.getName())) {
+            queryWrapper = queryWrapper.like("name",test.getName());
+         }
+        if(!StringUtils.isBlank(test.getText())) {
+            queryWrapper = queryWrapper.like("text",test.getText());
+         }
+        IPage<Test> pageInfo = testService.page(page, queryWrapper);
+        model.addAttribute("searchInfo", test);
+        model.addAttribute("pageInfo", new PageInfo(pageInfo));
+        return prefix+"test-list";
     }
 
+    /**
+    * 添加跳转页面
+    * @return
+    */
+    @GetMapping("addBefore")
+    public String addBefore(){
+        return prefix+"add";
     }
+    /**
+    * 添加
+    * @param test
+    * @return
+    */
+    @PostMapping("add")
+    @ResponseBody
+    public AjaxResult add(Test test){
+        return toAjax(testService.save(test));
+    }
+    /**
+    * 添加跳转页面
+    * @return
+    */
+    @GetMapping("editBefore/{id}")
+    public String editBefore(Model model,@PathVariable("id")Long id){
+        model.addAttribute("test",testService.getById(id));
+        return prefix+"edit";
+    }
+    /**
+    * 添加
+    * @param test
+    * @return
+    */
+    @PostMapping("edit")
+    @ResponseBody
+    public AjaxResult edit(Test test){
+        return toAjax(testService.updateById(test));
+    }
+    /**
+    * 删除
+    * @param id
+    * @return
+    */
+    @GetMapping("delete/{id}")
+    @ResponseBody
+    public AjaxResult delete(@PathVariable("id") Long id){
+        return toAjax(testService.removeById(id));
+    }
+    /**
+    * 批量删除
+    * @param ids
+    * @return
+    */
+    @PostMapping("deleteAll")
+    @ResponseBody
+    public AjaxResult deleteAll(@RequestBody List<Long> ids){
+        return toAjax(testService.removeByIds(ids));
+    }
+
+}
 
