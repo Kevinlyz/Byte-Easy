@@ -36,29 +36,13 @@
                             <#list table.fields as field >
                                 <#if (field.propertyName != "id" && field.propertyName != "createTime" && field.propertyName != "updateTime") >
                                      <#if field.type == 'datetime'>
-                                         <input type="input-text"
-                                               placeholder="搜索${field.comment?split("#")[0]}"
-                                                name="${field.propertyName}Space"
-                                                th:value="${r"$"}{${field.propertyName}Space}"
-                                                class="input-text  timeSpace"/>
+                                         <input type="input-text" placeholder="搜索${field.comment?split("#")[0]}" name="${field.propertyName}Space" th:value="${r"$"}{${field.propertyName}Space}" class="input-text  timeSpace"/>
                                     <#elseif field.type == 'tinyint' ||field.type == 'smallint' ||field.type == 'mediumint'||field.type == 'int'||field.type == 'bigint'>
-                                         <input type="number" class="input-text"
-                                                th:value="${r"$"}{searchInfo.${field.propertyName}}"
-                                                name="${field.propertyName}"
-                                                placeholder="搜索${field.comment?split("#")[0]}"
-                                                id="${field.propertyName}"/>
+                                         <input type="number" class="input-text" th:value="${r"$"}{searchInfo.${field.propertyName}}" name="${field.propertyName}" placeholder="搜索${field.comment?split("#")[0]}" id="${field.propertyName}"/>
                                      <#elseif field.type == 'float' ||field.type == 'double'||field.type == 'real'||field.type == 'decimal' >
-                                         <input type="number"  step="0.001" class="input-text"
-                                                th:value="${r"$"}{searchInfo.${field.propertyName}}"
-                                                name="${field.propertyName}"
-                                                placeholder="搜索${field.comment?split("#")[0]}"
-                                                id="${field.propertyName}"/>
+                                         <input type="number"  step="0.001" class="input-text" th:value="${r"$"}{searchInfo.${field.propertyName}}" name="${field.propertyName}" placeholder="搜索${field.comment?split("#")[0]}" id="${field.propertyName}"/>
                                      <#else>
-                                         <input type="input-text" class="input-text"
-                                                th:value="${r"$"}{searchInfo.${field.propertyName}}"
-                                                name="${field.propertyName}"
-                                                placeholder="搜索${field.comment?split("#")[0]}"
-                                                id="${field.propertyName}"/>
+                                         <input type="input-text" class="input-text" th:value="${r"$"}{searchInfo.${field.propertyName}}" name="${field.propertyName}" placeholder="搜索${field.comment?split("#")[0]}" sid="${field.propertyName}"/>
                                      </#if>
                                 </#if>
                             </#list>

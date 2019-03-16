@@ -16,29 +16,20 @@
                      </div>
 				<#elseif field.type == 'text'>
                     <div class="formControls col-xs-7 col-sm-7" style="height: 600px;">
-                        <script id="${field.propertyName}" name="${field.propertyName}" autofocus type="text/plain" class="input-text" style="border:0;padding: 0;">
+                        <script id="editor" name="${field.propertyName}"  type="text/plain"  style="height:500px;">
                         </script>
                     </div>
                  <#elseif field.type == 'tinyint' ||field.type == 'smallint' ||field.type == 'mediumint'||field.type == 'int'||field.type == 'bigint'>
                          <div class="formControls col-xs-7 col-sm-7">
-                        <input type="number" class="input-text"
-                                name="${field.propertyName}"
-                                placeholder="请填写${field.comment?split("#")[0]}"
-                                id="${field.propertyName}"/>
+                        <input type="number" class="input-text" name="${field.propertyName}"  placeholder="请填写${field.comment?split("#")[0]}" id="${field.propertyName}"/>
                         </div>
                   <#elseif field.type == 'float' ||field.type == 'double'||field.type == 'real'||field.type == 'decimal' >
                         <div class="formControls col-xs-7 col-sm-7">
-                        <input type="number" step="0.001" class="input-text"
-                                name="${field.propertyName}"
-                                placeholder="请填写${field.comment?split("#")[0]}"
-                                id="${field.propertyName}"/>
+                        <input type="number" step="0.001" class="input-text" name="${field.propertyName}" placeholder="请填写${field.comment?split("#")[0]}" id="${field.propertyName}"/>
                         </div>
                    <#else>
                         <div class="formControls col-xs-7 col-sm-7">
-                        <input type="input-text" class="input-text"
-                                name="${field.propertyName}"
-                                placeholder="请填写${field.comment?split("#")[0]}"
-                                id="${field.propertyName}"/>
+                        <input type="input-text" class="input-text" name="${field.propertyName}" placeholder="请填写${field.comment?split("#")[0]}" id="${field.propertyName}"/>
                         </div>
                     </#if>
         </div>
