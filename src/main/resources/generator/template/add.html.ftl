@@ -11,8 +11,8 @@
              <label class="form-label col-xs-2 col-sm-2"><span class="c-red">*</span>${field.comment?split("#")[0]}：</label>
         <#if field.type == 'datetime'>
              <div class="formControls col-xs-10 col-sm-10">
-                 <input type="input-text" class="input-text Wdate" onfocus="WdatePicker({el:$dp.$('startupDate'),dateFmt:'yyyy-MM-dd HH:mm:ss'})" readonly="readonly"
-                        autocomplete="off" value="" name="${field.propertyName}" placeholder="请选择${field.comment?split("#")[0]}"/>
+                 <input type="input-text" class="input-text timeSpace" readonly="readonly"
+                        autocomplete="off" name="${field.propertyName}" placeholder="请选择${field.comment?split("#")[0]}"/>
              </div>
         <#elseif field.type == 'text'>
             <div class="formControls col-xs-10 col-sm-10" >
@@ -84,7 +84,12 @@
 		}
 	});
 });
-
+        lay('.timeSpace').each(function(){
+            laydate.render({
+                elem: this
+                ,trigger: 'click'
+            });
+        });
 </script>
 <!--/请在上方写此页面业务相关的脚本-->
 </body>

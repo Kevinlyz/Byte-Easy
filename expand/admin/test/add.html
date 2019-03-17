@@ -15,14 +15,14 @@
         <div class="row cl">
              <label class="form-label col-xs-2 col-sm-2"><span class="c-red">*</span>创建时间：</label>
              <div class="formControls col-xs-10 col-sm-10">
-                 <input type="input-text" class="input-text Wdate" onfocus="WdatePicker({el:$dp.$('startupDate'),dateFmt:'yyyy-MM-dd HH:mm:ss'})" readonly="readonly"
+                 <input type="input-text" class="input-text timeSpace"readonly="readonly"
                         autocomplete="off" value="" name="createTime" placeholder="请选择创建时间"/>
              </div>
         </div>
         <div class="row cl">
              <label class="form-label col-xs-2 col-sm-2"><span class="c-red">*</span>更新时间：</label>
              <div class="formControls col-xs-10 col-sm-10">
-                 <input type="input-text" class="input-text Wdate" onfocus="WdatePicker({el:$dp.$('startupDate'),dateFmt:'yyyy-MM-dd HH:mm:ss'})" readonly="readonly"
+                 <input type="input-text" class="input-text timeSpace"readonly="readonly"
                         autocomplete="off" value="" name="updateTime" placeholder="请选择更新时间"/>
              </div>
         </div>
@@ -32,6 +32,13 @@
                 <script id="editor" name="text"  type="text/plain"  style="height:500px;">
                 </script>
             </div>
+        </div>
+        <div class="row cl">
+             <label class="form-label col-xs-2 col-sm-2"><span class="c-red">*</span>时间：</label>
+             <div class="formControls col-xs-10 col-sm-10">
+                 <input type="input-text" class="input-text timeSpace"readonly="readonly"
+                        autocomplete="off" value="" name="date" placeholder="请选择时间"/>
+             </div>
         </div>
 	<div class="row cl">
 	<div class="col-xs-4 col-sm-3 col-xs-offset-4 col-sm-offset-3">
@@ -64,6 +71,9 @@
             text:{
                 required: true,
 			},
+            date:{
+                required: true,
+			},
 		},
 		onkeyup:false,
 		debug: true,
@@ -90,7 +100,11 @@
 		}
 	});
 });
-
+        lay('.timeSpace').each(function(){
+            laydate.render({
+                elem: this
+            });
+        });
 </script>
 <!--/请在上方写此页面业务相关的脚本-->
 </body>
