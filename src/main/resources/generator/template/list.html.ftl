@@ -103,9 +103,14 @@
 <script>
     //日期时间范围选择
     laydate.render({
-        elem: '.timeSpace'
-        ,type: 'datetime'
-        ,range: true //或 range: '~' 来自定义分割字符
+
+    });
+    lay('.timeSpace').each(function(){
+        laydate.render({
+            elem: this
+            ,type: 'datetime'
+            ,range: true //或 range: '~' 来自定义分割字符
+        });
     });
 
 </script>

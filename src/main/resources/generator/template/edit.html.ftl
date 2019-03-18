@@ -15,7 +15,7 @@
                                 class="c-red">*</span>${field.comment?split("#")[0]}：</label>
                         <#if field.type == 'datetime'>
                             <div class="formControls col-xs-10 col-sm-10">
-                                <input type="input-text" class="input-text Wdate" onfocus="WdatePicker({el:$dp.$('startupDate'),dateFmt:'yyyy-MM-dd HH:mm:ss'})" readonly="readonly" autocomplete="off" th:value="${r"$"}{#temporals.format(${entity?uncap_first}.${field.propertyName}, 'yyyy-MM-dd HH:mm:ss')}" name="${field.propertyName}" placeholder="请选择${field.comment?split("#")[0]}"/>
+                                <input type="input-text" class="input-text timeSpace" readonly="readonly" autocomplete="off" th:value="${r"$"}{#temporals.format(${entity?uncap_first}.${field.propertyName}, 'yyyy-MM-dd HH:mm:ss')}" name="${field.propertyName}" placeholder="请选择${field.comment?split("#")[0]}"/>
                             </div>
                         <#elseif field.type == 'tinyint' ||field.type == 'smallint' ||field.type == 'mediumint'||field.type == 'int'||field.type == 'bigint'>
                             <div class="formControls col-xs-10 col-sm-10">
@@ -97,6 +97,13 @@
         }
     })
         ;
+    });
+
+    lay('.timeSpace').each(function(){
+        laydate.render({
+            elem: this
+            ,trigger: 'click'
+        });
     });
 
 </script>

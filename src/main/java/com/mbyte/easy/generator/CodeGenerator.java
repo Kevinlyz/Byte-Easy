@@ -52,7 +52,7 @@ public class    CodeGenerator {
         gc.setOutputDir(projectPath + "/src/main/java");
         gc.setAuthor("");
         gc.setOpen(false);
-        gc.setAuthor("张伟晨");
+        gc.setAuthor("黄润宣");
         mpg.setGlobalConfig(gc);
 
         // 数据源配置
