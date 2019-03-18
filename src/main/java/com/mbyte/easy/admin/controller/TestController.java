@@ -43,7 +43,7 @@ public class TestController extends BaseController  {
     * @return
     */
     @RequestMapping
-    public String index(Model model,@RequestParam(value = "pageNo", required = false, defaultValue = "1") Integer pageNo,@RequestParam(value = "pageSize", required = false, defaultValue = "20") Integer pageSize, String createTimeSpace, String updateTimeSpace, Test test) {
+    public String index(Model model,@RequestParam(value = "pageNo", required = false, defaultValue = "1") Integer pageNo,@RequestParam(value = "pageSize", required = false, defaultValue = "20") Integer pageSize, String createTimeSpace, String updateTimeSpace, String dateSpace, Test test) {
         Page<Test> page = new Page<Test>(pageNo, pageSize);
         QueryWrapper<Test> queryWrapper = new QueryWrapper<Test>();
     //        queryWrapper.lambda()
@@ -54,7 +54,11 @@ public class TestController extends BaseController  {
         if(!StringUtils.isBlank(test.getText())) {
             queryWrapper = queryWrapper.like("text",test.getText());
          }
+        if (!StringUtils.isBlank(dateSpace)){
+            queryWrapper = queryWrapper.between("date", LocalDateTime.parse(dateSpace.split(" - ")[0],DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")), LocalDateTime.parse(dateSpace.split(" - ")[1],DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
+         }
         IPage<Test> pageInfo = testService.page(page, queryWrapper);
+        model.addAttribute("dateSpace", dateSpace);
         model.addAttribute("searchInfo", test);
         model.addAttribute("pageInfo", new PageInfo(pageInfo));
         return prefix+"test-list";

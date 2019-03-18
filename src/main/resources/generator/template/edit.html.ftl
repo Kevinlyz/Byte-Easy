@@ -47,9 +47,9 @@
         </div>
     </form>
 </article>
-<div th:replace="_ueditor :: ueditor"></div>
 <!--_footer 作为公共模版分离出去-->
 <div th:replace="_footer :: footerjs"></div>
+<div th:replace="_ueditor :: ueditor"></div>
 <!--/_footer 作为公共模版分离出去-->
 <!--请在下方写此页面业务相关的脚本-->
 <script>

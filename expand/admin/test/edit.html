@@ -25,6 +25,14 @@
                             </div>
                     </div>
                 </div>
+                <div class="row cl">
+                    <label class="form-label col-xs-2 col-sm-2"><span
+                                class="c-red">*</span>时间：</label>
+                            <div class="formControls col-xs-10 col-sm-10">
+                                <input type="input-text" class="input-text Wdate" onfocus="WdatePicker({el:$dp.$('startupDate'),dateFmt:'yyyy-MM-dd HH:mm:ss'})" readonly="readonly" autocomplete="off" th:value="${#temporals.format(test.date, 'yyyy-MM-dd HH:mm:ss')}" name="date" placeholder="请选择时间"/>
+                            </div>
+                    </div>
+                </div>
         <div class="row cl">
             <div class="col-xs-3 col-sm-3 col-xs-offset-4 col-sm-offset-3">
                 <input class="btn btn-primary radius" id="subbtn" type="submit" value="&nbsp;&nbsp;提交&nbsp;&nbsp;"/>
@@ -33,9 +41,9 @@
         </div>
     </form>
 </article>
-<div th:replace="_ueditor :: ueditor"></div>
 <!--_footer 作为公共模版分离出去-->
 <div th:replace="_footer :: footerjs"></div>
+<div th:replace="_ueditor :: ueditor"></div>
 <!--/_footer 作为公共模版分离出去-->
 <!--请在下方写此页面业务相关的脚本-->
 <script>
@@ -47,6 +55,10 @@
             required: true,
         },
         text:
+        {
+            required: true,
+        },
+        date:
         {
             required: true,
         },
