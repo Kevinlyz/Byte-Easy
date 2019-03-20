@@ -11,6 +11,8 @@ import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy;
 import com.baomidou.mybatisplus.generator.engine.FreemarkerTemplateEngine;
 
 import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.*;
 
 /**
@@ -42,7 +44,7 @@ public class    CodeGenerator {
         throw new MybatisPlusException("请输入正确的" + tip + "！");
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         // 代码生成器
         AutoGenerator mpg = new AutoGenerator();
 
@@ -55,14 +57,26 @@ public class    CodeGenerator {
         gc.setAuthor("黄润宣");
         mpg.setGlobalConfig(gc);
 
+        Properties properties = new Properties();
+        // 使用ClassLoader加载properties配置文件生成对应的输入流
+        InputStream in = CodeGenerator.class.getClassLoader().getResourceAsStream("application.properties");
+        // 使用properties对象加载输入流
+        properties.load(in);
+
+        //获取key对应的value值
+        String url = properties.getProperty("spring.datasource.druid.url");
+        String driverName = properties.getProperty("spring.datasource.druid.driver-class-name");
+        String userName = properties.getProperty("spring.datasource.druid.username");
+        String password = properties.getProperty("spring.datasource.druid.password");
         // 数据源配置
         DataSourceConfig dsc = new DataSourceConfig();
-        dsc.setUrl("jdbc:mysql://129.204.110.32:3306/byte_easy?useUnicode=true&useSSL=false&characterEncoding=utf8");
+        dsc.setUrl(url);
         // dsc.setSchemaName("public");
-        dsc.setDriverName("com.mysql.cj.jdbc.Driver");
-        dsc.setUsername("root");
-        dsc.setPassword("itenscen2015");
+        dsc.setDriverName(driverName);
+        dsc.setUsername(userName);
+        dsc.setPassword(password);
         mpg.setDataSource(dsc);
+
         /**
          * 输入表名和模块名
          */
