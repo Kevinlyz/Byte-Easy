@@ -36,16 +36,17 @@ public class FileUtil {
             return null;
         }
         //获取文件相对路径
-        String filePath = getUploadFilePath(multipartFile.getOriginalFilename());
-        logger.info("filePath："+filePath);
-        File destFile = new File(uploadLocalPath + File.separator + filePath);
-        if(!destFile.getParentFile().exists()){
-            destFile.getParentFile().mkdirs();
+        String fileName = getUploadFileName(multipartFile.getOriginalFilename());
+        String dateDir = DateUtil.format(null,DateUtil.PATTERN_yyyyMMdd);
+        File destFileDir = new File(uploadLocalPath + File.separator + dateDir);
+        if(!destFileDir.exists()){
+            destFileDir.mkdirs();
         }
         try {
+            File destFile = new File(destFileDir.getAbsoluteFile()+File.separator+fileName);
             multipartFile.transferTo(destFile);
             logger.info("文件【"+multipartFile.getOriginalFilename()+"】上传成功");
-            return filePath;
+            return dateDir+File.separator+fileName;
         } catch (IOException e) {
             logger.error("文件上传异常："+multipartFile.getOriginalFilename(),e);
             return null;
@@ -58,9 +59,8 @@ public class FileUtil {
      * @return: java.lang.String
      * @throws:
      */
-    public static String getUploadFilePath(String fileName){
-        return new StringBuilder(DateUtil.format(null, DateUtil.PATTERN_yyyyMMdd))
-                .append( File.separator)
+    public static String getUploadFileName(String fileName){
+        return new StringBuilder()
                 .append(DateUtil.format(null, DateUtil.PATTERN_yyyyMMddHHmmssSSS))
                 .append("_").append(Utility.getRandomStrByNum(6))
                 .append(".").append(FilenameUtils.getExtension(fileName))
