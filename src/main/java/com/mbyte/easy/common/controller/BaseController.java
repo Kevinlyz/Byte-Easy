@@ -37,7 +37,7 @@ public class BaseController {
             public void setAsText(String text)
             {
                 if(StringUtils.isNoneBlank(text)){
-                    setValue(LocalDateTime.parse(text, DateTimeFormatter.ofPattern("yyyy-MM-dd")));
+                    setValue(LocalDate.parse(text, DateTimeFormatter.ofPattern("yyyy-MM-dd")));
                 }
             }
         });
