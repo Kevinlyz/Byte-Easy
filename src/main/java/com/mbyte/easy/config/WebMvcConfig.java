@@ -3,6 +3,7 @@ package com.mbyte.easy.config;
 import com.mbyte.easy.util.FileUtil;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
@@ -41,5 +42,14 @@ public class WebMvcConfig  implements WebMvcConfigurer {
 		FileUtil.uploadSuffixPath = uploadSuffixPath;
 		FileUtil.uploadLocalPath = uploadLocalPath;
 		registry.addResourceHandler(uploadSuffixPath +"/**").addResourceLocations("file:"+uploadLocalPath);
+	}
+
+	/**
+	 * 跨域
+	 * @param registry
+	 */
+	@Override
+	public void addCorsMappings(CorsRegistry registry) {
+		registry.addMapping("/rest/**");
 	}
 }

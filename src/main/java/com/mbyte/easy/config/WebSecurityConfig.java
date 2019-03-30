@@ -58,7 +58,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {//.defaultSuccessUrl("/welcome")
 		http.authorizeRequests()
-                .antMatchers("/kaptcha/getKaptchaImage", "/druid/**").permitAll()
+                .antMatchers("/kaptcha/getKaptchaImage", "/druid/**", "/rest/**").permitAll()
                 .anyRequest().authenticated().and()
 				.formLogin().loginPage("/login").failureUrl("/login?error").defaultSuccessUrl("/").permitAll()
                 .authenticationDetailsSource(authenticationDetailsSource)
