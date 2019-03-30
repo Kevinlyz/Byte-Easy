@@ -52,19 +52,13 @@ public class ${table.controllerName} extends ${superControllerClass}  {
     public String index(Model model,@RequestParam(value = "pageNo", required = false, defaultValue = "1") Integer pageNo,@RequestParam(value = "pageSize", required = false, defaultValue = "20") Integer pageSize<#list table.fields as field ><#if (field.propertyName != "id" && field.propertyName != "create_time" && field.propertyName != "update_time") ><#if (field.type == "datetime") >, String ${field.propertyName}Space</#if></#if></#list>, ${entity} ${entity?uncap_first}) {
         Page<${entity}> page = new Page<${entity}>(pageNo, pageSize);
         QueryWrapper<${entity}> queryWrapper = new QueryWrapper<${entity}>();
-    //        queryWrapper.lambda()
-    //                .eq(Test::getName, "1");
     <#list table.fields as field >
         <#if (field.propertyName != "id" && field.propertyName != "createTime" && field.propertyName != "updateTime") >
-            <#if (field.type == "datetime") >
-        if (!StringUtils.isBlank(${field.propertyName}Space)){
-            queryWrapper = queryWrapper.between("${field.name}", LocalDateTime.parse(${field.propertyName}Space.split(" - ")[0],DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")), LocalDateTime.parse(${field.propertyName}Space.split(" - ")[1],DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
-         }
-            <#else>
-        if(!StringUtils.isBlank(${entity?uncap_first}.get${field.propertyName?cap_first}())) {
+
+        if(${entity?uncap_first}.get${field.propertyName?cap_first}() != null  && !"".equals(${entity?uncap_first}.get${field.propertyName?cap_first}() + "")) {
             queryWrapper = queryWrapper.like("${field.name}",${entity?uncap_first}.get${field.propertyName?cap_first}());
          }
-            </#if>
+
         </#if>
     </#list>
         IPage<${entity}> pageInfo = ${entity?uncap_first}Service.page(page, queryWrapper);

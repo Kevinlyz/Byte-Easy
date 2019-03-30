@@ -87,6 +87,7 @@
             laydate.render({
                 elem: this
                 ,trigger: 'click'
+                ,type: 'datetime'
             });
         });
 </script>

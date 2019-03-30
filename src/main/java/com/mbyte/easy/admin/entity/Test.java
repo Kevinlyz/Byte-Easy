@@ -12,7 +12,7 @@ import lombok.experimental.Accessors;
  * </p>
  *
  * @author 黄润宣
- * @since 2019-03-19
+ * @since 2019-03-28
  */
 @Data
 @EqualsAndHashCode(callSuper = true)
@@ -22,34 +22,24 @@ public class Test extends BaseEntity {
     private static final long serialVersionUID = 1L;
 
     /**
-     * 名字
+     * 编号
      */
-    private String name;
+    private Integer code;
 
     /**
-     * 创建时间
+     * 描述
+     */
+    private String description;
+
+    /**
+     * 内容
+     */
+    private String content;
+
+    /**
+     * 创建日期
      */
     private LocalDateTime createTime;
-
-    /**
-     * 更新时间
-     */
-    private LocalDateTime updateTime;
-
-    /**
-     * 文本
-     */
-    private String text;
-
-    /**
-     * 时间
-     */
-    private LocalDateTime date;
-
-    /**
-     * file
-     */
-    private String file;
 
 
 }
