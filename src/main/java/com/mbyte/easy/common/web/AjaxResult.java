@@ -58,6 +58,20 @@ public class AjaxResult extends HashMap<String, Object>
 
     /**
      * 返回成功消息
+     *
+     * @param object 内容
+     * @return 成功消息
+     */
+    public static AjaxResult success(Object object)
+    {
+        AjaxResult json = new AjaxResult();
+        json.put("data", object);
+        json.put("code", 0);
+        return json;
+    }
+
+    /**
+     * 返回成功消息
      * 
      * @param msg 内容
      * @return 成功消息

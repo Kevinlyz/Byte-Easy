@@ -83,8 +83,17 @@ public class BaseController {
      * 返回成功消息
      */
     public AjaxResult success(String message)
+
     {
         return AjaxResult.success(message);
+    }
+
+    /**
+     * 返回成功消息
+     */
+    public AjaxResult success(Object object)
+    {
+        return AjaxResult.success(object);
     }
 
     /**

@@ -31,7 +31,10 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
-
+        <dependency>
+            <groupId>org.springframework.security.oauth</groupId>
+            <artifactId>spring-security-oauth2</artifactId>
+        </dependency>
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
@@ -58,7 +61,6 @@
             <artifactId>mybatis-plus-generator</artifactId>
             <version>3.1.0</version>
         </dependency>
-
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
@@ -76,14 +78,6 @@
             <groupId>org.freemarker</groupId>
             <artifactId>freemarker</artifactId>
         </dependency>
-
-        <!-- https://mvnrepository.com/artifact/org.apache.velocity/velocity -->
-        <!--<dependency>-->
-            <!--<groupId>org.apache.velocity</groupId>-->
-            <!--<artifactId>velocity</artifactId>-->
-            <!--<version>1.7</version>-->
-        <!--</dependency>-->
-
         <!--commons -->
         <dependency>
             <groupId>org.apache.commons</groupId>
@@ -95,12 +89,6 @@
             <artifactId>commons-io</artifactId>
             <version>2.5</version>
         </dependency>
-        <!-- 分页插件 -->
-        <!--<dependency>-->
-            <!--<groupId>com.github.pagehelper</groupId>-->
-            <!--<artifactId>pagehelper-spring-boot-starter</artifactId>-->
-            <!--<version>1.2.10</version>-->
-        <!--</dependency>-->
         <!-- https://mvnrepository.com/artifact/com.alibaba/fastjson -->
         <dependency>
             <groupId>com.alibaba</groupId>
