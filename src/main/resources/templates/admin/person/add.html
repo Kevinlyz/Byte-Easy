@@ -5,32 +5,18 @@
 </head>
 <body>
 <article class="page-container">
-	<form class="form form-horizontal"  id="form-test-add" action="#" th:action="@{/admin/test/add}">
+	<form class="form form-horizontal"  id="form-person-add" action="#" th:action="@{/admin/person/add}">
+        <div class="row cl">
+             <label class="form-label col-xs-2 col-sm-2"><span class="c-red">*</span>姓名：</label>
+            <div class="formControls col-xs-10 col-sm-10">
+                <input type="input-text" class="input-text" name="name" placeholder="请填写姓名" id="name"/>
+            </div>
+        </div>
         <div class="row cl">
              <label class="form-label col-xs-2 col-sm-2"><span class="c-red">*</span>编号：</label>
             <div class="formControls col-xs-10 col-sm-10">
                 <input type="input-text" class="input-text" name="code" placeholder="请填写编号" id="code"/>
             </div>
-        </div>
-        <div class="row cl">
-             <label class="form-label col-xs-2 col-sm-2"><span class="c-red">*</span>描述：</label>
-            <div class="formControls col-xs-10 col-sm-10">
-                <input type="input-text" class="input-text" name="description" placeholder="请填写描述" id="description"/>
-            </div>
-        </div>
-        <div class="row cl">
-             <label class="form-label col-xs-2 col-sm-2"><span class="c-red">*</span>内容：</label>
-            <div class="formControls col-xs-10 col-sm-10" >
-                <script id="editor" name="content"  type="text/plain"  style="height:500px;">
-                </script>
-            </div>
-        </div>
-        <div class="row cl">
-             <label class="form-label col-xs-2 col-sm-2"><span class="c-red">*</span>创建日期：</label>
-             <div class="formControls col-xs-10 col-sm-10">
-                 <input type="input-text" class="input-text timeSpace" readonly="readonly"
-                        autocomplete="off" name="createTime" placeholder="请选择创建日期"/>
-             </div>
         </div>
 	<div class="row cl">
 	<div class="col-xs-4 col-sm-3 col-xs-offset-4 col-sm-offset-3">
@@ -48,18 +34,12 @@
 <!--请在下方写此页面业务相关的脚本-->
 <script>
  $(function(){
-	$("#form-test-add").validate({
+	$("#form-person-add").validate({
 		rules:{
+            name:{
+                required: true,
+			},
             code:{
-                required: true,
-			},
-            description:{
-                required: true,
-			},
-            content:{
-                required: true,
-			},
-            createTime:{
                 required: true,
 			},
 		},
@@ -69,7 +49,7 @@
 		submitHandler:function(form){
 				$(form).ajaxSubmit({
 				type: 'POST',
-				url: "/admin/test/add" ,
+				url: "/admin/person/add" ,
 				success: function(data){
 					if(data.code == "0"){
 						layer.designMsg('添加成功!',1,function(){

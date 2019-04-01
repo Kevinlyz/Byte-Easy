@@ -10,7 +10,7 @@
                                                 href="javascript:location.replace(location.href);" title="刷新"><i
                 class="Hui-iconfont">&#xe68f;</i></a></nav>
 <div class="page-container">
-    <form action="#" th:action="@{/admin/test}" method="post">
+    <form action="#" th:action="@{/admin/person}" method="post">
         <div class="layui-body">
             <!-- 内容主体区域 -->
             <fieldset class="layui-elem-field">
@@ -21,10 +21,10 @@
                     <div class="cl pd-5 bg-1 bk-gray">
 						<span class="l">
 						<a href="javascript:;"
-                           onclick="deleteAll('/admin/test/deleteAll')"
+                           onclick="deleteAll('/admin/person/deleteAll')"
                            class="layui-btn  layui-btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i> 批量删除</a>
 						<a href="javascript:;"
-                           onclick="layer_show('添加','/admin/test/addBefore',900,500)"
+                           onclick="layer_show('添加','/admin/person/addBefore',900,500)"
                            class="layui-btn  layui-btn-normal radius"><i class="Hui-iconfont">&#xe600;</i> 添加</a>
 						</span>
                         <span class="r wei-height">共有数据：<strong th:text="${pageInfo.total}"></strong> 条</span>
@@ -33,9 +33,8 @@
 
                     <div class="cl pd-5 bg-1 bk-gray ">
                         <div class="searchByField">
+                                         <input type="input-text" class="input-text" th:value="${searchInfo.name}" name="name" placeholder="搜索姓名" sid="name"/>
                                          <input type="input-text" class="input-text" th:value="${searchInfo.code}" name="code" placeholder="搜索编号" sid="code"/>
-                                         <input type="input-text" class="input-text" th:value="${searchInfo.description}" name="description" placeholder="搜索描述" sid="description"/>
-                                         <input type="input-text" class="input-text" th:value="${searchInfo.content}" name="content" placeholder="搜索内容" sid="content"/>
                             <button type="submit"
                                     class="layui-btn  layui-btn-success radius"><i
                                         class="Hui-iconfont">&#xe665;</i> 搜索
@@ -48,10 +47,8 @@
                         <tr class="text-c">
                             <th width="25"><input type="checkbox" name="" value=""/></th>
                             <th width="25">序号</th>
+                                <th width="40">姓名</th>
                                 <th width="40">编号</th>
-                                <th width="40">描述</th>
-                                <th width="40">内容</th>
-                                <th width="40">创建日期</th>
                             <th width="100">操作</th>
                         </tr>
                         </thead>
@@ -59,20 +56,18 @@
                         <tr class="text-c" th:if="${pageInfo.list.size() == 0}">
                             <td colspan="15"><strong>暂无数据</strong></td>
                         </tr>
-                        <tr class="text-c" th:each="test,count:${pageInfo.list}">
-                            <td><input type="checkbox" value="1" th:value="${test.id}"
+                        <tr class="text-c" th:each="person,count:${pageInfo.list}">
+                            <td><input type="checkbox" value="1" th:value="${person.id}"
                                        name="id"/></td>
                             <td th:text="${count.count}"></td>
-                                    <td th:text="${test.code}"></td>
-                                    <td th:text="${test.description}"></td>
-                                    <td th:text="${test.content}"></td>
-                                    <td th:text="${#temporals.format(test.createTime, 'yyyy-MM-dd HH:mm:ss')}"></td>
+                                    <td th:text="${person.name}"></td>
+                                    <td th:text="${person.code}"></td>
                             <td class="td-manage">
                                 <a title="编辑" href="javascript:;"
-                                   th:onclick="'javascript:layer_show(\'编辑\',\'/admin/'+'test'+'/editBefore/'+${test.id}+'\',900,500)'"
+                                   th:onclick="'javascript:layer_show(\'编辑\',\'/admin/'+'person'+'/editBefore/'+${person.id}+'\',900,500)'"
                                    class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6df;</i></a>
                                 <a title="删除" href="javascript:;"
-                                   th:onclick="'javascript:deleteById(\'/admin/'+'test'+'/delete/'+${test.id}+'\')'"
+                                   th:onclick="'javascript:deleteById(\'/admin/'+'person'+'/delete/'+${person.id}+'\')'"
                                    class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6e2;</i></a>
                             </td>
                         </tr>

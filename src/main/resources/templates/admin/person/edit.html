@@ -5,31 +5,22 @@
 </head>
 <body>
 <article class="page-container">
-    <form class="form form-horizontal" id="form-test-edit" action="#"
-          th:action="@{/admin/test/edit}" th:object="${test}">
-        <input type="hidden" name="id" th:value="${test.id}"/>
+    <form class="form form-horizontal" id="form-person-edit" action="#"
+          th:action="@{/admin/person/edit}" th:object="${person}">
+        <input type="hidden" name="id" th:value="${person.id}"/>
+                <div class="row cl">
+                    <label class="form-label col-xs-2 col-sm-2"><span
+                                class="c-red">*</span>姓名：</label>
+                            <div class="formControls col-xs-10 col-sm-10">
+                                <input type="input-text" class="input-text" th:value="${person.name}" name="name"  placeholder="修改姓名" id="name"/>
+                            </div>
+                    </div>
+                </div>
                 <div class="row cl">
                     <label class="form-label col-xs-2 col-sm-2"><span
                                 class="c-red">*</span>编号：</label>
                             <div class="formControls col-xs-10 col-sm-10">
-                                <input type="input-text" class="input-text" th:value="${test.code}" name="code"  placeholder="修改编号" id="code"/>
-                            </div>
-                    </div>
-                </div>
-                <div class="row cl">
-                    <label class="form-label col-xs-2 col-sm-2"><span
-                                class="c-red">*</span>描述：</label>
-                            <div class="formControls col-xs-10 col-sm-10">
-                                <input type="input-text" class="input-text" th:value="${test.description}" name="description"  placeholder="修改描述" id="description"/>
-                            </div>
-                    </div>
-                </div>
-                <div class="row cl">
-                    <label class="form-label col-xs-2 col-sm-2"><span
-                                class="c-red">*</span>内容：</label>
-                            <div class="formControls col-xs-10 col-sm-10">
-                                <script id="editor" th:text="${test.content}" name="content" autofocus type="text/plain" style="height: 500px">
-                                </script>
+                                <input type="input-text" class="input-text" th:value="${person.code}" name="code"  placeholder="修改编号" id="code"/>
                             </div>
                     </div>
                 </div>
@@ -48,17 +39,13 @@
 <!--请在下方写此页面业务相关的脚本-->
 <script>
     $(function () {
-        $("#form-test-edit").validate({
+        $("#form-person-edit").validate({
             rules: {
+        name:
+        {
+            required: true,
+        },
         code:
-        {
-            required: true,
-        },
-        description:
-        {
-            required: true,
-        },
-        content:
         {
             required: true,
         },
@@ -76,7 +63,7 @@
         function (form) {
             $(form).ajaxSubmit({
                 type: 'POST',
-                url: "/admin/test/edit",
+                url: "/admin/person/edit",
                 success: function (data) {
                     if (data.code == "0") {
                         layer.designMsg('编辑成功!', 1, function () {
