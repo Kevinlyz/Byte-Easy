@@ -2,20 +2,10 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="${package.Mapper}.${entity}Mapper">
   <resultMap id="BaseResultMap" type="${package.Entity}.${entity}">
-    <#list table.commonFields as field >
-        <#if field.type?contains("(")>
-      <id column="${field.name}" jdbcType="${field.type ?replace((field.type ?substring(field.type?index_of('('),field.type?index_of(')') + 1)),'')?upper_case}" property="${field.propertyName}" />
-        <#else>
-      <id column="${field.name}" jdbcType="${field.type ?upper_case}" property="${field.propertyName}" />
-      </#if>
+    <#list cfg.mybatisFields as field >
+      <id column="${field.column}" jdbcType="${field.jdbcType}" property="${field.property}" />
     </#list>
-      <#list table.fields as field >
-          <#if field.type?contains("(")>
-              <id column="${field.name}" jdbcType="${field.type ?replace((field.type ?substring(field.type?index_of('('),field.type?index_of(')') + 1)),'')?upper_case}" property="${field.propertyName}" />
-          <#else>
-              <id column="${field.name}" jdbcType="${field.type ?upper_case}" property="${field.propertyName}" />
-          </#if>
-      </#list>
+
   </resultMap>
   <sql id="Base_Column_List">
       <#list table.commonFields as field >
@@ -31,27 +21,19 @@
     select
     <include refid="Base_Column_List" />
     from ${table.name}
-    <#list table.commonFields as field >
+    <#list cfg.mybatisFields as field >
         <#if field.keyFlag>
-         <#if field.type?contains("(")>
-        where ${field.name} = <#noparse>#</#noparse>{${field.propertyName},jdbcType=${field.type ?replace((field.type ?substring(field.type?index_of('('),field.type?index_of(')') + 1)),'')?upper_case}}
-        <#else>
-       where ${field.name} = <#noparse>#</#noparse>{${field.propertyName},jdbcType=${field.type ?upper_case}}
+       where ${field.column} = <#noparse>#</#noparse>{${field.property},jdbcType=${field.jdbcType}}
         </#if>
-    </#if>
     </#list>
   </select>
 
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     delete from  ${table.name}
-     <#list table.commonFields as field >
+     <#list cfg.mybatisFields as field >
         <#if field.keyFlag>
-     <#if field.type?contains("(")>
-        where ${field.name} = <#noparse>#</#noparse>{${field.propertyName},jdbcType=${field.type ?replace((field.type ?substring(field.type?index_of('('),field.type?index_of(')') + 1)),'')?upper_case} }
-        <#else>
-       where ${field.name} = <#noparse>#</#noparse>{${field.propertyName},jdbcType=${field.type ?upper_case} }
+       where ${field.column} = <#noparse>#</#noparse>{${field.property},jdbcType=${field.jdbcType}}
         </#if>
-    </#if>
     </#list>
   </delete>
   <insert id="insert" parameterType="${package.Entity}.${entity}">
@@ -109,15 +91,10 @@
       </if>
      </#list>
     </set>
-    <#list table.commonFields as field >
+     <#list cfg.mybatisFields as field >
         <#if field.keyFlag>
-     <#if field.type?contains("(")>
-        where ${field.name} = <#noparse>#</#noparse>{${field.propertyName},jdbcType=${field.type ?replace((field.type ?substring(field.type?index_of('('),field.type?index_of(')') + 1)),'')?upper_case} }
-        <#else>
-       where ${field.name} = <#noparse>#</#noparse>{${field.propertyName},jdbcType=${field.type ?upper_case} }
+       where ${field.column} = <#noparse>#</#noparse>{${field.property},jdbcType=${field.jdbcType}}
         </#if>
-
-    </#if>
     </#list>
   </update>
   <update id="updateByPrimaryKey" parameterType="${package.Entity}.${entity}">
@@ -131,14 +108,10 @@
         </#if>
     </#list>
 
-    <#list table.commonFields as field >
+    <#list cfg.mybatisFields as field >
         <#if field.keyFlag>
-     <#if field.type?contains("(")>
-        where ${field.name} = <#noparse>#</#noparse>{${field.propertyName},jdbcType=${field.type ?replace((field.type ?substring(field.type?index_of('('),field.type?index_of(')') + 1)),'')?upper_case} }
-        <#else>
-       where ${field.name} = <#noparse>#</#noparse>{${field.propertyName},jdbcType=${field.type ?upper_case} }
+       where ${field.column} = <#noparse>#</#noparse>{${field.property},jdbcType=${field.jdbcType}}
         </#if>
-    </#if>
     </#list>
   </update>
 -->

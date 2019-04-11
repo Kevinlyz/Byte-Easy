@@ -3,26 +3,28 @@
 <mapper namespace="com.mbyte.easy.admin.mapper.PersonMapper">
   <resultMap id="BaseResultMap" type="com.mbyte.easy.admin.entity.Person">
       <id column="id" jdbcType="BIGINT" property="id" />
-              <id column="name" jdbcType="VARCHAR" property="name" />
-              <id column="code" jdbcType="VARCHAR" property="code" />
-              <id column="content" jdbcType="TEXT" property="content" />
-              <id column="file_path" jdbcType="VARCHAR" property="filePath" />
+      <id column="name" jdbcType="VARCHAR" property="name" />
+      <id column="code" jdbcType="VARCHAR" property="code" />
+      <id column="content" jdbcType="VARCHAR" property="content" />
+      <id column="file_path" jdbcType="VARCHAR" property="filePath" />
+
   </resultMap>
   <sql id="Base_Column_List">
               id,
       name, code, content, file_path
   </sql>
 
+<!--
  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
     from t_person
-        where id = #{id,jdbcType=BIGINT}
+       where id = #{id,jdbcType=BIGINT}
   </select>
 
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     delete from  t_person
-        where id = #{id,jdbcType=BIGINT }
+       where id = #{id,jdbcType=BIGINT}
   </delete>
   <insert id="insert" parameterType="com.mbyte.easy.admin.entity.Person">
     insert into t_person (name, code, content, file_path)
@@ -81,8 +83,7 @@
          file_path = #{filePath,jdbcType=VARCHAR},
       </if>
     </set>
-        where id = #{id,jdbcType=BIGINT }
-
+       where id = #{id,jdbcType=BIGINT}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.mbyte.easy.admin.entity.Person">
     update t_person
@@ -92,7 +93,7 @@
          content = #{content,jdbcType=TEXT},
          file_path = #{filePath,jdbcType=VARCHAR},
 
-        where id = #{id,jdbcType=BIGINT }
+       where id = #{id,jdbcType=BIGINT}
   </update>
-
+-->
 </mapper>

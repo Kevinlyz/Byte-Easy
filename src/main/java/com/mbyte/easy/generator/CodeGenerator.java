@@ -102,30 +102,42 @@ public class CodeGenerator {
         mpg.setPackageInfo(pc);
 
         // 自定义配置
-        InjectionConfig cfg = new InjectionConfig() {
+        InjectionConfig injectionConfig = new InjectionConfig() {
             @Override
             public void initMap() {
                 // to do nothing
                 Map<String, Object> map = new HashMap<>();
                 map.put("superController", "com.mbyte.easy.common.controller.BaseController");
                 List<TableInfo> listTableInfo = mpg.getConfig().getTableInfoList(); //组装属性,适配xml
+                List<MybatisFieldModel> mybatisFields = new ArrayList<>();
                 for(TableInfo tableInfo : listTableInfo){
-                    List<TableField> fields = tableInfo.getFields();
-                    fields.containsAll(tableInfo.getCommonFields());
+                    if(!tableInfo.getName().equals(tableName)){
+                        continue;
+                    }
+                    System.out.println(tableName);
+                    List<TableField> fields = new ArrayList<>();
+                    fields.addAll(tableInfo.getCommonFields());
+                    fields.addAll(tableInfo.getFields());
                     for(TableField field : fields){
+                        String type = field.getType();
+                        if("TEXT".equalsIgnoreCase(type)){
+                            type = "VARCHAR";
+                        }
+                        if(type.contains("(")){
+                            type = type.substring(0, type.indexOf("(")).toUpperCase();
+                        }
                         MybatisFieldModel mybatisModel =
-                                new MybatisFieldModel(field.getName(), field.getType(), field.getPropertyName(), field.isKeyFlag());
-
-
+                                new MybatisFieldModel(field.getName(), type, field.getPropertyName(), field.isKeyFlag());
+                        mybatisFields.add(mybatisModel);
                     }
 
-
-
-
                 }
+                map.put("mybatisFields", mybatisFields);
                 this.setMap(map);
             }
         };
+
+
 
         // 策略配置
         StrategyConfig strategy = new StrategyConfig();
@@ -196,8 +208,8 @@ public class CodeGenerator {
 
 
 
-        cfg.setFileOutConfigList(focList);
-        mpg.setCfg(cfg);
+        injectionConfig.setFileOutConfigList(focList);
+        mpg.setCfg(injectionConfig);
         mpg.setTemplate(new TemplateConfig().setXml(null));
 
 
