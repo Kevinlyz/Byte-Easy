@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.baomidou.mybatisplus.generator.AutoGenerator;
 import com.baomidou.mybatisplus.generator.InjectionConfig;
 import com.baomidou.mybatisplus.generator.config.*;
+import com.baomidou.mybatisplus.generator.config.po.TableField;
 import com.baomidou.mybatisplus.generator.config.po.TableInfo;
 import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy;
 import com.baomidou.mybatisplus.generator.engine.FreemarkerTemplateEngine;
@@ -52,9 +53,8 @@ public class CodeGenerator {
         GlobalConfig gc = new GlobalConfig();
         String projectPath = System.getProperty("user.dir");
         gc.setOutputDir(projectPath + "/src/main/java");
-        gc.setAuthor("");
+        gc.setAuthor("会写代码的怪叔叔");
         gc.setOpen(false);
-//        gc.setAuthor("黄润宣");
         mpg.setGlobalConfig(gc);
 
         Properties properties = new Properties();
@@ -108,6 +108,21 @@ public class CodeGenerator {
                 // to do nothing
                 Map<String, Object> map = new HashMap<>();
                 map.put("superController", "com.mbyte.easy.common.controller.BaseController");
+                List<TableInfo> listTableInfo = mpg.getConfig().getTableInfoList(); //组装属性,适配xml
+                for(TableInfo tableInfo : listTableInfo){
+                    List<TableField> fields = tableInfo.getFields();
+                    fields.containsAll(tableInfo.getCommonFields());
+                    for(TableField field : fields){
+                        MybatisFieldModel mybatisModel =
+                                new MybatisFieldModel(field.getName(), field.getType(), field.getPropertyName(), field.isKeyFlag());
+
+
+                    }
+
+
+
+
+                }
                 this.setMap(map);
             }
         };
@@ -132,9 +147,8 @@ public class CodeGenerator {
             strategy.setTablePrefix(ignorePrefix);
         }
 
-        String expand = projectPath + File.separator + "expand" + File.separator + pc.getModuleName()+File.separator;
 
-        focList.add(new FileOutConfig("/templates/mapper.xml.ftl") {
+        focList.add(new FileOutConfig("/generator/xml/mapper.xml.ftl") {
             @Override
             public String outputFile(TableInfo tableInfo) {
                 // 自定义Mapper.xml文件存放的路径
@@ -147,17 +161,18 @@ public class CodeGenerator {
             @Override
             public String outputFile(TableInfo tableInfo) {
                 System.out.println("tableInfo:"+tableInfo);
-                String expand = projectPath + File.separator + "expand" + File.separator + pc.getModuleName();
+                String expand = projectPath + File.separator + "src/main/java/com/mbyte/easy" + File.separator  + pc.getModuleName() + "/controller";
                 String entityFile = String.format((expand + File.separator + "%s" + ".java"), tableInfo.getControllerName());
                 return entityFile;
             }
         });
-//
+
+        String templatesPath = projectPath + File.separator + "src/main/resources/templates" + File.separator + pc.getModuleName();
         focList.add(new FileOutConfig("/generator/template/list.html.ftl") {
             @Override
             public String outputFile(TableInfo tableInfo) {
                 String tableName = tableInfo.getEntityName().substring(0,1).toLowerCase()+ tableInfo.getEntityName().substring(1);
-                String entityFile = String.format((expand+File.separator+tableName + File.separator + "%s" + ".html"), tableName+ "-list");
+                String entityFile = String.format((templatesPath+File.separator+tableName + File.separator + "%s" + ".html"), "list");
                 return entityFile;
             }
         });
@@ -165,7 +180,7 @@ public class CodeGenerator {
             @Override
             public String outputFile(TableInfo tableInfo) {
                 String tableName = tableInfo.getEntityName().substring(0,1).toLowerCase()+ tableInfo.getEntityName().substring(1);
-                String entityFile = String.format((expand +File.separator+tableName+ File.separator + "%s" + ".html"), "add");
+                String entityFile = String.format(( templatesPath+File.separator+tableName+ File.separator + "%s" + ".html"), "add");
                 return entityFile;
             }
         });
@@ -173,10 +188,12 @@ public class CodeGenerator {
             @Override
             public String outputFile(TableInfo tableInfo) {
                 String tableName = tableInfo.getEntityName().substring(0,1).toLowerCase()+ tableInfo.getEntityName().substring(1);
-                String entityFile = String.format((expand +File.separator+tableName+ File.separator + "%s" + ".html"), "edit");
+                String entityFile = String.format((templatesPath +File.separator+tableName+ File.separator + "%s" + ".html"), "edit");
                 return entityFile;
             }
         });
+
+
 
 
         cfg.setFileOutConfigList(focList);

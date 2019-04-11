@@ -18,6 +18,7 @@ import org.springframework.stereotype.Controller;
 </#if>
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.util.ObjectUtils;
 import java.util.List;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -54,11 +55,9 @@ public class ${table.controllerName} extends ${superControllerClass}  {
         QueryWrapper<${entity}> queryWrapper = new QueryWrapper<${entity}>();
     <#list table.fields as field >
         <#if (field.propertyName != "id" && field.propertyName != "createTime" && field.propertyName != "updateTime") >
-
-        if(${entity?uncap_first}.get${field.propertyName?cap_first}() != null  && !"".equals(${entity?uncap_first}.get${field.propertyName?cap_first}() + "")) {
+        if(!ObjectUtils.isEmpty(${entity?uncap_first}.get${field.propertyName?cap_first}())) {
             queryWrapper = queryWrapper.like("${field.name}",${entity?uncap_first}.get${field.propertyName?cap_first}());
          }
-
         </#if>
     </#list>
         IPage<${entity}> pageInfo = ${entity?uncap_first}Service.page(page, queryWrapper);
@@ -71,7 +70,7 @@ public class ${table.controllerName} extends ${superControllerClass}  {
         </#list>
         model.addAttribute("searchInfo", ${entity?uncap_first});
         model.addAttribute("pageInfo", new PageInfo(pageInfo));
-        return prefix+"${entity?uncap_first}-list";
+        return prefix+"list";
     }
 
     /**

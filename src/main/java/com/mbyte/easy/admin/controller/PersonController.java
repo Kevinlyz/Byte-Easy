@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.util.ObjectUtils;
 import java.util.List;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -21,7 +22,7 @@ import java.time.LocalDateTime;
 * <p>
 * 前端控制器
 * </p>
-* @author 
+* @author 会写代码的怪叔叔
 * @since 2019-03-11
 */
 @Controller
@@ -46,30 +47,22 @@ public class PersonController extends BaseController  {
     public String index(Model model,@RequestParam(value = "pageNo", required = false, defaultValue = "1") Integer pageNo,@RequestParam(value = "pageSize", required = false, defaultValue = "20") Integer pageSize, Person person) {
         Page<Person> page = new Page<Person>(pageNo, pageSize);
         QueryWrapper<Person> queryWrapper = new QueryWrapper<Person>();
-
-        if(person.getName() != null  && !"".equals(person.getName() + "")) {
+        if(!ObjectUtils.isEmpty(person.getName())) {
             queryWrapper = queryWrapper.like("name",person.getName());
          }
-
-
-        if(person.getCode() != null  && !"".equals(person.getCode() + "")) {
+        if(!ObjectUtils.isEmpty(person.getCode())) {
             queryWrapper = queryWrapper.like("code",person.getCode());
          }
-
-
-        if(person.getContent() != null  && !"".equals(person.getContent() + "")) {
+        if(!ObjectUtils.isEmpty(person.getContent())) {
             queryWrapper = queryWrapper.like("content",person.getContent());
          }
-
-
-        if(person.getFilePath() != null  && !"".equals(person.getFilePath() + "")) {
+        if(!ObjectUtils.isEmpty(person.getFilePath())) {
             queryWrapper = queryWrapper.like("file_path",person.getFilePath());
          }
-
         IPage<Person> pageInfo = personService.page(page, queryWrapper);
         model.addAttribute("searchInfo", person);
         model.addAttribute("pageInfo", new PageInfo(pageInfo));
-        return prefix+"person-list";
+        return prefix+"list";
     }
 
     /**
