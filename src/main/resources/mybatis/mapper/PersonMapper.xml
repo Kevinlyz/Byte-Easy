@@ -14,6 +14,7 @@
       name, code, content, file_path
   </sql>
 
+<!--注意:在打开下面注释的时候，在执行添加和更新操作时，一定要添加事物，否则会造成无法添加和更新-->
 <!--
  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select
@@ -31,7 +32,7 @@
     values (
          name = #{name,jdbcType=VARCHAR},
          code = #{code,jdbcType=VARCHAR},
-         content = #{content,jdbcType=TEXT},
+         content = #{content,jdbcType=VARCHAR},
          file_path = #{filePath,jdbcType=VARCHAR}
     )
   </insert>
@@ -53,33 +54,38 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
+
       <if test="name != null">
-         name = #{name,jdbcType=VARCHAR},
+        name = #{name,jdbcType=VARCHAR},
       </if>
+
       <if test="code != null">
-         code = #{code,jdbcType=VARCHAR},
+        code = #{code,jdbcType=VARCHAR},
       </if>
+
       <if test="content != null">
-         content = #{content,jdbcType=TEXT},
+        content = #{content,jdbcType=VARCHAR},
       </if>
+
       <if test="filePath != null">
-         file_path = #{filePath,jdbcType=VARCHAR},
+        file_path = #{filePath,jdbcType=VARCHAR},
       </if>
+
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.mbyte.easy.admin.entity.Person">
     update t_person
     <set>
-      <if test="name != null">
+       <if test="name != null">
          name = #{name,jdbcType=VARCHAR},
       </if>
-      <if test="code != null">
+       <if test="code != null">
          code = #{code,jdbcType=VARCHAR},
       </if>
-      <if test="content != null">
-         content = #{content,jdbcType=TEXT},
+       <if test="content != null">
+         content = #{content,jdbcType=VARCHAR},
       </if>
-      <if test="filePath != null">
+       <if test="filePath != null">
          file_path = #{filePath,jdbcType=VARCHAR},
       </if>
     </set>
@@ -88,10 +94,10 @@
   <update id="updateByPrimaryKey" parameterType="com.mbyte.easy.admin.entity.Person">
     update t_person
     set
-         name = #{name,jdbcType=VARCHAR},
-         code = #{code,jdbcType=VARCHAR},
-         content = #{content,jdbcType=TEXT},
-         file_path = #{filePath,jdbcType=VARCHAR},
+        name = #{name,jdbcType=VARCHAR},
+        code = #{code,jdbcType=VARCHAR},
+        content = #{content,jdbcType=VARCHAR},
+        file_path = #{filePath,jdbcType=VARCHAR},
 
        where id = #{id,jdbcType=BIGINT}
   </update>

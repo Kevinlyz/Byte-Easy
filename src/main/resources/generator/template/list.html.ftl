@@ -4,8 +4,8 @@
     <title>列表</title>
 </head>
 <body>
-<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span>XX管理 <span
-            class="c-gray en">&gt;</span>XX模块<a class="btn btn-success radius r"
+<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span>${table.comment}管理<span
+            class="c-gray en">&gt;</span>${table.comment}列表<a class="btn btn-success radius r"
                                                 style="line-height:1.6em;margin-top:3px"
                                                 href="javascript:location.replace(location.href);" title="刷新"><i
                 class="Hui-iconfont">&#xe68f;</i></a></nav>
@@ -14,7 +14,7 @@
         <div class="layui-body">
             <!-- 内容主体区域 -->
             <fieldset class="layui-elem-field">
-                <legend>XXX列表</legend>
+                <legend>${table.comment}列表</legend>
                 <div class="layui-field-box">
 
                     <hr style="margin: 0">

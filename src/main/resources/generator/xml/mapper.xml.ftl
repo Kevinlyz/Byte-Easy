@@ -16,6 +16,7 @@
       ${table.fieldNames}
   </sql>
 
+<!--注意:在打开下面注释的时候，在执行添加和更新操作时，一定要添加事物，否则会造成无法添加和更新-->
 <!--
  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select
@@ -39,19 +40,13 @@
   <insert id="insert" parameterType="${package.Entity}.${entity}">
     insert into ${table.name} (${table.fieldNames})
     values (
-    <#list table.fields as field >
-     <#if !field_has_next>
-     <#if field.type?contains("(")>
-         ${field.name} = <#noparse>#</#noparse>{${field.propertyName},jdbcType=${field.type ?replace((field.type ?substring(field.type?index_of('('),field.type?index_of(')') + 1)),'')?upper_case}}
-       <#else>
-         ${field.name} = <#noparse>#</#noparse>{${field.propertyName},jdbcType=${field.type ?upper_case}}
-        </#if>
+    <#list cfg.mybatisFields as field >
+    <#if !field.keyFlag>
+    <#if !field_has_next>
+         ${field.column} = <#noparse>#</#noparse>{${field.property},jdbcType=${field.jdbcType}}
     <#else>
-       <#if field.type?contains("(")>
-         ${field.name} = <#noparse>#</#noparse>{${field.propertyName},jdbcType=${field.type ?replace((field.type ?substring(field.type?index_of('('),field.type?index_of(')') + 1)),'')?upper_case}},
-       <#else>
-         ${field.name} = <#noparse>#</#noparse>{${field.propertyName},jdbcType=${field.type ?upper_case}},
-        </#if>
+         ${field.column} = <#noparse>#</#noparse>{${field.property},jdbcType=${field.jdbcType}},
+    </#if>
     </#if>
     </#list>
     )
@@ -67,28 +62,25 @@
     </#list>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-     <#list table.fields as field >
-      <if test="${field.propertyName} != null">
-      <#if field.type?contains("(")>
-         ${field.name} = <#noparse>#</#noparse>{${field.propertyName},jdbcType=${field.type ?replace((field.type ?substring(field.type?index_of('('),field.type?index_of(')') + 1)),'')?upper_case}},
-       <#else>
-         ${field.name} = <#noparse>#</#noparse>{${field.propertyName},jdbcType=${field.type ?upper_case}},
-        </#if>
+     <#list  cfg.mybatisFields as field >
+     <#if !field.keyFlag>
+      <if test="${field.property} != null">
+        ${field.column} = <#noparse>#</#noparse>{${field.property},jdbcType=${field.jdbcType}},
       </if>
+     </#if>
+
     </#list>
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="${package.Entity}.${entity}">
     update ${table.name}
     <set>
-      <#list table.fields as field >
-      <if test="${field.propertyName} != null">
-       <#if field.type?contains("(")>
-         ${field.name} = <#noparse>#</#noparse>{${field.propertyName},jdbcType=${field.type ?replace((field.type ?substring(field.type?index_of('('),field.type?index_of(')') + 1)),'')?upper_case}},
-       <#else>
-         ${field.name} = <#noparse>#</#noparse>{${field.propertyName},jdbcType=${field.type ?upper_case}},
-        </#if>
+      <#list cfg.mybatisFields as field >
+      <#if !field.keyFlag>
+       <if test="${field.property} != null">
+         ${field.column} = <#noparse>#</#noparse>{${field.property},jdbcType=${field.jdbcType}},
       </if>
+      </#if>
      </#list>
     </set>
      <#list cfg.mybatisFields as field >
@@ -100,13 +92,11 @@
   <update id="updateByPrimaryKey" parameterType="${package.Entity}.${entity}">
     update ${table.name}
     set
-    <#list table.fields as field >
-       <#if field.type?contains("(")>
-         ${field.name} = <#noparse>#</#noparse>{${field.propertyName},jdbcType=${field.type ?replace((field.type ?substring(field.type?index_of('('),field.type?index_of(')') + 1)),'')?upper_case}},
-       <#else>
-         ${field.name} = <#noparse>#</#noparse>{${field.propertyName},jdbcType=${field.type ?upper_case}},
-        </#if>
-    </#list>
+     <#list cfg.mybatisFields as field >
+      <#if !field.keyFlag>
+        ${field.column} = <#noparse>#</#noparse>{${field.property},jdbcType=${field.jdbcType}},
+      </#if>
+     </#list>
 
     <#list cfg.mybatisFields as field >
         <#if field.keyFlag>
