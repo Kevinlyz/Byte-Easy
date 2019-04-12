@@ -27,7 +27,7 @@ public class AjaxResult extends HashMap<String, Object>
      */
     public static AjaxResult error()
     {
-        return error(1, "操作失败");
+        return error(0, "操作失败");
     }
 
     /**
@@ -66,7 +66,7 @@ public class AjaxResult extends HashMap<String, Object>
     {
         AjaxResult json = new AjaxResult();
         json.put("data", object);
-        json.put("code", 0);
+        json.put("code", 1);
         return json;
     }
 
@@ -80,7 +80,7 @@ public class AjaxResult extends HashMap<String, Object>
     {
         AjaxResult json = new AjaxResult();
         json.put("msg", msg);
-        json.put("code", 0);
+        json.put("code", 1);
         return json;
     }
     
