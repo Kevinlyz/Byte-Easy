@@ -80,7 +80,7 @@
                 type: 'POST',
                 url: "/${package.ModuleName}/${entity?uncap_first}/edit",
                 success: function (data) {
-                    if (data.code == "0") {
+                    if (data.code == "1") {
                         layer.designMsg('编辑成功!', 1, function () {
                             var index = parent.layer.getFrameIndex(window.name);
                             parent.location.reload();

@@ -66,7 +66,7 @@
 				type: 'POST',
 				url: "/${package.ModuleName}/${entity?uncap_first}/add" ,
 				success: function(data){
-					if(data.code == "0"){
+					if(data.code == "1"){
 						layer.designMsg('添加成功!',1,function(){
 							var index = parent.layer.getFrameIndex(window.name);
 							parent.location.reload();

@@ -69,7 +69,7 @@ function deleteById(url){
             url: url,
             dataType: 'json',
             success: function(data){
-                if(data.code == "0"){
+                if(data.code == "1"){
                     layer.designMsg('删除成功!',1,function(){
                         window.location.reload();
                     });
@@ -111,7 +111,7 @@ function deleteAll(url){
             dataType:'json',
             contentType:"application/json",  //发送信息至服务器时内容编码类型。
             success:function(data) {
-                if(data.code == "0"){
+                if(data.code == "1"){
                     layer.designMsg('删除成功!',1,function(){
                         window.location.reload();
                     });
